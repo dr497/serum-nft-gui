@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d3e7f6f7.chunk.css",
+    "main.js": "/static/js/main.96eba133.chunk.js",
+    "main.js.map": "/static/js/main.96eba133.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.48866770.js",
+    "runtime-main.js.map": "/static/js/runtime-main.48866770.js.map",
+    "static/css/2.cfe2253c.chunk.css": "/static/css/2.cfe2253c.chunk.css",
+    "static/js/2.5d3d8708.chunk.js": "/static/js/2.5d3d8708.chunk.js",
+    "static/js/2.5d3d8708.chunk.js.map": "/static/js/2.5d3d8708.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.38238984ce6dfd559b634e67e6ada817.js": "/precache-manifest.38238984ce6dfd559b634e67e6ada817.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.cfe2253c.chunk.css.map": "/static/css/2.cfe2253c.chunk.css.map",
+    "static/css/main.d3e7f6f7.chunk.css.map": "/static/css/main.d3e7f6f7.chunk.css.map",
+    "static/js/2.5d3d8708.chunk.js.LICENSE.txt": "/static/js/2.5d3d8708.chunk.js.LICENSE.txt",
+    "static/media/logo-deep.png": "/static/media/logo-deep.04bd3c48.png",
+    "static/media/satoshi-btc.gif": "/static/media/satoshi-btc.1ee5a32c.gif",
+    "static/media/satoshi-btc.JPG": "/static/media/satoshi-btc.b39177ef.JPG",
+    "static/media/satoshi-closeup.gif": "/static/media/satoshi-closeup.ade7d873.gif",
+    "static/media/satoshi-closeup.JPG": "/static/media/satoshi-closeup.d69a9247.JPG",
+    "static/media/satoshi-gb.JPG": "/static/media/satoshi-gb.4c8081a5.JPG",
+    "static/media/satoshi-gb.gif": "/static/media/satoshi-gb.fb33b42b.gif",
+    "static/media/satoshi-og.gif": "/static/media/satoshi-og.bb1a4781.gif",
+    "static/media/satoshi.gif": "/static/media/satoshi.8d8b2974.gif",
+    "static/media/srm.gif": "/static/media/srm.0be67a89.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.48866770.js",
+    "static/css/2.cfe2253c.chunk.css",
+    "static/js/2.5d3d8708.chunk.js",
+    "static/css/main.d3e7f6f7.chunk.css",
+    "static/js/main.96eba133.chunk.js"
+  ]
+}
