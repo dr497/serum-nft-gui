@@ -66,7 +66,12 @@ const SearchPage = () => {
     let temp: NFT[] = [];
     keywords?.forEach((keyword) => {
       USE_NFTS.forEach((nft) => {
-        if (nft.keywords.includes(keyword.toLowerCase())) {
+        if (
+          nft.keywords.includes(keyword.toLowerCase()) ||
+          keyword.toLowerCase() ===
+            nft.marketAddress.toBase58().toLowerCase() ||
+          keyword.toLowerCase() === nft.mintAddress.toBase58().toLowerCase()
+        ) {
           temp.push(nft);
         }
       });
