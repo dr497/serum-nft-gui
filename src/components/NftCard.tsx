@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useMarket } from '../utils/markets';
 import TradeForm from './TradeForm';
-
 const { Title, Paragraph } = Typography;
 
 const EXPLORER_URL = 'https://explorer.solana.com/address/';
@@ -25,13 +24,20 @@ const FancyTitle = styled(Title)`
 `;
 
 const WrappedButton = styled(Button)`
-  color: white;
-  bordercolor: white;
+  color: #8f5cff;
+  border: solid 2px;
+  border-radius: 25px;
+  width: 50%;
+  height: 50px;
+  &:hover: {
+    color: #000;
+    background: #8f5cff;
+  }
 `;
 
 const WrappedCard = styled(Card)`
   maxwidth: 600px;
-  height: 100%;
+  height: 750px;
   background: transparent;
   bordercolor: transparent;
   width: auto;
@@ -51,9 +57,10 @@ const NftCard = ({ img, name, supply, mintAddress, sold, marketAddress }) => {
     setMarketAddress(marketAddress.toBase58());
     history.push('/trade');
   };
+
   return (
     <>
-      <WrappedCard onClick={handleClick}>
+      <WrappedCard onClick={handleClick} style={{ overflow: 'hidden' }}>
         <Title level={2} style={{ color: 'white', textAlign: 'center' }}>
           {name}
         </Title>
@@ -83,7 +90,7 @@ const NftCard = ({ img, name, supply, mintAddress, sold, marketAddress }) => {
           <WrappedParagraph>{supply}</WrappedParagraph>
         </Row>
         <Row align="middle" justify="center">
-          <WrappedButton disabled={sold} ghost onClick={handleClick}>
+          <WrappedButton disabled={sold} block onClick={handleClick}>
             {sold ? 'Sold' : 'Buy'}
           </WrappedButton>
         </Row>
