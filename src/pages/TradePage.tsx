@@ -55,24 +55,17 @@ export default function TradePage() {
       [],
     ),
   };
-  const getComponent = useCallback(() => {
-    if (width < 1000) {
-      return <RenderSmaller {...componentProps} />;
-    } else if (width < 1450) {
-      return <RenderSmall {...componentProps} />;
-    } else {
-      return <RenderNormal {...componentProps} />;
-    }
-  }, [width, componentProps]);
 
   return (
     <>
-      <Wrapper>{getComponent()}</Wrapper>
+      <Wrapper>
+        <RenderTradePage {...componentProps} />
+      </Wrapper>
     </>
   );
 }
 
-const RenderNormal = ({ onChangeOrderRef, onPrice, onSize }) => {
+const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
   const { market } = useMarket();
 
   let NFT: any;
@@ -108,84 +101,6 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize }) => {
           <UserInfoTable />
         </Col>
         <Col flex="auto" />
-      </Row>
-    </>
-  );
-};
-
-const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
-  const { market } = useMarket();
-
-  let NFT: any;
-  if (market) {
-    NFT = USE_NFTS.filter(
-      (nft) => nft.marketAddress.toBase58() === market.address.toBase58(),
-    )[0];
-  }
-  return (
-    <>
-      <Row align="middle" justify="center">
-        <Col flex="auto" />
-
-        {NFT && (
-          <Col>
-            <NftCardTrade
-              img={NFT.img}
-              name={NFT.name}
-              supply={NFT.supply}
-              mintAddress={NFT.mintAddress}
-              setChangeOrderRef={onChangeOrderRef}
-              smallScreen={true}
-              onPrice={onPrice}
-              onSize={onSize}
-            />
-          </Col>
-        )}
-
-        <Col flex="auto" />
-      </Row>
-      <Row>
-        <Col flex="auto">
-          <UserInfoTable />
-        </Col>
-      </Row>
-    </>
-  );
-};
-
-const RenderSmaller = ({ onChangeOrderRef, onPrice, onSize }) => {
-  const { market } = useMarket();
-
-  let NFT: any;
-  if (market) {
-    NFT = USE_NFTS.filter(
-      (nft) => nft.marketAddress.toBase58() === market.address.toBase58(),
-    )[0];
-  }
-  return (
-    <>
-      <Row align="middle" justify="center">
-        <Col flex="auto" />
-        <Col>
-          {NFT && (
-            <NftCardTrade
-              img={NFT.img}
-              name={NFT.name}
-              supply={NFT.supply}
-              mintAddress={NFT.mintAddress}
-              setChangeOrderRef={onChangeOrderRef}
-              smallScreen={true}
-              onPrice={onPrice}
-              onSize={onSize}
-            />
-          )}
-        </Col>
-        <Col flex="auto" />
-      </Row>
-      <Row style={{ paddingTop: '20px' }}>
-        <Col flex="auto">
-          <UserInfoTable />
-        </Col>
       </Row>
     </>
   );
