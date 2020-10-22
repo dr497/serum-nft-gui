@@ -12,6 +12,7 @@ import { EndpointInfo } from '../utils/types';
 import { notify } from '../utils/notifications';
 import { Connection } from '@solana/web3.js';
 import WalletConnect from './WalletConnect';
+import { useWindowDimensions } from './utils';
 
 const Wrapper = styled.div`
   background: #000;
@@ -46,6 +47,8 @@ export default function TopBar() {
   const [testingConnection, setTestingConnection] = useState(false);
   const location = useLocation();
   const history = useHistory();
+
+  let windowDimensions = useWindowDimensions();
 
   const handleClick = useCallback(
     (e) => {
@@ -132,54 +135,58 @@ export default function TopBar() {
           }}
         >
           <Menu.Item key="/">Home</Menu.Item>
-          {/*          {connected && <Menu.Item key="/balances">BALANCES</Menu.Item>}
-          {connected && <Menu.Item key="/orders">ORDERS</Menu.Item>}*/}
         </Menu>
-        <div>
-          <Row
-            align="middle"
-            style={{ paddingLeft: 5, paddingRight: 5 }}
-            gutter={16}
-          >
-            <Col>
-              <Select
-                onSelect={setEndpoint}
-                value={endpoint}
-                style={{ marginRight: 8, width: '150px' }}
+
+        {windowDimensions.width > 1000 && (
+          <>
+            <div>
+              <Row
+                align="middle"
+                style={{ paddingLeft: 5, paddingRight: 5 }}
+                gutter={16}
               >
-                {availableEndpoints.map(({ name, endpoint }) => (
-                  <Select.Option value={endpoint} key={endpoint}>
+                <Col>
+                  <Select
+                    onSelect={setEndpoint}
+                    value={endpoint}
+                    style={{ marginRight: 8, width: '150px' }}
+                  >
+                    {availableEndpoints.map(({ name, endpoint }) => (
+                      <Select.Option value={endpoint} key={endpoint}>
+                        {name}
+                      </Select.Option>
+                    ))}
+                  </Select>
+                </Col>
+              </Row>
+            </div>
+            {connected && (
+              <div>
+                <Popover
+                  content={<Settings autoApprove={wallet?.autoApprove} />}
+                  placement="bottomRight"
+                  title="Settings"
+                  trigger="click"
+                >
+                  <Button style={{ marginRight: 8 }}>
+                    <SettingOutlined />
+                    Settings
+                  </Button>
+                </Popover>
+              </div>
+            )}
+            <div>
+              <Select onSelect={setProvider} value={providerUrl}>
+                {WALLET_PROVIDERS.map(({ name, url }) => (
+                  <Select.Option value={url} key={url}>
                     {name}
                   </Select.Option>
                 ))}
               </Select>
-            </Col>
-          </Row>
-        </div>
-        {connected && (
-          <div>
-            <Popover
-              content={<Settings autoApprove={wallet?.autoApprove} />}
-              placement="bottomRight"
-              title="Settings"
-              trigger="click"
-            >
-              <Button style={{ marginRight: 8 }}>
-                <SettingOutlined />
-                Settings
-              </Button>
-            </Popover>
-          </div>
+            </div>
+          </>
         )}
-        <div>
-          <Select onSelect={setProvider} value={providerUrl}>
-            {WALLET_PROVIDERS.map(({ name, url }) => (
-              <Select.Option value={url} key={url}>
-                {name}
-              </Select.Option>
-            ))}
-          </Select>
-        </div>
+
         <div>
           <WalletConnect />
         </div>
