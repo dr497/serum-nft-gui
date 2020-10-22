@@ -178,9 +178,7 @@ export const NftCardTrade = ({
         visible={showModal}
         onOk={handleClick}
         onCancel={handleClick}
-        bodyStyle={{ width: '45vw' }}
-        maskStyle={{ width: '45vw' }}
-        width="45vw"
+        width="50%"
       >
         <img src={img} width="100%" alt={name} />
       </Modal>
