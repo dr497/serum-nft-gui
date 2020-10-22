@@ -55,6 +55,7 @@ const WrappedCardTrade = styled(Card)`
   border-radius: 25px;
   border: solid 3px;
   cursor: pointer;
+  overflow: hidden;
 `;
 
 const WrappedParagraph = styled(Paragraph)`
@@ -136,7 +137,7 @@ export const NftCardTrade = ({
           <img
             src={img}
             alt={name}
-            style={{ padding: 10, height: '400px' }}
+            style={{ padding: 10, height: 'auto', maxHeight: '400px' }}
             onClick={handleClick}
           />
         </Row>

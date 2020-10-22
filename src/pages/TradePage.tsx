@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Col, Row } from 'antd';
 import styled from 'styled-components';
-import Orderbook from '../components/Orderbook';
 import UserInfoTable from '../components/UserInfoTable';
-import StandaloneBalancesDisplay from '../components/StandaloneBalancesDisplay';
 import { useMarket } from '../utils/markets';
 import USE_NFTS from '../nfts';
 import { NftCardTrade } from '../components/NftCard';
@@ -155,12 +153,6 @@ const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
             />
           )}
         </Col>
-        {/*        <Col
-          flex="400px"
-          style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-        >
-          <StandaloneBalancesDisplay />
-        </Col>*/}
       </Row>
       <Row>
         <Col flex="auto">
@@ -197,11 +189,8 @@ const RenderSmaller = ({ onChangeOrderRef, onPrice, onSize }) => {
             />
           )}
         </Col>
-        {/*        <Col xs={24} sm={12}>
-          <StandaloneBalancesDisplay />
-        </Col>*/}
       </Row>
-      <Row>
+      <Row style={{ paddingTop: '20px' }}>
         <Col flex="auto">
           <UserInfoTable />
         </Col>
