@@ -18,10 +18,6 @@ const Wrapper = styled.div`
 
 export default function TradePage() {
   const { marketName } = useMarket();
-  const [dimensions, setDimensions] = useState({
-    height: window.innerHeight,
-    width: window.innerWidth,
-  });
 
   useEffect(() => {
     document.title = marketName ? `${marketName} — Solible` : 'Solible';
@@ -31,19 +27,6 @@ export default function TradePage() {
     ({ size, price }: { size?: number; price?: number }) => void
   >();
 
-  useEffect(() => {
-    const handleResize = () => {
-      setDimensions({
-        height: window.innerHeight,
-        width: window.innerWidth,
-      });
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const width = dimensions?.width;
   const componentProps = {
     onChangeOrderRef: (ref: any) => (changeOrderRef.current = ref),
     onPrice: useCallback(
