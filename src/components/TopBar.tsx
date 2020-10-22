@@ -132,8 +132,8 @@ export default function TopBar() {
           }}
         >
           <Menu.Item key="/">Home</Menu.Item>
-          {connected && <Menu.Item key="/balances">BALANCES</Menu.Item>}
-          {connected && <Menu.Item key="/orders">ORDERS</Menu.Item>}
+          {/*          {connected && <Menu.Item key="/balances">BALANCES</Menu.Item>}
+          {connected && <Menu.Item key="/orders">ORDERS</Menu.Item>}*/}
         </Menu>
         <div>
           <Row

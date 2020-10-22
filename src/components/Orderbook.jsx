@@ -120,15 +120,13 @@ export default function Orderbook({ smallScreen, depth = 7, onPrice, onSize }) {
           ? {
               flex: 1,
               background: 'transparent',
-              borderRadius: '25px',
-              border: 'solid 3px',
+              width: '100%',
             }
           : {
-              height: '500px',
+              height: '100%',
               overflow: 'hidden',
               background: 'transparent',
-              borderRadius: '25px',
-              border: 'solid 3px',
+              width: '100%',
             }
       }
     >

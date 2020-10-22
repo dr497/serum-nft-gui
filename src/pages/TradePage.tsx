@@ -95,11 +95,6 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize }) => {
           }}
         >
           <Col flex="auto" />
-          <Col style={{ paddingRight: '50px' }}>
-            <Orderbook smallScreen={false} onPrice={onPrice} onSize={onSize} />
-            <div style={{ paddingTop: '20px' }} />
-            <StandaloneBalancesDisplay />
-          </Col>
           <Col>
             {NFT && (
               <NftCardTrade
@@ -108,6 +103,9 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize }) => {
                 supply={NFT.supply}
                 mintAddress={NFT.mintAddress}
                 setChangeOrderRef={onChangeOrderRef}
+                smallScreen={false}
+                onPrice={onPrice}
+                onSize={onSize}
               />
             )}
           </Col>
@@ -151,21 +149,18 @@ const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
               supply={NFT.supply}
               mintAddress={NFT.mintAddress}
               setChangeOrderRef={onChangeOrderRef}
+              smallScreen={true}
+              onPrice={onPrice}
+              onSize={onSize}
             />
           )}
-          <Orderbook
-            smallScreen={true}
-            depth={13}
-            onPrice={onPrice}
-            onSize={onSize}
-          />
         </Col>
-        <Col
+        {/*        <Col
           flex="400px"
           style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
         >
           <StandaloneBalancesDisplay />
-        </Col>
+        </Col>*/}
       </Row>
       <Row>
         <Col flex="auto">
@@ -196,21 +191,15 @@ const RenderSmaller = ({ onChangeOrderRef, onPrice, onSize }) => {
               supply={NFT.supply}
               mintAddress={NFT.mintAddress}
               setChangeOrderRef={onChangeOrderRef}
+              smallScreen={true}
+              onPrice={onPrice}
+              onSize={onSize}
             />
           )}
         </Col>
-        <Col xs={24} sm={12}>
+        {/*        <Col xs={24} sm={12}>
           <StandaloneBalancesDisplay />
-        </Col>
-      </Row>
-      <Row
-        style={{
-          height: '500px',
-        }}
-      >
-        <Col xs={24} sm={12} style={{ height: '100%', display: 'flex' }}>
-          <Orderbook smallScreen={true} onPrice={onPrice} onSize={onSize} />
-        </Col>
+        </Col>*/}
       </Row>
       <Row>
         <Col flex="auto">

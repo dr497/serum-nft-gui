@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useMarket } from '../utils/markets';
 import TradeForm from './TradeForm';
+import Orderbook from './Orderbook';
 const { Title, Paragraph } = Typography;
 
 const EXPLORER_URL = 'https://explorer.solana.com/address/';
@@ -38,6 +39,16 @@ const WrappedButton = styled(Button)`
 const WrappedCard = styled(Card)`
   maxwidth: 600px;
   height: 750px;
+  background: transparent;
+  bordercolor: transparent;
+  width: auto;
+  border-radius: 25px;
+  border: solid 3px;
+  cursor: pointer;
+`;
+
+const WrappedCardTrade = styled(Card)`
+  maxwidth: 600px;
   background: transparent;
   bordercolor: transparent;
   width: auto;
@@ -107,6 +118,9 @@ export const NftCardTrade = ({
   supply,
   mintAddress,
   setChangeOrderRef,
+  smallScreen,
+  onPrice,
+  onSize,
 }) => {
   const [showModal, setShowModal] = React.useState(false);
   const handleClick = () => {
@@ -114,7 +128,7 @@ export const NftCardTrade = ({
   };
   return (
     <>
-      <WrappedCard>
+      <WrappedCardTrade>
         <Title level={2} style={{ color: 'white', textAlign: 'center' }}>
           {name}
         </Title>
@@ -151,7 +165,14 @@ export const NftCardTrade = ({
         <Row align="middle" justify="center">
           <TradeForm setChangeOrderRef={setChangeOrderRef} />
         </Row>
-      </WrappedCard>
+        <Row align="middle" justify="center">
+          <Orderbook
+            smallScreen={smallScreen}
+            onPrice={onPrice}
+            onSize={onSize}
+          />
+        </Row>
+      </WrappedCardTrade>
       <Modal
         visible={showModal}
         onOk={handleClick}
