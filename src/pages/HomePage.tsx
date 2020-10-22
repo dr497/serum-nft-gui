@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import USE_NFTS from '../nfts';
 import { useWindowDimensions } from '../components/utils';
 
-const WrappedCol = styled(Col)`
+export const WrappedCol = styled(Col)`
   padding: 30px;
 `;
 
@@ -34,7 +34,7 @@ const RowHomePage = ({ start, end }) => {
 };
 
 const HomePage = () => {
-  let windowDimensions = useWindowDimensions();
+  const windowDimensions = useWindowDimensions();
   return (
     <>
       {windowDimensions.width > 1600 && (

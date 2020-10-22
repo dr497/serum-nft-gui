@@ -135,6 +135,7 @@ export default function TopBar() {
           }}
         >
           <Menu.Item key="/">Home</Menu.Item>
+          <Menu.Item key="/search">Search</Menu.Item>
         </Menu>
 
         {windowDimensions.width > 1000 && (

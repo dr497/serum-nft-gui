@@ -5,6 +5,7 @@ import OpenOrdersPage from './pages/OpenOrdersPage';
 import BalancesPage from './pages/BalancesPage';
 import BasicLayout from './components/BasicLayout';
 import HomePage from './pages/HomePage';
+import SearchPage from './pages/SearchPage';
 
 export function Routes() {
   return (
@@ -15,6 +16,7 @@ export function Routes() {
           <Route exact path="/trade" component={TradePage} />
           <Route exact path="/orders" component={OpenOrdersPage} />
           <Route exact path="/balances" component={BalancesPage} />
+          <Route exact path="/search" component={SearchPage} />
         </BasicLayout>
       </HashRouter>
     </>
