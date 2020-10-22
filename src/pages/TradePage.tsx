@@ -84,41 +84,31 @@ const RenderNormal = ({ onChangeOrderRef, onPrice, onSize }) => {
 
   return (
     <>
-      <Col flex="auto" />
-      <Col>
-        <Row
-          style={{
-            minHeight: '900px',
-            flexWrap: 'nowrap',
-          }}
-        >
-          <Col flex="auto" />
-          <Col>
-            {NFT && (
-              <NftCardTrade
-                img={NFT.img}
-                name={NFT.name}
-                supply={NFT.supply}
-                mintAddress={NFT.mintAddress}
-                setChangeOrderRef={onChangeOrderRef}
-                smallScreen={false}
-                onPrice={onPrice}
-                onSize={onSize}
-              />
-            )}
-          </Col>
-          <Col flex="auto" />
-        </Row>
-
-        <Row style={{ paddingTop: '50px' }}>
-          <Col flex="auto" />
-          <Col flex="auto">
-            <UserInfoTable />
-          </Col>
-          <Col flex="auto" />
-        </Row>
-      </Col>
-      <Col flex="auto" />
+      <Row align="middle" justify="center">
+        <Col flex="auto" />
+        <Col>
+          {NFT && (
+            <NftCardTrade
+              img={NFT.img}
+              name={NFT.name}
+              supply={NFT.supply}
+              mintAddress={NFT.mintAddress}
+              setChangeOrderRef={onChangeOrderRef}
+              smallScreen={false}
+              onPrice={onPrice}
+              onSize={onSize}
+            />
+          )}
+        </Col>
+        <Col flex="auto" />
+      </Row>
+      <Row style={{ paddingTop: '50px' }}>
+        <Col flex="auto" />
+        <Col flex="auto">
+          <UserInfoTable />
+        </Col>
+        <Col flex="auto" />
+      </Row>
     </>
   );
 };
@@ -134,13 +124,11 @@ const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
   }
   return (
     <>
-      <Row
-        style={{
-          height: '900px',
-        }}
-      >
-        <Col flex="auto" style={{ height: '100%', display: 'flex' }}>
-          {NFT && (
+      <Row align="middle" justify="center">
+        <Col flex="auto" />
+
+        {NFT && (
+          <Col>
             <NftCardTrade
               img={NFT.img}
               name={NFT.name}
@@ -151,8 +139,10 @@ const RenderSmall = ({ onChangeOrderRef, onPrice, onSize }) => {
               onPrice={onPrice}
               onSize={onSize}
             />
-          )}
-        </Col>
+          </Col>
+        )}
+
+        <Col flex="auto" />
       </Row>
       <Row>
         <Col flex="auto">
@@ -174,8 +164,9 @@ const RenderSmaller = ({ onChangeOrderRef, onPrice, onSize }) => {
   }
   return (
     <>
-      <Row>
-        <Col xs={24} sm={12} style={{ height: '100%', display: 'flex' }}>
+      <Row align="middle" justify="center">
+        <Col flex="auto" />
+        <Col>
           {NFT && (
             <NftCardTrade
               img={NFT.img}
@@ -189,6 +180,7 @@ const RenderSmaller = ({ onChangeOrderRef, onPrice, onSize }) => {
             />
           )}
         </Col>
+        <Col flex="auto" />
       </Row>
       <Row style={{ paddingTop: '20px' }}>
         <Col flex="auto">
