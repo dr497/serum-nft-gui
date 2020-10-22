@@ -51,6 +51,19 @@ const SearchRow = ({ divider, longueur, NFT_ARRAY }) => {
   );
 };
 
+const searchWord = (nft: NFT, word: string): boolean => {
+  for (let i = 0; i < nft.keywords.length; i++) {
+    if (
+      nft.keywords[i].includes(word) ||
+      nft.marketAddress.toBase58().toLowerCase().includes(word.toLowerCase()) ||
+      nft.mintAddress.toBase58().toLowerCase().includes(word.toLowerCase())
+    ) {
+      return true;
+    }
+  }
+  return false;
+};
+
 const SearchPage = () => {
   const windowDimensions = useWindowDimensions();
   console.log(windowDimensions);
@@ -66,12 +79,7 @@ const SearchPage = () => {
     let temp: NFT[] = [];
     keywords?.forEach((keyword) => {
       USE_NFTS.forEach((nft) => {
-        if (
-          nft.keywords.includes(keyword.toLowerCase()) ||
-          keyword.toLowerCase() ===
-            nft.marketAddress.toBase58().toLowerCase() ||
-          keyword.toLowerCase() === nft.mintAddress.toBase58().toLowerCase()
-        ) {
+        if (searchWord(nft, keyword.toLowerCase())) {
           temp.push(nft);
         }
       });
