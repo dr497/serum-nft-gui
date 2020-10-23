@@ -136,6 +136,7 @@ export default function TopBar() {
         >
           <Menu.Item key="/">Home</Menu.Item>
           <Menu.Item key="/search">Search</Menu.Item>
+          {connected && <Menu.Item key="/balances">My Collection</Menu.Item>}
         </Menu>
 
         {windowDimensions.width > 1000 && (

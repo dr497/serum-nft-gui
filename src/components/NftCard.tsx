@@ -58,6 +58,17 @@ const WrappedCardTrade = styled(Card)`
   overflow: hidden;
 `;
 
+const WrappedBalance = styled(Card)`
+  maxwidth: 600px;
+  height: auto;
+  background: transparent;
+  bordercolor: transparent;
+  width: auto;
+  border-radius: 25px;
+  border: solid 3px;
+  cursor: pointer;
+`;
+
 const WrappedParagraph = styled(Paragraph)`
   textalign: center;
 `;
@@ -182,6 +193,66 @@ export const NftCardTrade = ({
       >
         <img src={img} width="100%" alt={name} />
       </Modal>
+    </>
+  );
+};
+
+export const NftCardBalance = ({
+  img,
+  name,
+  supply,
+  mintAddress,
+  marketAddress,
+  walletBalance,
+}) => {
+  let history = useHistory();
+  const { setMarketAddress } = useMarket();
+  const handleClick = () => {
+    setMarketAddress(marketAddress.toBase58());
+    history.push('/trade');
+  };
+
+  return (
+    <>
+      <WrappedBalance onClick={handleClick} style={{ overflow: 'hidden' }}>
+        <Title level={2} style={{ color: 'white', textAlign: 'center' }}>
+          {name}
+        </Title>
+        <Row align="middle" justify="center" style={{ paddingTop: 10 }}>
+          <img src={img} alt={name} style={{ padding: 10, height: '300px' }} />
+        </Row>
+        <Row align="middle" justify="center" style={{ paddingTop: 10 }}>
+          <FancyTitle level={3}>Mint Address</FancyTitle>
+        </Row>
+        <Row align="middle" justify="center" style={{ width: '100%' }}>
+          <Col>
+            <Paragraph copyable ellipsis>
+              {mintAddress.toString()}
+            </Paragraph>
+          </Col>
+          <Col
+            style={{ paddingBottom: 15, paddingLeft: 10, cursor: 'pointer' }}
+            onClick={() => window.open(getExplorerLink(mintAddress), '_blank')}
+          >
+            <ZoomInOutlined style={{ color: '#8f5cff' }} />
+          </Col>
+        </Row>
+        <SectionRow title="Wallet Balance" description={walletBalance} />
+        <SectionRow title="Supply" description={supply} />
+      </WrappedBalance>
+    </>
+  );
+};
+
+const SectionRow = ({ title, description }) => {
+  return (
+    <>
+      <Row align="middle" justify="center" style={{ paddingTop: 10 }}>
+        <FancyTitle level={3}>{title}</FancyTitle>
+      </Row>
+      <Row align="middle" justify="center" style={{ paddingTop: 10 }}>
+        <WrappedParagraph>{description}</WrappedParagraph>
+      </Row>
     </>
   );
 };

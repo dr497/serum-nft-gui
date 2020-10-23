@@ -8,7 +8,7 @@ import notFoundGif from '../assets/not-found.gif';
 const { Search } = Input;
 const { Title } = Typography;
 
-export const RowCard = ({ start, end, NFT_ARRAY }) => {
+const RowCard = ({ start, end, NFT_ARRAY }) => {
   return (
     <Row align="middle" justify="center">
       <Col flex="auto" />
@@ -35,16 +35,16 @@ export const RowCard = ({ start, end, NFT_ARRAY }) => {
 const SearchRow = ({ divider, longueur, NFT_ARRAY }) => {
   const quotien = Math.floor(longueur / divider);
   const reste = longueur % divider;
-  const MAP_ARRAY_3 = Array.from({ length: quotien }, (v, i) => i);
+  const MAP_ARRAY = Array.from({ length: quotien }, (v, i) => i);
   return (
     <>
       {quotien === 0 && <RowCard start={0} end={reste} NFT_ARRAY={NFT_ARRAY} />}
-      {MAP_ARRAY_3.map((e) => {
-        return <RowCard start={e} end={e + 3} NFT_ARRAY={NFT_ARRAY} />;
+      {MAP_ARRAY.map((e) => {
+        return <RowCard start={e} end={e + divider} NFT_ARRAY={NFT_ARRAY} />;
       })}
       <RowCard
-        start={longueur - 3}
-        end={longueur + reste - 3}
+        start={longueur - divider}
+        end={longueur + reste - divider}
         NFT_ARRAY={NFT_ARRAY}
       />
     </>

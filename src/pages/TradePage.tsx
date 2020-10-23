@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { Col, Row } from 'antd';
 import styled from 'styled-components';
 import UserInfoTable from '../components/UserInfoTable';
