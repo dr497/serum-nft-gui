@@ -108,6 +108,24 @@ const USE_NFTS: NFT[] = [
     false,
     ['satoshi', 'btc', 'genesis', 'block'],
   ),
+  new NFT(
+    require('../assets/nfts/9Vvre2DxBB9onibwYDHeMsY1cj6BDKtEDccBPWRN215E/9Vvre2DxBB9onibwYDHeMsY1cj6BDKtEDccBPWRN215E.gif'),
+    'Satoshi Nakamoto',
+    1,
+    new PublicKey('9Vvre2DxBB9onibwYDHeMsY1cj6BDKtEDccBPWRN215E'),
+    new PublicKey('F4euXHP7KWijkhGqsGEqWy9iZKeNc1jg2LVodKHQ13PV'),
+    false,
+    ['satoshi', 'nakamoto'],
+  ),
+  new NFT(
+    require('../assets/nfts/7RpFk44cMTAUt9CcjEMWnZMypE9bYQsjBiSNLn5qBvhP/7RpFk44cMTAUt9CcjEMWnZMypE9bYQsjBiSNLn5qBvhP.gif'),
+    'Charles Hoskinson',
+    1,
+    new PublicKey('7RpFk44cMTAUt9CcjEMWnZMypE9bYQsjBiSNLn5qBvhP'),
+    new PublicKey('474bvPo2KH3L9E8fpBspKgeDGqW51ysiH5LTnbko1Njq'),
+    false,
+    ['charles', 'hoskinson'],
+  ),
 ];
 
 export default USE_NFTS;
