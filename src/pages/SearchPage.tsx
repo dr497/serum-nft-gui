@@ -8,7 +8,7 @@ import notFoundGif from '../assets/not-found.gif';
 const { Search } = Input;
 const { Title } = Typography;
 
-const RowCard = ({ start, end, NFT_ARRAY }) => {
+export const RowCard = ({ start, end, NFT_ARRAY }) => {
   return (
     <Row align="middle" justify="center">
       <Col flex="auto" />
@@ -34,7 +34,7 @@ const RowCard = ({ start, end, NFT_ARRAY }) => {
 
 const SearchRow = ({ divider, longueur, NFT_ARRAY }) => {
   const quotien = Math.floor(longueur / divider);
-  const reste = longueur % 3;
+  const reste = longueur % divider;
   const MAP_ARRAY_3 = Array.from({ length: quotien }, (v, i) => i);
   return (
     <>
@@ -66,7 +66,6 @@ const searchWord = (nft: NFT, word: string): boolean => {
 
 const SearchPage = () => {
   const windowDimensions = useWindowDimensions();
-  console.log(windowDimensions);
   const [searchResults, setSearchResults] = useState<NFT[] | null>(null);
   const [keywords, setKeywords] = useState<string[] | null>(null);
   const onSearch = (value: string) => {
