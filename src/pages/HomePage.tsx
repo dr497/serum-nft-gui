@@ -42,7 +42,8 @@ const HomePage = () => {
           <RowHomePage start={0} end={3} />
           <RowHomePage start={3} end={6} />
           <RowHomePage start={6} end={9} />
-          <RowHomePage start={9} end={11} />
+          <RowHomePage start={9} end={12} />
+          <RowHomePage start={12} end={15} />
         </>
       )}
       {1100 < windowDimensions.width && windowDimensions.width < 1600 && (
@@ -51,7 +52,8 @@ const HomePage = () => {
           <RowHomePage start={2} end={4} />
           <RowHomePage start={4} end={6} />
           <RowHomePage start={6} end={8} />
-          <RowHomePage start={8} end={11} />
+          <RowHomePage start={9} end={12} />
+          <RowHomePage start={12} end={15} />
         </>
       )}
       {windowDimensions.width < 1100 && (
