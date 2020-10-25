@@ -1,20 +1,21 @@
 {
   "files": {
     "main.css": "/static/css/main.d3e7f6f7.chunk.css",
-    "main.js": "/static/js/main.4dcbdd27.chunk.js",
-    "main.js.map": "/static/js/main.4dcbdd27.chunk.js.map",
+    "main.js": "/static/js/main.2d39fad3.chunk.js",
+    "main.js.map": "/static/js/main.2d39fad3.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.48866770.js",
     "runtime-main.js.map": "/static/js/runtime-main.48866770.js.map",
     "static/css/2.cfe2253c.chunk.css": "/static/css/2.cfe2253c.chunk.css",
-    "static/js/2.ad7431aa.chunk.js": "/static/js/2.ad7431aa.chunk.js",
-    "static/js/2.ad7431aa.chunk.js.map": "/static/js/2.ad7431aa.chunk.js.map",
+    "static/js/2.1c9eb015.chunk.js": "/static/js/2.1c9eb015.chunk.js",
+    "static/js/2.1c9eb015.chunk.js.map": "/static/js/2.1c9eb015.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.dc67a7a87c2d1b8f9cbddf75112b58e5.js": "/precache-manifest.dc67a7a87c2d1b8f9cbddf75112b58e5.js",
+    "precache-manifest.07090977de4d13f6e1074f190449f776.js": "/precache-manifest.07090977de4d13f6e1074f190449f776.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.cfe2253c.chunk.css.map": "/static/css/2.cfe2253c.chunk.css.map",
     "static/css/main.d3e7f6f7.chunk.css.map": "/static/css/main.d3e7f6f7.chunk.css.map",
-    "static/js/2.ad7431aa.chunk.js.LICENSE.txt": "/static/js/2.ad7431aa.chunk.js.LICENSE.txt",
+    "static/js/2.1c9eb015.chunk.js.LICENSE.txt": "/static/js/2.1c9eb015.chunk.js.LICENSE.txt",
     "static/media/7RpFk44cMTAUt9CcjEMWnZMypE9bYQsjBiSNLn5qBvhP.gif": "/static/media/7RpFk44cMTAUt9CcjEMWnZMypE9bYQsjBiSNLn5qBvhP.f630e500.gif",
+    "static/media/9CmQwpvVXRyixjiE3LrbSyyopPZohNDN1RZiTk8rnXsQ.gif": "/static/media/9CmQwpvVXRyixjiE3LrbSyyopPZohNDN1RZiTk8rnXsQ.c1b55532.gif",
     "static/media/9Vvre2DxBB9onibwYDHeMsY1cj6BDKtEDccBPWRN215E.gif": "/static/media/9Vvre2DxBB9onibwYDHeMsY1cj6BDKtEDccBPWRN215E.bde42c44.gif",
     "static/media/logo-deep.png": "/static/media/logo-deep.04bd3c48.png",
     "static/media/not-connected.gif": "/static/media/not-connected.6f26844a.gif",
@@ -32,8 +33,8 @@
   "entrypoints": [
     "static/js/runtime-main.48866770.js",
     "static/css/2.cfe2253c.chunk.css",
-    "static/js/2.ad7431aa.chunk.js",
+    "static/js/2.1c9eb015.chunk.js",
     "static/css/main.d3e7f6f7.chunk.css",
-    "static/js/main.4dcbdd27.chunk.js"
+    "static/js/main.2d39fad3.chunk.js"
   ]
 }
