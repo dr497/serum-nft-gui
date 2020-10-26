@@ -10,6 +10,7 @@ import { NftCardBalance } from '../components/NftCard';
 import styled from 'styled-components';
 import { useWallet } from '../utils/wallet';
 import notConnected from '../assets/not-connected.gif';
+import notFoundGif from '../assets/not-found.gif';
 const { Title } = Typography;
 
 const WrappedCol = styled(Col)`
@@ -106,6 +107,7 @@ export default function BalancesPage() {
   const walletBalances = useWalletBalancesForAllMarkets();
   const openOrdersBalances = useAllOpenOrdersBalances();
   const windowDimensions = useWindowDimensions();
+  const { connected } = useWallet();
 
   let data = (walletBalances || []).map((balance) => {
     const balances = {
@@ -121,12 +123,22 @@ export default function BalancesPage() {
     }
     return balances;
   });
-  data = data.filter((balance) => !!balance.nft);
+  data = data.filter((balance) => !!balance.nft && balance.walletBalance > 0);
   const longueur = data.length;
 
   return (
     <>
       <TopPage />
+      {longueur === 0 && connected && (
+        <Row style={{ paddingTop: '50px' }}>
+          <Col flex="auto" />
+          <Col>
+            <Title level={2}>You don't have any NFT in your collection</Title>
+            <img src={notFoundGif} width="100%" alt="not found" />
+          </Col>
+          <Col flex="auto" />
+        </Row>
+      )}
       {windowDimensions.width > 1600 && (
         <BalanceRow divider={3} longueur={longueur} array={data} />
       )}
