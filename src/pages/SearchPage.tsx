@@ -40,7 +40,13 @@ const SearchRow = ({ divider, longueur, NFT_ARRAY }) => {
     <>
       {quotien === 0 && <RowCard start={0} end={reste} NFT_ARRAY={NFT_ARRAY} />}
       {MAP_ARRAY.map((e) => {
-        return <RowCard start={e} end={e + divider} NFT_ARRAY={NFT_ARRAY} />;
+        return (
+          <RowCard
+            start={divider * e}
+            end={divider * e + divider}
+            NFT_ARRAY={NFT_ARRAY}
+          />
+        );
       })}
       <RowCard
         start={longueur - divider}
