@@ -15,7 +15,12 @@ import WalletConnect from './WalletConnect';
 import { useWindowDimensions } from './utils';
 
 const Wrapper = styled.div`
-  background: #000;
+  background: linear-gradient(
+    90deg,
+    rgba(25, 29, 89, 1) 0%,
+    rgba(19, 24, 47, 1) 50%,
+    rgba(25, 29, 89, 1) 100%
+  );
   display: flex;
   flex-direction: row;
   justify-content: flex-end;

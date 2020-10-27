@@ -55,13 +55,13 @@ input[type=number]:focus::-webkit-inner-spin-button {
   border-top: 1px solid #434a59 !important;
 }
 .ant-layout {
-    background: #000
+    background: linear-gradient(90deg, rgba(25,29,89,1) 0%, rgba(19,24,47,1) 50%, rgba(25,29,89,1) 100%);
   }
   .ant-table {
-    background: #000;
+    background: transparent;
   }
   .ant-table-thead > tr > th {
-    background: #000;
+    background: transparent;
   }
 .ant-select-item-option-content {
   img {
@@ -70,6 +70,10 @@ input[type=number]:focus::-webkit-inner-spin-button {
 }
 .ant-modal-content {
   background-color: #212734;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: 0px
 }
 
 @-webkit-keyframes highlight {

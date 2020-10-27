@@ -18,7 +18,7 @@ const RowHomePage = ({ start, end }) => {
           <WrappedCol>
             <NftCard
               key={key}
-              img={NFT.img}
+              img={NFT.imgSmall}
               name={NFT.name}
               supply={NFT.supply}
               mintAddress={NFT.mintAddress}
