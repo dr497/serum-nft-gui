@@ -73,11 +73,11 @@ const WrappedParagraph = styled(Paragraph)`
   textalign: center;
 `;
 
-const NftCard = ({ img, name, supply, mintAddress, sold, marketAddress }) => {
+const NftCard = ({ nft }) => {
   let history = useHistory();
   const { setMarketAddress } = useMarket();
   const handleClick = () => {
-    setMarketAddress(marketAddress.toBase58());
+    setMarketAddress(nft.marketAddress.toBase58());
     history.push('/trade');
   };
 
@@ -85,10 +85,20 @@ const NftCard = ({ img, name, supply, mintAddress, sold, marketAddress }) => {
     <>
       <WrappedCard onClick={handleClick} style={{ overflow: 'hidden' }}>
         <Title level={2} style={{ color: 'white', textAlign: 'center' }}>
-          {name}
+          {nft.name}
         </Title>
         <Row align="middle" justify="center" style={{ paddingTop: 10 }}>
-          <img src={img} alt={name} style={{ padding: 10, height: '300px' }} />
+          {nft.type === 'IMAGE' ? (
+            <img
+              src={nft.imgSmall}
+              alt={nft.name}
+              style={{ padding: 10, height: '300px' }}
+            />
+          ) : (
+            <video height="300" muted loop autoPlay>
+              <source src={nft.imgSmall} type="video/webm" />
+            </video>
+          )}
         </Row>
         <Row align="middle" justify="center" style={{ paddingTop: 10 }}>
           <FancyTitle level={3}>Mint Address</FancyTitle>
@@ -96,12 +106,14 @@ const NftCard = ({ img, name, supply, mintAddress, sold, marketAddress }) => {
         <Row align="middle" justify="center" style={{ width: '100%' }}>
           <Col>
             <Paragraph copyable ellipsis>
-              {mintAddress.toString()}
+              {nft.mintAddress.toString()}
             </Paragraph>
           </Col>
           <Col
             style={{ paddingBottom: 15, paddingLeft: 10, cursor: 'pointer' }}
-            onClick={() => window.open(getExplorerLink(mintAddress), '_blank')}
+            onClick={() =>
+              window.open(getExplorerLink(nft.mintAddress), '_blank')
+            }
           >
             <ZoomInOutlined style={{ color: '#8f5cff' }} />
           </Col>
@@ -110,11 +122,11 @@ const NftCard = ({ img, name, supply, mintAddress, sold, marketAddress }) => {
           <FancyTitle level={3}>Supply</FancyTitle>
         </Row>
         <Row align="middle" justify="center" style={{ paddingTop: 10 }}>
-          <WrappedParagraph>{supply}</WrappedParagraph>
+          <WrappedParagraph>{nft.supply}</WrappedParagraph>
         </Row>
         <Row align="middle" justify="center">
-          <WrappedButton disabled={sold} block onClick={handleClick}>
-            {sold ? 'Sold' : 'Buy'}
+          <WrappedButton disabled={nft.sold} block onClick={handleClick}>
+            {nft.sold ? 'Sold' : 'Buy'}
           </WrappedButton>
         </Row>
       </WrappedCard>

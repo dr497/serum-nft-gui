@@ -16,15 +16,7 @@ const RowHomePage = ({ start, end }) => {
       {USE_NFTS.slice(start, end).map((NFT, key) => {
         return (
           <WrappedCol>
-            <NftCard
-              key={key}
-              img={NFT.imgSmall}
-              name={NFT.name}
-              supply={NFT.supply}
-              mintAddress={NFT.mintAddress}
-              sold={NFT.sold}
-              marketAddress={NFT.marketAddress}
-            />
+            <NftCard key={key} nft={NFT} />
           </WrappedCol>
         );
       })}
@@ -61,15 +53,7 @@ const HomePage = () => {
           {USE_NFTS.map((NFT, key) => {
             return (
               <WrappedCol style={{ paddingRight: '10%', paddingLeft: '10%' }}>
-                <NftCard
-                  key={key}
-                  img={NFT.img}
-                  name={NFT.name}
-                  supply={NFT.supply}
-                  mintAddress={NFT.mintAddress}
-                  sold={NFT.sold}
-                  marketAddress={NFT.marketAddress}
-                />
+                <NftCard key={key} nft={NFT} />
               </WrappedCol>
             );
           })}

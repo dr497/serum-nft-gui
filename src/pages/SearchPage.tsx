@@ -15,15 +15,7 @@ const RowCard = ({ start, end, NFT_ARRAY }) => {
       {NFT_ARRAY?.slice(start, end).map((nft: NFT, key: number) => {
         return (
           <WrappedCol>
-            <NftCard
-              key={key}
-              img={nft.img}
-              name={nft.name}
-              supply={nft.supply}
-              mintAddress={nft.mintAddress}
-              sold={nft.sold}
-              marketAddress={nft.marketAddress}
-            />
+            <NftCard key={key} nft={nft} />
           </WrappedCol>
         );
       })}
@@ -135,15 +127,7 @@ const SearchPage = () => {
           {searchResults?.map((NFT, key) => {
             return (
               <WrappedCol style={{ paddingRight: '10%', paddingLeft: '10%' }}>
-                <NftCard
-                  key={key}
-                  img={NFT.img}
-                  name={NFT.name}
-                  supply={NFT.supply}
-                  mintAddress={NFT.mintAddress}
-                  sold={NFT.sold}
-                  marketAddress={NFT.marketAddress}
-                />
+                <NftCard key={key} nft={NFT} />
               </WrappedCol>
             );
           })}
