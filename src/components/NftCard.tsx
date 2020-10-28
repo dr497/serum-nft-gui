@@ -95,7 +95,7 @@ const NftCard = ({ nft }) => {
               style={{ padding: 10, height: '300px' }}
             />
           ) : (
-            <video height="300" muted loop autoPlay>
+            <video height="300" muted loop autoPlay playsInline>
               <source src={nft.imgSmall} type="video/webm" />
             </video>
           )}
