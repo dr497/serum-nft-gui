@@ -86,7 +86,7 @@ const USE_NFTS: NFT[] = [
   ),
   new NFT(
     require('../assets/nfts/8T4vXgwZUWwsbCDiptHFHjdfexvLG9UP8oy1psJWEQdS/8T4vXgwZUWwsbCDiptHFHjdfexvLG9UP8oy1psJWEQdS.gif'),
-    require('../assets/nfts/8T4vXgwZUWwsbCDiptHFHjdfexvLG9UP8oy1psJWEQdS/small.webm'),
+    require('../assets/nfts/8T4vXgwZUWwsbCDiptHFHjdfexvLG9UP8oy1psJWEQdS/small.mp4'),
     'Uni Christmas',
     1,
     new PublicKey('8T4vXgwZUWwsbCDiptHFHjdfexvLG9UP8oy1psJWEQdS'),
