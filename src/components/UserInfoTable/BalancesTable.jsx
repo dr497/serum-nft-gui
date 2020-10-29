@@ -10,7 +10,7 @@ import { useSendConnection } from '../../utils/connection';
 import { useWallet } from '../../utils/wallet';
 import { settleFunds } from '../../utils/send';
 import { notify } from '../../utils/notifications';
-import USE_NFTS from '../../nfts';
+import { USE_ALL_NFTS } from '../../nfts';
 
 export default function BalancesTable({
   balances,
@@ -25,14 +25,14 @@ export default function BalancesTable({
 
   let NFT;
   if (market) {
-    NFT = USE_NFTS.filter(
+    NFT = USE_ALL_NFTS.filter(
       (nft) => nft.marketAddress.toBase58() === market.address.toBase58(),
     )[0];
   }
 
   balances.forEach((item, i) => {
     if (item.coin === 'UNKNOWN') {
-      item.coin = NFT.name;
+      item.coin = NFT?.name;
     }
   });
 

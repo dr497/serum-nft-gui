@@ -12,11 +12,11 @@ export default function Index() {
   return (
     <FloatingElement
       style={{
+        width: '100%',
         flex: 1,
         paddingTop: 20,
         background: 'transparent',
         borderRadius: '25px',
-        border: 'solid 3px',
       }}
     >
       <Tabs defaultActiveKey="orders">

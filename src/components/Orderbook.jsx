@@ -7,7 +7,7 @@ import { useInterval } from '../utils/useInterval';
 import FloatingElement from './layout/FloatingElement';
 import usePrevious from '../utils/usePrevious';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
-import USE_NFTS from '../nfts';
+import { USE_ALL_NFTS } from '../nfts';
 
 const Title = styled.div`
   color: rgba(255, 255, 255, 1);
@@ -57,7 +57,7 @@ export default function Orderbook({ smallScreen, depth = 7, onPrice, onSize }) {
 
   let NFT;
   if (market) {
-    NFT = USE_NFTS.filter(
+    NFT = USE_ALL_NFTS.filter(
       (nft) => nft.marketAddress.toBase58() === market.address.toBase58(),
     )[0];
   }
@@ -133,8 +133,8 @@ export default function Orderbook({ smallScreen, depth = 7, onPrice, onSize }) {
       <Title>Orderbook</Title>
       <SizeTitle>
         <Col span={12} style={{ textAlign: 'left' }}>
-          Size ({baseCurrency === 'UNKNOWN' && market ? NFT.name : baseCurrency}
-          )
+          Size (
+          {baseCurrency === 'UNKNOWN' && market ? NFT?.name : baseCurrency})
         </Col>
         <Col span={12} style={{ textAlign: 'right' }}>
           Price ({quoteCurrency})

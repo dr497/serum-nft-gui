@@ -13,7 +13,7 @@ export class NFT {
   supply: number;
   mintAddress: PublicKey;
   marketAddress: PublicKey;
-  sold: boolean;
+  redeembale: boolean;
   keywords: string[];
   type: NFT_Types;
   constructor(
@@ -23,7 +23,7 @@ export class NFT {
     supply: number,
     mintAddress: PublicKey,
     marketAddress: PublicKey,
-    sold: boolean,
+    redeembale: boolean,
     keywords: string[],
     type: NFT_Types,
   ) {
@@ -33,7 +33,7 @@ export class NFT {
     this.supply = supply;
     this.mintAddress = mintAddress;
     this.marketAddress = marketAddress;
-    this.sold = sold;
+    this.redeembale = redeembale;
     this.keywords = keywords;
     this.type = type;
   }
@@ -82,6 +82,17 @@ const USE_NFTS: NFT[] = [
     new PublicKey('BKZSAFLqxBHKXJk3cw5pGdFCsKzyrouSG19KmiUQKXBh'),
     false,
     ['decefi', 'DCFI'],
+    NFT_Types.VIDEO,
+  ),
+  new NFT(
+    require('../assets/nfts/8T4vXgwZUWwsbCDiptHFHjdfexvLG9UP8oy1psJWEQdS/8T4vXgwZUWwsbCDiptHFHjdfexvLG9UP8oy1psJWEQdS.gif'),
+    require('../assets/nfts/8T4vXgwZUWwsbCDiptHFHjdfexvLG9UP8oy1psJWEQdS/small.webm'),
+    'Uni Christmas',
+    1,
+    new PublicKey('8T4vXgwZUWwsbCDiptHFHjdfexvLG9UP8oy1psJWEQdS'),
+    new PublicKey('Ev6wW561tdrsFakA9G9TddMbCsCnkbGGRy4d5B5Q43fQ'),
+    false,
+    ['uni', 'uniswap', 'christmas'],
     NFT_Types.VIDEO,
   ),
   new NFT(
@@ -219,6 +230,8 @@ export const USE_REDEEMABLE_NFTS: NFT[] = [
     new PublicKey('CWkuMPt24aZFA4sHTUs43zwp3N8Lh9UfKNAScQqQ8uUg'),
     false,
     ['bitcoin', 'tram', 'hong', 'kong'],
-    NFT_Types.REDEEMABLE,
+    NFT_Types.IMAGE,
   ),
 ];
+
+export const USE_ALL_NFTS = [...USE_NFTS, ...USE_REDEEMABLE_NFTS];

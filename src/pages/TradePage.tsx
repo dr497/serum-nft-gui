@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { Col, Row } from 'antd';
 import styled from 'styled-components';
-import UserInfoTable from '../components/UserInfoTable';
 import { useMarket } from '../utils/markets';
 import USE_NFTS from '../nfts';
-import { NftCardTrade } from '../components/NftCard';
+import { NftCardTrade, NftView } from '../components/NftCard';
 
 const Wrapper = styled.div`
   height: 100%;
@@ -51,39 +50,39 @@ export default function TradePage() {
 const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
   const { market } = useMarket();
 
+  const styles = {
+    col: { padding: 20 },
+  };
+
   let NFT: any;
   if (market) {
     NFT = USE_NFTS.filter(
       (nft) => nft.marketAddress.toBase58() === market.address.toBase58(),
     )[0];
   }
+  if (!NFT) {
+    return null;
+  }
 
   return (
     <>
-      <Row align="middle" justify="center">
-        <Col flex="auto" />
-        <Col>
-          {NFT && (
+      <Row align="middle" justify="space-around">
+        <>
+          <Col flex="auto" />
+          <Col style={styles.col}>
+            <NftView nft={NFT} />
+          </Col>
+          <Col style={styles.col}>
             <NftCardTrade
-              img={NFT.img}
-              name={NFT.name}
-              supply={NFT.supply}
-              mintAddress={NFT.mintAddress}
+              nft={NFT}
               setChangeOrderRef={onChangeOrderRef}
               smallScreen={false}
               onPrice={onPrice}
               onSize={onSize}
             />
-          )}
-        </Col>
-        <Col flex="auto" />
-      </Row>
-      <Row style={{ paddingTop: '50px' }}>
-        <Col flex="auto" />
-        <Col flex="auto">
-          <UserInfoTable />
-        </Col>
-        <Col flex="auto" />
+          </Col>
+          <Col flex="auto" />
+        </>
       </Row>
     </>
   );

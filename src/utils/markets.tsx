@@ -40,13 +40,13 @@ import {
 import { WRAPPED_SOL_MINT } from '@project-serum/serum/lib/token-instructions';
 import { Order } from '@project-serum/serum/lib/market';
 import BonfidaApi from './bonfidaConnector';
-import USE_NFTS from '../nfts';
+import { USE_ALL_NFTS } from '../nfts';
 
 let USE_MARKETS: MarketInfo[] = [];
 
-USE_NFTS.forEach((NFT) => {
+USE_ALL_NFTS.forEach((NFT) => {
   USE_MARKETS.push({
-    name: NFT.name + '/SRM',
+    name: NFT.name,
     address: NFT.marketAddress,
     programId: new PublicKey('EUqojwWA2rd19FZrzeBncJsm38Jm1hEhE3zsmX3bRc2o'),
     deprecated: false,

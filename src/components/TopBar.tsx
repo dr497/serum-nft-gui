@@ -13,14 +13,10 @@ import { notify } from '../utils/notifications';
 import { Connection } from '@solana/web3.js';
 import WalletConnect from './WalletConnect';
 import { useWindowDimensions } from './utils';
+import SearchBar from './SearchBar';
 
 const Wrapper = styled.div`
-  background: linear-gradient(
-    90deg,
-    rgba(25, 29, 89, 1) 0%,
-    rgba(19, 24, 47, 1) 50%,
-    rgba(25, 29, 89, 1) 100%
-  );
+  background: #000;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -34,7 +30,7 @@ const LogoWrapper = styled.div`
   font-weight: bold;
   cursor: pointer;
   img {
-    height: 60px;
+    height: 40px;
     margin: 10px;
   }
 `;
@@ -42,7 +38,6 @@ const LogoWrapper = styled.div`
 export default function TopBar() {
   const { connected, wallet, providerUrl, setProvider } = useWallet();
   const {
-    endpoint,
     endpointInfo,
     setEndpoint,
     availableEndpoints,
@@ -140,7 +135,6 @@ export default function TopBar() {
           }}
         >
           <Menu.Item key="/">Home</Menu.Item>
-          <Menu.Item key="/search">Search</Menu.Item>
           {connected && <Menu.Item key="/balances">My Collection</Menu.Item>}
         </Menu>
 
@@ -152,18 +146,8 @@ export default function TopBar() {
                 style={{ paddingLeft: 5, paddingRight: 5 }}
                 gutter={16}
               >
-                <Col>
-                  <Select
-                    onSelect={setEndpoint}
-                    value={endpoint}
-                    style={{ marginRight: 8, width: '150px' }}
-                  >
-                    {availableEndpoints.map(({ name, endpoint }) => (
-                      <Select.Option value={endpoint} key={endpoint}>
-                        {name}
-                      </Select.Option>
-                    ))}
-                  </Select>
+                <Col style={{ top: 16, paddingRight: 10 }}>
+                  <SearchBar />
                 </Col>
               </Row>
             </div>

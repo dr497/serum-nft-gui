@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Row, Col, Typography } from 'antd';
+import { Row, Col, Typography } from 'antd';
 import USE_NFTS, { NFT } from '../nfts';
 import { WrappedCol } from './HomePage';
 import { useWindowDimensions } from '../components/utils';
 import NftCard from '../components/NftCard';
 import notFoundGif from '../assets/not-found.gif';
-const { Search } = Input;
+import { RouteComponentProps } from 'react-router-dom';
 const { Title } = Typography;
 
 const RowCard = ({ start, end, NFT_ARRAY }) => {
@@ -62,13 +62,13 @@ const searchWord = (nft: NFT, word: string): boolean => {
   return false;
 };
 
-const SearchPage = () => {
+type TParams = { searchParameters: string };
+
+const SearchPage = ({ match }: RouteComponentProps<TParams>) => {
   const windowDimensions = useWindowDimensions();
   const [searchResults, setSearchResults] = useState<NFT[] | null>(null);
   const [keywords, setKeywords] = useState<string[] | null>(null);
-  const onSearch = (value: string) => {
-    setKeywords(value.split(' ').map((e) => e.toLowerCase()));
-  };
+
   const [notFound, setNotFound] = useState(false);
 
   // Update results
@@ -84,6 +84,12 @@ const SearchPage = () => {
     setSearchResults(temp);
   }, [keywords]);
 
+  React.useEffect(() => {
+    setKeywords(
+      match?.params.searchParameters.split('&').map((e) => e.toLowerCase()),
+    );
+  }, [match]);
+
   // Not Found
   useEffect(() => {
     if (keywords && searchResults) {
@@ -95,22 +101,13 @@ const SearchPage = () => {
 
   return (
     <>
-      <Row style={{ paddingTop: '50px' }}>
-        <Col flex="auto" />
-        <Col>
-          <Search
-            placeholder="Search NFT"
-            onSearch={onSearch}
-            style={{ width: 200 }}
-          />
-        </Col>
-        <Col flex="auto" />
-      </Row>
       {notFound && (
         <Row style={{ paddingTop: '50px' }}>
           <Col flex="auto" />
           <Col>
-            <Title level={2}>Nothing found</Title>
+            <Title level={2} style={{ color: 'black' }}>
+              Nothing found
+            </Title>
             <img src={notFoundGif} width="100%" alt="not found" />
           </Col>
           <Col flex="auto" />
