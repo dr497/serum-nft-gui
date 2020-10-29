@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Row, Col, Typography, Modal } from 'antd';
+import { Card, Row, Col, Typography, Modal } from 'antd';
 import { ZoomInOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
@@ -24,18 +24,6 @@ const FancyTitle = styled(Title)`
   borderleftwidth: 0;
   borderrightwidth: 0;
   borderimage: linear-gradient(to right, #d07d7a, #d05651) 1 stretch;
-`;
-
-const WrappedButton = styled(Button)`
-  color: #8f5cff;
-  border: solid 2px;
-  border-radius: 25px;
-  width: 50%;
-  height: 50px;
-  &:hover: {
-    color: #000;
-    background: #8f5cff;
-  }
 `;
 
 const WrappedCard = styled(Card)`
