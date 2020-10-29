@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useMarket } from '../utils/markets';
 import USE_NFTS from '../nfts';
 import { NftCardTrade, NftView } from '../components/NftCard';
+import { useWindowDimensions } from '../components/utils';
 
 const Wrapper = styled.div`
   height: 100%;
@@ -49,6 +50,7 @@ export default function TradePage() {
 
 const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
   const { market } = useMarket();
+  const windowDimensions = useWindowDimensions();
 
   const styles = {
     col: { padding: 20 },
@@ -68,9 +70,13 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
     <>
       <Row align="middle" justify="space-around">
         <>
-          <Col flex="auto" />
+          {windowDimensions.width > 1000 && <Col flex="auto" />}
           <Col style={styles.col}>
-            <NftView nft={NFT} />
+            {windowDimensions.width > 1000 && (
+              <>
+                <NftView nft={NFT} />
+              </>
+            )}
           </Col>
           <Col style={styles.col}>
             <NftCardTrade
@@ -81,7 +87,7 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
               onSize={onSize}
             />
           </Col>
-          <Col flex="auto" />
+          {windowDimensions.width > 1000 && <Col flex="auto" />}
         </>
       </Row>
     </>

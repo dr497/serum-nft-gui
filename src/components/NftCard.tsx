@@ -66,7 +66,7 @@ const WrappedCardTrade = styled(Card)`
   border-radius: 25px;
   cursor: pointer;
   overflow: hidden;
-  min-height: 1000px;
+  min-height: 1030px;
   height: 100vh;
 `;
 
@@ -96,7 +96,7 @@ const WrappedCardView = styled(Card)`
   cursor: pointer;
   overflow: hidden;
   min-height: 1000px;
-  height: 100vh;
+  width: 50vw;
 `;
 
 const NftCard = ({ nft }) => {
@@ -251,10 +251,10 @@ const SectionRow = ({ title, description }) => {
 export const NftView = ({ nft }) => {
   const style = {
     img: {
-      // height: '90vh',
-      height: '100%',
-      width: '100%',
+      maxWidth: '100%',
     } as React.CSSProperties,
+    parent: { display: 'flex', minHeight: '100vh' } as React.CSSProperties,
+    children: { margin: 'auto' } as React.CSSProperties,
   };
 
   const [showModal, setShowModal] = React.useState(false);
@@ -268,12 +268,16 @@ export const NftView = ({ nft }) => {
         <Row align="middle" justify="center">
           <Col flex="auto" />
           <Col>
-            <img
-              onClick={handleClick}
-              src={nft.img}
-              style={style.img}
-              alt={nft.name}
-            />
+            <div style={style.parent}>
+              <div style={style.children}>
+                <img
+                  onClick={handleClick}
+                  src={nft.img}
+                  style={style.img}
+                  alt={nft.name}
+                />
+              </div>
+            </div>
           </Col>
           <Col flex="auto" />
         </Row>

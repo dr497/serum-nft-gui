@@ -52,9 +52,13 @@ const HomePage = () => {
         <>
           {USE_NFTS.map((NFT, key) => {
             return (
-              <WrappedCol style={{ paddingRight: '10%', paddingLeft: '10%' }}>
-                <NftCard key={key} nft={NFT} />
-              </WrappedCol>
+              <Row style={{ padding: 20 }} align="middle" justify="center">
+                <Col flex="auto" />
+                <Col>
+                  <NftCard key={key} nft={NFT} />
+                </Col>
+                <Col flex="auto" />
+              </Row>
             );
           })}
         </>
