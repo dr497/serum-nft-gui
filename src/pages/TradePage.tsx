@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { Col, Row } from 'antd';
 import styled from 'styled-components';
-import UserInfoTable from '../components/UserInfoTable';
 import { useMarket } from '../utils/markets';
 import USE_NFTS from '../nfts';
-import { NftCardTrade } from '../components/NftCard';
+import { NftCardTrade, NftView } from '../components/NftCard';
+import { useWindowDimensions } from '../components/utils';
 
 const Wrapper = styled.div`
   height: 100%;
@@ -50,6 +50,23 @@ export default function TradePage() {
 
 const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
   const { market } = useMarket();
+  const windowDimensions = useWindowDimensions();
+
+  const styles = {
+    parent: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    } as React.CSSProperties,
+    child: {
+      flex: 1,
+      paddingRight: 20,
+      paddingLeft: 20,
+    } as React.CSSProperties,
+    img: {
+      width: '100%',
+      paddingBottom: 30,
+    } as React.CSSProperties,
+  };
 
   let NFT: any;
   if (market) {
@@ -57,34 +74,54 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
       (nft) => nft.marketAddress.toBase58() === market.address.toBase58(),
     )[0];
   }
+  if (!NFT) {
+    return null;
+  }
 
   return (
     <>
-      <Row align="middle" justify="center">
-        <Col flex="auto" />
-        <Col>
-          {NFT && (
-            <NftCardTrade
-              img={NFT.img}
-              name={NFT.name}
-              supply={NFT.supply}
-              mintAddress={NFT.mintAddress}
-              setChangeOrderRef={onChangeOrderRef}
-              smallScreen={false}
-              onPrice={onPrice}
-              onSize={onSize}
-            />
-          )}
-        </Col>
-        <Col flex="auto" />
-      </Row>
-      <Row style={{ paddingTop: '50px' }}>
-        <Col flex="auto" />
-        <Col flex="auto">
-          <UserInfoTable />
-        </Col>
-        <Col flex="auto" />
-      </Row>
+      {windowDimensions.width > 1210 && (
+        <div style={styles.parent}>
+          <>
+            <div style={styles.child}>
+              <NftView nft={NFT} />
+            </div>
+            <div style={styles.child}>
+              <NftCardTrade
+                nft={NFT}
+                setChangeOrderRef={onChangeOrderRef}
+                smallScreen={false}
+                onPrice={onPrice}
+                onSize={onSize}
+              />
+            </div>
+          </>
+        </div>
+      )}
+      {windowDimensions.width < 1210 && (
+        <>
+          <Row align="middle" justify="center">
+            <Col flex="auto" />
+            <Col>
+              <img src={NFT.img} alt={NFT.name} style={styles.img} />
+            </Col>
+            <Col flex="auto" />
+          </Row>
+          <Row align="middle" justify="center">
+            <Col flex="auto" />
+            <Col>
+              <NftCardTrade
+                nft={NFT}
+                setChangeOrderRef={onChangeOrderRef}
+                smallScreen={false}
+                onPrice={onPrice}
+                onSize={onSize}
+              />
+            </Col>
+            <Col flex="auto" />
+          </Row>
+        </>
+      )}
     </>
   );
 };

@@ -20,7 +20,7 @@ import {
 import { useSendConnection } from '../utils/connection';
 import FloatingElement from './layout/FloatingElement';
 import { placeOrder } from '../utils/send';
-import USE_NFTS from '../nfts';
+import { USE_ALL_NFTS } from '../nfts';
 
 const SellButton = styled(Button)`
   margin: 20px 0px 0px 0px;
@@ -76,7 +76,7 @@ export default function TradeForm({
 
   let NFT: any;
   if (market) {
-    NFT = USE_NFTS.filter(
+    NFT = USE_ALL_NFTS.filter(
       (nft) => nft.marketAddress.toBase58() === market.address.toBase58(),
     )[0];
   }
@@ -293,7 +293,9 @@ export default function TradeForm({
             addonBefore={<div style={{ width: '30px' }}>Size</div>}
             suffix={
               <span style={{ fontSize: 10, opacity: 0.5 }}>
-                {baseCurrency === 'UNKNOWN' && market ? NFT.name : baseCurrency}
+                {baseCurrency === 'UNKNOWN' && market
+                  ? NFT?.name
+                  : baseCurrency}
               </span>
             }
             value={baseSize}
@@ -324,7 +326,7 @@ export default function TradeForm({
           size="large"
           loading={submitting}
         >
-          Buy {baseCurrency === 'UNKNOWN' && market ? NFT.name : baseCurrency}
+          Buy {baseCurrency === 'UNKNOWN' && market ? NFT?.name : baseCurrency}
         </BuyButton>
       ) : (
         <SellButton
@@ -335,7 +337,7 @@ export default function TradeForm({
           size="large"
           loading={submitting}
         >
-          Sell {baseCurrency === 'UNKNOWN' && market ? NFT.name : baseCurrency}
+          Sell {baseCurrency === 'UNKNOWN' && market ? NFT?.name : baseCurrency}
         </SellButton>
       )}
     </FloatingElement>
