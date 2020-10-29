@@ -68,17 +68,17 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
 
   return (
     <>
-      <Row align="middle" justify="space-around">
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+        }}
+      >
         <>
-          {windowDimensions.width > 1000 && <Col flex="auto" />}
-          <Col style={styles.col}>
-            {windowDimensions.width > 1000 && (
-              <>
-                <NftView nft={NFT} />
-              </>
-            )}
-          </Col>
-          <Col style={styles.col}>
+          <div style={{ flex: 1, paddingRight: 20, paddingLeft: 20 }}>
+            <NftView nft={NFT} />
+          </div>
+          <div style={{ flex: 1, paddingRight: 20, paddingLeft: 20 }}>
             <NftCardTrade
               nft={NFT}
               setChangeOrderRef={onChangeOrderRef}
@@ -86,10 +86,9 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
               onPrice={onPrice}
               onSize={onSize}
             />
-          </Col>
-          {windowDimensions.width > 1000 && <Col flex="auto" />}
+          </div>
         </>
-      </Row>
+      </div>
     </>
   );
 };
