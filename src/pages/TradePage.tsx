@@ -53,7 +53,19 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
   const windowDimensions = useWindowDimensions();
 
   const styles = {
-    col: { padding: 20 },
+    parent: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    } as React.CSSProperties,
+    child: {
+      flex: 1,
+      paddingRight: 20,
+      paddingLeft: 20,
+    } as React.CSSProperties,
+    img: {
+      width: '100%',
+      paddingBottom: 30,
+    } as React.CSSProperties,
   };
 
   let NFT: any;
@@ -68,27 +80,48 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
 
   return (
     <>
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-        }}
-      >
+      {windowDimensions.width > 1210 && (
+        <div style={styles.parent}>
+          <>
+            <div style={styles.child}>
+              <NftView nft={NFT} />
+            </div>
+            <div style={styles.child}>
+              <NftCardTrade
+                nft={NFT}
+                setChangeOrderRef={onChangeOrderRef}
+                smallScreen={false}
+                onPrice={onPrice}
+                onSize={onSize}
+              />
+            </div>
+          </>
+        </div>
+      )}
+      {windowDimensions.width < 1210 && (
         <>
-          <div style={{ flex: 1, paddingRight: 20, paddingLeft: 20 }}>
-            <NftView nft={NFT} />
-          </div>
-          <div style={{ flex: 1, paddingRight: 20, paddingLeft: 20 }}>
-            <NftCardTrade
-              nft={NFT}
-              setChangeOrderRef={onChangeOrderRef}
-              smallScreen={false}
-              onPrice={onPrice}
-              onSize={onSize}
-            />
-          </div>
+          <Row align="middle" justify="center">
+            <Col flex="auto" />
+            <Col>
+              <img src={NFT.img} alt={NFT.name} style={styles.img} />
+            </Col>
+            <Col flex="auto" />
+          </Row>
+          <Row align="middle" justify="center">
+            <Col flex="auto" />
+            <Col>
+              <NftCardTrade
+                nft={NFT}
+                setChangeOrderRef={onChangeOrderRef}
+                smallScreen={false}
+                onPrice={onPrice}
+                onSize={onSize}
+              />
+            </Col>
+            <Col flex="auto" />
+          </Row>
         </>
-      </div>
+      )}
     </>
   );
 };
