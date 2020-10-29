@@ -85,6 +85,17 @@ const USE_NFTS: NFT[] = [
     NFT_Types.VIDEO,
   ),
   new NFT(
+    require('../assets/nfts/8T4vXgwZUWwsbCDiptHFHjdfexvLG9UP8oy1psJWEQdS/8T4vXgwZUWwsbCDiptHFHjdfexvLG9UP8oy1psJWEQdS.gif'),
+    require('../assets/nfts/8T4vXgwZUWwsbCDiptHFHjdfexvLG9UP8oy1psJWEQdS/small.webm'),
+    'Uni Christmas',
+    1,
+    new PublicKey('8T4vXgwZUWwsbCDiptHFHjdfexvLG9UP8oy1psJWEQdS'),
+    new PublicKey('Ev6wW561tdrsFakA9G9TddMbCsCnkbGGRy4d5B5Q43fQ'),
+    false,
+    ['uni', 'uniswap', 'christmas'],
+    NFT_Types.VIDEO,
+  ),
+  new NFT(
     require('../assets/nfts/FkmkTr4en8CXkfo9jAwEMov6PVNLpYMzWr3Udqf9so8Z/FkmkTr4en8CXkfo9jAwEMov6PVNLpYMzWr3Udqf9so8Z.png'),
     require('../assets/nfts/FkmkTr4en8CXkfo9jAwEMov6PVNLpYMzWr3Udqf9so8Z/small.png'),
     'Seldom',
