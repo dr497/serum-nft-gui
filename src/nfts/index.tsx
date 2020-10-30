@@ -96,6 +96,17 @@ const USE_NFTS: NFT[] = [
     NFT_Types.VIDEO,
   ),
   new NFT(
+    require('../assets/nfts/EjFGGJSyp9UDS8aqafET5LX49nsG326MeNezYzpiwgpQ/EjFGGJSyp9UDS8aqafET5LX49nsG326MeNezYzpiwgpQ.jpg'),
+    require('../assets/nfts/EjFGGJSyp9UDS8aqafET5LX49nsG326MeNezYzpiwgpQ/small.jpg'),
+    'BNB',
+    1,
+    new PublicKey('7RpFk44cMTAUt9CcjEMWnZMypE9bYQsjBiSNLn5qBvhP'),
+    new PublicKey('474bvPo2KH3L9E8fpBspKgeDGqW51ysiH5LTnbko1Njq'),
+    false,
+    ['bnb', 'binance'],
+    NFT_Types.IMAGE,
+  ),
+  new NFT(
     require('../assets/nfts/FkmkTr4en8CXkfo9jAwEMov6PVNLpYMzWr3Udqf9so8Z/FkmkTr4en8CXkfo9jAwEMov6PVNLpYMzWr3Udqf9so8Z.png'),
     require('../assets/nfts/FkmkTr4en8CXkfo9jAwEMov6PVNLpYMzWr3Udqf9so8Z/small.png'),
     'Seldom',
