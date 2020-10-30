@@ -105,7 +105,7 @@ const SearchPage = ({ match }: RouteComponentProps<TParams>) => {
         <Row style={{ paddingTop: '50px' }}>
           <Col flex="auto" />
           <Col>
-            <Title level={2} style={{ color: 'black' }}>
+            <Title level={2} style={{ color: 'white' }}>
               Nothing found
             </Title>
             <img src={notFoundGif} width="100%" alt="not found" />

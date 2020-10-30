@@ -254,11 +254,7 @@ export function MarketProvider({ children }) {
     }
     setMarket(null);
     if (!marketInfo || !marketInfo.address) {
-      notify({
-        message: 'Error loading market',
-        description: 'Please select a market from the dropdown',
-        type: 'error',
-      });
+      console.log('Error loading market');
       return;
     }
     Market.load(connection, marketInfo.address, {}, marketInfo.programId)

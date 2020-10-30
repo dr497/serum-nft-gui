@@ -8,6 +8,7 @@ import TradeForm from './TradeForm';
 import Orderbook from './Orderbook';
 import UserInfoTable from '../components/UserInfoTable';
 import { useWindowDimensions } from './utils';
+import LazyLoad from 'react-lazyload';
 const { Title, Paragraph } = Typography;
 
 const EXPLORER_URL = 'https://explorer.solana.com/address/';
@@ -30,16 +31,13 @@ const WrappedCard = styled(Card)`
   maxwidth: 600px;
   width: 350px;
   height: 450px;
-
   background: linear-gradient(
     162.92deg,
     rgb(43, 43, 43) 12.36%,
     rgb(0, 0, 0) 94.75%
   );
   bordercolor: transparent;
-
   border-radius: 25px;
-
   cursor: pointer;
 `;
 
@@ -56,7 +54,7 @@ const WrappedCardTrade = styled(Card)`
   cursor: pointer;
   overflow: hidden;
   min-height: 1030px;
-  height: 100vh;
+  height: 100%;
 `;
 
 const WrappedBalance = styled(Card)`
@@ -86,6 +84,7 @@ const WrappedCardView = styled(Card)`
   overflow: hidden;
   min-height: 1000px;
   width: 50vw;
+  height: 100%;
 `;
 
 const NftCard = ({ nft }) => {
@@ -103,17 +102,19 @@ const NftCard = ({ nft }) => {
           {nft.name}
         </Title>
         <Row align="middle" justify="center" style={{ paddingTop: 10 }}>
-          {nft.type === 'IMAGE' ? (
-            <img
-              src={nft.imgSmall}
-              alt={nft.name}
-              style={{ padding: 10, height: '300px' }}
-            />
-          ) : (
-            <video height="300" muted loop autoPlay playsInline>
-              <source src={nft.imgSmall} type="video/mp4" />
-            </video>
-          )}
+          <LazyLoad height={300}>
+            {nft.type === 'IMAGE' ? (
+              <img
+                src={nft.imgSmall}
+                alt={nft.name}
+                style={{ padding: 10, height: '300px' }}
+              />
+            ) : (
+              <video height="300" muted loop autoPlay playsInline>
+                <source src={nft.imgSmall} type="video/mp4" />
+              </video>
+            )}
+          </LazyLoad>
         </Row>
       </WrappedCard>
     </>
@@ -130,10 +131,16 @@ export const NftCardTrade = ({
   onSize,
 }) => {
   const windowDimensions = useWindowDimensions();
+  const style = {
+    div: {
+      height: '100vh',
+    } as React.CSSProperties,
+    title: { color: 'white', textAlign: 'center' } as React.CSSProperties,
+  };
   return (
-    <>
+    <div style={style.div}>
       <WrappedCardTrade>
-        <Title level={2} style={{ color: 'white', textAlign: 'center' }}>
+        <Title level={2} style={style.title}>
           {nft.name}
         </Title>
         {windowDimensions.width > 1000 && (
@@ -183,7 +190,7 @@ export const NftCardTrade = ({
           <UserInfoTable />
         </Row>
       </WrappedCardTrade>
-    </>
+    </div>
   );
 };
 
@@ -201,15 +208,21 @@ export const NftCardBalance = ({
     setMarketAddress(marketAddress.toBase58());
     history.push('/trade');
   };
+  const style = {
+    img: { padding: 10, height: '300px' } as React.CSSProperties,
+    title: { color: 'white', textAlign: 'center' } as React.CSSProperties,
+  };
 
   return (
     <>
       <WrappedBalance onClick={handleClick} style={{ overflow: 'hidden' }}>
-        <Title level={2} style={{ color: 'white', textAlign: 'center' }}>
+        <Title level={2} style={style.title}>
           {name}
         </Title>
         <Row align="middle" justify="center" style={{ paddingTop: 10 }}>
-          <img src={img} alt={name} style={{ padding: 10, height: '300px' }} />
+          <LazyLoad height={300}>
+            <img src={img} alt={name} style={style.img} />
+          </LazyLoad>
         </Row>
         <Row align="middle" justify="center" style={{ paddingTop: 10 }}>
           <FancyTitle level={3}>Mint Address</FancyTitle>
@@ -254,6 +267,9 @@ export const NftView = ({ nft }) => {
     } as React.CSSProperties,
     parent: { display: 'flex', minHeight: '100vh' } as React.CSSProperties,
     children: { margin: 'auto' } as React.CSSProperties,
+    div: {
+      height: '100vh',
+    },
   };
 
   const [showModal, setShowModal] = React.useState(false);
@@ -262,19 +278,21 @@ export const NftView = ({ nft }) => {
   };
 
   return (
-    <>
+    <div style={style.div}>
       <WrappedCardView>
         <Row align="middle" justify="center">
           <Col flex="auto" />
           <Col>
             <div style={style.parent}>
               <div style={style.children}>
-                <img
-                  onClick={handleClick}
-                  src={nft.img}
-                  style={style.img}
-                  alt={nft.name}
-                />
+                <LazyLoad height={'100%'}>
+                  <img
+                    onClick={handleClick}
+                    src={nft.img}
+                    style={style.img}
+                    alt={nft.name}
+                  />
+                </LazyLoad>
               </div>
             </div>
           </Col>
@@ -289,6 +307,6 @@ export const NftView = ({ nft }) => {
       >
         <img src={nft.img} width="100%" alt={nft.name} />
       </Modal>
-    </>
+    </div>
   );
 };

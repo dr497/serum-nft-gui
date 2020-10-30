@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import TradePage from './pages/TradePage';
-import OpenOrdersPage from './pages/OpenOrdersPage';
-import BalancesPage from './pages/BalancesPage';
-import BasicLayout from './components/BasicLayout';
+
 import HomePage from './pages/HomePage';
-import SearchPage from './pages/SearchPage';
-import BitcoinTram from './pages/BitcoinTram';
+import BasicLayout from './components/BasicLayout';
+
+const TradePage = lazy(() => import('./pages/TradePage'));
+const OpenOrdersPage = lazy(() => import('./pages/OpenOrdersPage'));
+const BalancesPage = lazy(() => import('./pages/BalancesPage'));
+const SearchPage = lazy(() => import('./pages/SearchPage'));
+const BitcoinTram = lazy(() => import('./pages/BitcoinTram'));
 
 export function Routes() {
   return (
