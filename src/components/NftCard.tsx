@@ -60,12 +60,15 @@ const WrappedCardTrade = styled(Card)`
 const WrappedBalance = styled(Card)`
   maxwidth: 600px;
   height: auto;
-  background: transparent;
+  background: linear-gradient(
+    162.92deg,
+    rgb(43, 43, 43) 12.36%,
+    rgb(0, 0, 0) 94.75%
+  );
   bordercolor: transparent;
   width: auto;
-  border-radius: 25px;
-  border: solid 3px;
   cursor: pointer;
+  border-radius: 25px;
 `;
 
 const WrappedParagraph = styled(Paragraph)`

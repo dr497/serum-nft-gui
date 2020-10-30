@@ -5,7 +5,7 @@ import {
   useWalletBalancesForAllMarkets,
 } from '../utils/markets';
 import { useWindowDimensions } from '../components/utils';
-import USE_NFTS, { NFT } from '../nfts';
+import { NFT, USE_ALL_NFTS } from '../nfts';
 import { NftCardBalance } from '../components/NftCard';
 import styled from 'styled-components';
 import { useWallet } from '../utils/wallet';
@@ -18,7 +18,7 @@ const WrappedCol = styled(Col)`
 `;
 
 const getNftByMintAddress = (mintAddress: string): NFT | null => {
-  const result = USE_NFTS.filter(
+  const result = USE_ALL_NFTS.filter(
     (nft) => nft.mintAddress.toBase58() === mintAddress,
   );
   return result.length === 1 ? result[0] : null;

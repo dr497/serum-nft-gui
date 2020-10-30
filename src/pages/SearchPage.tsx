@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Typography } from 'antd';
-import USE_NFTS, { NFT } from '../nfts';
+import { NFT, USE_ALL_NFTS } from '../nfts';
 import { WrappedCol } from './HomePage';
 import { useWindowDimensions } from '../components/utils';
 import NftCard from '../components/NftCard';
@@ -75,7 +75,7 @@ const SearchPage = ({ match }: RouteComponentProps<TParams>) => {
   useEffect(() => {
     let temp: NFT[] = [];
     keywords?.forEach((keyword) => {
-      USE_NFTS.forEach((nft) => {
+      USE_ALL_NFTS.forEach((nft) => {
         if (searchWord(nft, keyword.toLowerCase())) {
           temp.push(nft);
         }
