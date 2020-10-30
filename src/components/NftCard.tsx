@@ -133,7 +133,7 @@ export const NftCardTrade = ({
   const windowDimensions = useWindowDimensions();
   const style = {
     div: {
-      height: '100vh',
+      height: '100%',
     } as React.CSSProperties,
     title: { color: 'white', textAlign: 'center' } as React.CSSProperties,
   };
@@ -268,7 +268,7 @@ export const NftView = ({ nft }) => {
     parent: { display: 'flex', minHeight: '100vh' } as React.CSSProperties,
     children: { margin: 'auto' } as React.CSSProperties,
     div: {
-      height: '100vh',
+      height: '100%',
     },
   };
 
