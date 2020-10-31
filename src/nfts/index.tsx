@@ -63,6 +63,17 @@ const USE_NFTS: NFT[] = [
     NFT_Types.VIDEO,
   ),
   new NFT(
+    require('../assets/nfts/BrUKFwAABkExb1xzYU4NkRWzjBihVQdZ3PBz4m5S8if3/BrUKFwAABkExb1xzYU4NkRWzjBihVQdZ3PBz4m5S8if3.png'),
+    require('../assets/nfts/BrUKFwAABkExb1xzYU4NkRWzjBihVQdZ3PBz4m5S8if3/small.png'),
+    'Tesla',
+    10,
+    new PublicKey('BrUKFwAABkExb1xzYU4NkRWzjBihVQdZ3PBz4m5S8if3'),
+    new PublicKey('5vH2BhEqpBw7ouE1g4dYLstigj6zin1k9n9FzNfExYJK'),
+    false,
+    ['ftx', 'tsla', 'tesla', 'pepe', 'frog'],
+    NFT_Types.IMAGE,
+  ),
+  new NFT(
     require('../assets/nfts/29PEpZeuqWf9tS2gwCjpeXNdXLkaZSMR2s1ibkvGsfnP/29PEpZeuqWf9tS2gwCjpeXNdXLkaZSMR2s1ibkvGsfnP.gif'),
     require('../assets/nfts/29PEpZeuqWf9tS2gwCjpeXNdXLkaZSMR2s1ibkvGsfnP/small.mp4'),
     'Need for Speed',
