@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
 html,body{
   background: #11161D;
+  font-family: Source Sans Pro;
 }
 input[type=number]::-webkit-inner-spin-button {
   opacity: 0;
