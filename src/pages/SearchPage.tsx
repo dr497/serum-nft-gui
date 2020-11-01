@@ -40,11 +40,7 @@ const SearchRow = ({ divider, longueur, NFT_ARRAY }) => {
           />
         );
       })}
-      <RowCard
-        start={longueur - divider}
-        end={longueur + reste - divider}
-        NFT_ARRAY={NFT_ARRAY}
-      />
+      <RowCard start={longueur - reste} end={longueur} NFT_ARRAY={NFT_ARRAY} />
     </>
   );
 };
@@ -98,7 +94,7 @@ const SearchPage = ({ match }: RouteComponentProps<TParams>) => {
   }, [keywords, keywords?.length, searchResults, searchResults?.length]);
 
   const longueur = searchResults ? searchResults.length : 0;
-
+  console.log('Search results', searchResults);
   return (
     <>
       {notFound && (
