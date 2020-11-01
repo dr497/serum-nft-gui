@@ -29,9 +29,11 @@ const HomePageRow = ({ divider, longueur, array }) => {
   const quotien = Math.floor(longueur / divider);
   const reste = longueur % divider;
   const MAP_ARRAY = Array.from({ length: quotien }, (v, i) => i);
+  if (quotien === 0) {
+    return <RowCard start={0} end={reste} array={array} />;
+  }
   return (
     <>
-      {quotien === 0 && <RowCard start={0} end={reste} array={array} />}
       {MAP_ARRAY.map((e) => {
         return (
           <RowCard
