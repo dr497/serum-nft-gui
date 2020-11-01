@@ -1,2 +1,0 @@
-(this["webpackJsonpserum-nft-gui"]=this["webpackJsonpserum-nft-gui"]||[]).push([[6],{617:function(e,t,a){"use strict";a.r(t);var l=a(0),n=a.n(l),o=a(597),i=o.a.Title,r=o.a.Paragraph;t.default=function(){return n.a.createElement(n.a.Fragment,null,n.a.createElement(i,{level:1,style:{color:"white",fontFamily:"Source Sans Pro"}},"How to list an NFT on Solible:"),n.a.createElement(r,null,"To list an NFT on Solible please email:"," ",n.a.createElement("a",{href:"mailto:contact@solible.com"},"contact@solible.com")))}}}]);
-//# sourceMappingURL=6.c9075b7e.chunk.js.map
