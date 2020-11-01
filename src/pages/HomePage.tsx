@@ -9,11 +9,11 @@ export const WrappedCol = styled(Col)`
   padding: 30px;
 `;
 
-const RowHomePage = ({ start, end }) => {
+const RowCard = ({ start, end, array }) => {
   return (
     <Row align="middle" justify="center">
       <Col flex="auto" />
-      {USE_NFTS.slice(start, end).map((NFT, key) => {
+      {array.slice(start, end).map((NFT, key) => {
         return (
           <WrappedCol>
             <NftCard key={key} nft={NFT} />
@@ -25,27 +25,44 @@ const RowHomePage = ({ start, end }) => {
   );
 };
 
+const HomePageRow = ({ divider, longueur, array }) => {
+  const quotien = Math.floor(longueur / divider);
+  const reste = longueur % divider;
+  const MAP_ARRAY = Array.from({ length: quotien }, (v, i) => i);
+  return (
+    <>
+      {quotien === 0 && <RowCard start={0} end={reste} array={array} />}
+      {MAP_ARRAY.map((e) => {
+        return (
+          <RowCard
+            start={divider * e}
+            end={divider * e + divider}
+            array={array}
+          />
+        );
+      })}
+      <RowCard
+        start={longueur - divider}
+        end={longueur + reste - divider}
+        array={array}
+      />
+    </>
+  );
+};
+
 const HomePage = () => {
   const windowDimensions = useWindowDimensions();
+  const longueur = USE_NFTS.length;
   return (
     <>
       {windowDimensions.width > 1600 && (
         <>
-          <RowHomePage start={0} end={3} />
-          <RowHomePage start={3} end={6} />
-          <RowHomePage start={6} end={9} />
-          <RowHomePage start={9} end={12} />
-          <RowHomePage start={12} end={15} />
+          <HomePageRow divider={3} longueur={longueur} array={USE_NFTS} />
         </>
       )}
       {1100 < windowDimensions.width && windowDimensions.width < 1600 && (
         <>
-          <RowHomePage start={0} end={2} />
-          <RowHomePage start={2} end={4} />
-          <RowHomePage start={4} end={6} />
-          <RowHomePage start={6} end={8} />
-          <RowHomePage start={9} end={12} />
-          <RowHomePage start={12} end={15} />
+          <HomePageRow divider={2} longueur={longueur} array={USE_NFTS} />
         </>
       )}
       {windowDimensions.width < 1100 && (

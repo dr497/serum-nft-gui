@@ -33,7 +33,7 @@ const RowCard = ({ start, end, array }) => {
           <>
             <WrappedCol key={key}>
               <NftCardBalance
-                img={balance.nft.img}
+                img={balance.nft.imgSmall}
                 name={balance.nft.name}
                 supply={balance.nft.supply}
                 mintAddress={balance.nft.mintAddress}
@@ -57,7 +57,13 @@ const BalanceRow = ({ divider, longueur, array }) => {
     <>
       {quotien === 0 && <RowCard start={0} end={reste} array={array} />}
       {MAP_ARRAY.map((e) => {
-        return <RowCard start={e} end={e + divider} array={array} />;
+        return (
+          <RowCard
+            start={divider * e}
+            end={divider * e + divider}
+            array={array}
+          />
+        );
       })}
       <RowCard
         start={longueur - divider}
