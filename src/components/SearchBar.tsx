@@ -13,6 +13,9 @@ const SearchBar = () => {
   }, [location]);
 
   const onSearch = (value: string) => {
+    if (value === '') {
+      return;
+    }
     const keywords = value.split(' ').map((e) => e.toLowerCase());
     history.push(`/search/${keywords?.join('&') || ''}`);
   };
