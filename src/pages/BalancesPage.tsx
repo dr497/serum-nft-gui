@@ -65,11 +65,7 @@ const BalanceRow = ({ divider, longueur, array }) => {
           />
         );
       })}
-      <RowCard
-        start={longueur - divider}
-        end={longueur + reste - divider}
-        array={array}
-      />
+      <RowCard start={longueur - reste} end={longueur} array={array} />
     </>
   );
 };
