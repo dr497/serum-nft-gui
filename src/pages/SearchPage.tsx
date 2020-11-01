@@ -28,9 +28,11 @@ const SearchRow = ({ divider, longueur, NFT_ARRAY }) => {
   const quotien = Math.floor(longueur / divider);
   const reste = longueur % divider;
   const MAP_ARRAY = Array.from({ length: quotien }, (v, i) => i);
+  if (quotien === 0) {
+    return <RowCard start={0} end={reste} NFT_ARRAY={NFT_ARRAY} />;
+  }
   return (
     <>
-      {quotien === 0 && <RowCard start={0} end={reste} NFT_ARRAY={NFT_ARRAY} />}
       {MAP_ARRAY.map((e) => {
         return (
           <RowCard
@@ -86,15 +88,22 @@ const SearchPage = ({ match }: RouteComponentProps<TParams>) => {
     );
   }, [match]);
 
+  const notFoundArray = [
+    keywords,
+    keywords?.length,
+    searchResults,
+    searchResults?.length,
+  ];
+
   // Not Found
   useEffect(() => {
     if (keywords && searchResults) {
       setNotFound(keywords.length > 0 && searchResults.length === 0);
     }
-  }, [keywords, keywords?.length, searchResults, searchResults?.length]);
+  }, [keywords, searchResults, notFoundArray]);
 
   const longueur = searchResults ? searchResults.length : 0;
-  console.log('Search results', searchResults);
+
   return (
     <>
       {notFound && (
