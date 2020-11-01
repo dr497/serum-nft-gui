@@ -9,6 +9,7 @@ const OpenOrdersPage = lazy(() => import('./pages/OpenOrdersPage'));
 const BalancesPage = lazy(() => import('./pages/BalancesPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const BitcoinTram = lazy(() => import('./pages/BitcoinTram'));
+const ListNFT = lazy(() => import('./pages/ListNFT'));
 
 export function Routes() {
   return (
@@ -26,6 +27,7 @@ export function Routes() {
               component={SearchPage}
             />
             <Route exact path="/bitcoin-tram" component={BitcoinTram} />
+            <Route exact path="/list-nft" component={ListNFT} />
           </Switch>
         </BasicLayout>
       </HashRouter>

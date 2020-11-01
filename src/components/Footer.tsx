@@ -6,21 +6,27 @@ const { Footer } = Layout;
 const { useBreakpoint } = Grid;
 
 const footerElements = [
-  { description: 'Bonfida', link: 'https://bonfida.com' },
-  { description: 'Twitter', link: 'https://twitter.com/bonfidadotcom' },
+  { description: 'Bonfida', link: 'https://bonfida.com', external: true },
+  {
+    description: 'Twitter',
+    link: 'https://twitter.com/bonfidadotcom',
+    external: true,
+  },
+  { description: 'List NFT', link: '/list-nft', external: false },
 ];
+const styles = {
+  footer: {
+    height: '45px',
+    paddingBottom: 10,
+    paddingTop: 10,
+  },
+};
 
 export const CustomFooter = () => {
   const smallScreen = !useBreakpoint().lg;
 
   return (
-    <Footer
-      style={{
-        height: '45px',
-        paddingBottom: 10,
-        paddingTop: 10,
-      }}
-    >
+    <Footer style={styles.footer}>
       <Row align="middle" gutter={[16, 4]}>
         {!smallScreen && (
           <>
@@ -28,7 +34,7 @@ export const CustomFooter = () => {
             {footerElements.map((elem, index) => {
               return (
                 <Col key={index + ''}>
-                  <Link external to={elem.link}>
+                  <Link external={elem.external} to={elem.link}>
                     {elem.description}
                   </Link>
                 </Col>
