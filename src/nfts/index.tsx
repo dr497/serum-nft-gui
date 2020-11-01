@@ -260,6 +260,17 @@ const USE_NFTS: NFT[] = [
     ['charles', 'hoskinson'],
     NFT_Types.VIDEO,
   ),
+  new NFT(
+    require('../assets/nfts/GyRkPAxpd9XrMHcBF6fYHVRSZQvQBwAGKAGQeBPSKzMq/GyRkPAxpd9XrMHcBF6fYHVRSZQvQBwAGKAGQeBPSKzMq.gif'),
+    require('../assets/nfts/GyRkPAxpd9XrMHcBF6fYHVRSZQvQBwAGKAGQeBPSKzMq/small.mp4'),
+    'SBF',
+    1,
+    new PublicKey('GyRkPAxpd9XrMHcBF6fYHVRSZQvQBwAGKAGQeBPSKzMq'),
+    new PublicKey('HFmsR4XGcSPbUv4sG4Km1TVr1V9reXZKgUQaYzSiKTpD'),
+    false,
+    ['sam', 'sbf', 'bankman-fried'],
+    NFT_Types.VIDEO,
+  ),
 ];
 
 export default USE_NFTS;
