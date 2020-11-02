@@ -1,9 +1,12 @@
 import React from 'react';
-import { Button, Card, Typography, Row, Col } from 'antd';
+import { Button, Card, Typography, Row, Col, Statistic } from 'antd';
 import styled from 'styled-components';
 import Emoji from './Emoji';
 
 const { Paragraph } = Typography;
+const { Countdown } = Statistic;
+
+const deadline = Date.parse('2020-11-06T21:00:00.000+08:00');
 
 const RedeemButton = styled(Button)`
   width: auto;
@@ -48,6 +51,9 @@ const RedeemCard = ({ nft, disabled, onClick }) => {
     div: {
       height: '100%',
     },
+    countdown: {
+      paddingTop: '10px',
+    },
   };
   return (
     <div style={style.div}>
@@ -59,6 +65,14 @@ const RedeemCard = ({ nft, disabled, onClick }) => {
               <WrapperParagraph>
                 {redeemText}
                 <Emoji symbol="✉️" label="burn" class="emoji-redeem" />
+              </WrapperParagraph>
+              <WrapperParagraph>
+                {auctionText}
+                <Countdown
+                  title="Countdown"
+                  value={deadline}
+                  style={style.countdown}
+                />
               </WrapperParagraph>
               <Row align="middle" justify="center">
                 <Col flex="auto" />
@@ -88,5 +102,9 @@ const RedeemCard = ({ nft, disabled, onClick }) => {
 export default RedeemCard;
 
 const redeemText = `
-Once you have bought this NFT you can keep it in your wallet, resell it or redeem it for a physical collectible item and mailed to your door
+Once you have bought this NFT you can keep it in your wallet, resell it or redeem it for a physical collectible item mailed to your door
+`;
+
+const auctionText = `
+The auction will end on 06/11/2020 at 9pm UTC+8
 `;

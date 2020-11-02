@@ -14,6 +14,7 @@ import { Connection } from '@solana/web3.js';
 import WalletConnect from './WalletConnect';
 import { useWindowDimensions } from './utils';
 import SearchBar from './SearchBar';
+import Emoji from './Emoji';
 
 const Wrapper = styled.div`
   background: #000;
@@ -136,6 +137,10 @@ export default function TopBar() {
         >
           <Menu.Item key="/">Home</Menu.Item>
           {connected && <Menu.Item key="/balances">My Collection</Menu.Item>}
+          <Menu.Item key="/bitcoin-tram">
+            Redeemable
+            <Emoji symbol="🔥" label="burn" class="emoji-redeem-top-bar" />
+          </Menu.Item>
         </Menu>
 
         {windowDimensions.width > 1000 && (
