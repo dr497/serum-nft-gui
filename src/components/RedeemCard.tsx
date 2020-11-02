@@ -62,10 +62,7 @@ const RedeemCard = ({ nft, disabled, onClick }) => {
           <div style={style.parent}>
             <div style={style.children}>
               <img src={nft.img} alt={nft.name} style={style.img} />
-              <WrapperParagraph>
-                {redeemText}
-                <Emoji symbol="✉️" label="burn" class="emoji-redeem" />
-              </WrapperParagraph>
+              <WrapperParagraph>{redeemText}</WrapperParagraph>
               <WrapperParagraph>
                 {auctionText}
                 <Countdown
@@ -102,7 +99,7 @@ const RedeemCard = ({ nft, disabled, onClick }) => {
 export default RedeemCard;
 
 const redeemText = `
-Once you have bought this NFT you can keep it in your wallet, resell it or redeem it for a physical collectible item mailed to your door
+This NFT can be redeemed for a physical Bitcoin Tram model mailed to your door
 `;
 
 const auctionText = `
