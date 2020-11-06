@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Input } from 'antd';
 const { Search } = Input;
 
 const SearchBar = () => {
   const history = useHistory();
-  const location = useLocation();
   const [value, setValue] = useState<string | null>(null);
-
-  useEffect(() => {
-    setValue(null);
-  }, [location]);
+  const valueRef = useRef();
 
   const onSearch = (value: string) => {
     if (value === '') {
@@ -18,6 +14,7 @@ const SearchBar = () => {
     }
     const keywords = value.split(' ').map((e) => e.toLowerCase());
     history.push(`/search/${keywords?.join('&') || ''}`);
+    window.location.reload(false);
   };
 
   const onChange = (e: any) => {
@@ -31,7 +28,7 @@ const SearchBar = () => {
         className="search-bar"
         placeholder="Search NFT"
         onSearch={onSearch}
-        value={value || ''}
+        value={valueRef.current}
         onChange={onChange}
         style={{ width: 200, padding: 0 }}
       />
