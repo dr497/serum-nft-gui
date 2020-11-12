@@ -16,6 +16,7 @@ export class NFT {
   redeembale: boolean;
   keywords: string[];
   type: NFT_Types;
+  redeemAddress?: PublicKey;
   constructor(
     img: Object,
     imgSmall: Object,
@@ -26,6 +27,7 @@ export class NFT {
     redeembale: boolean,
     keywords: string[],
     type: NFT_Types,
+    redeemAddress?: PublicKey,
   ) {
     this.img = img;
     this.imgSmall = imgSmall;
@@ -36,6 +38,7 @@ export class NFT {
     this.redeembale = redeembale;
     this.keywords = keywords;
     this.type = type;
+    this.redeemAddress = redeemAddress;
   }
 }
 
@@ -308,6 +311,7 @@ export const USE_REDEEMABLE_NFTS: NFT[] = [
     false,
     ['bitcoin', 'tram', 'hong', 'kong'],
     NFT_Types.IMAGE,
+    new PublicKey('FCHmpXY6AQifAwe6SjAEGfF6APTPEcCjyNFAHn83ijdb'),
   ),
 ];
 

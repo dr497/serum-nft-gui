@@ -216,9 +216,22 @@ const RedeemForm = ({
             </Button>
           </Form.Item>
         </Form>
+        <Help />
       </Col>
       <Col flex="auto" />
     </Row>
+  );
+};
+
+const Help = () => {
+  const styles = {
+    root: { textAlign: 'center', paddingLeft: 60 } as React.CSSProperties,
+  };
+  return (
+    <div style={styles.root}>
+      If you are having issues redeeming please email{' '}
+      <a href="mailto:redeem@solible.com">redeem@solible.com</a>
+    </div>
   );
 };
 

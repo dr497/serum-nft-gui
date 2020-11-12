@@ -7,9 +7,7 @@ import { USE_REDEEMABLE_NFTS } from '../nfts';
 import RedeemCard from '../components/RedeemCard';
 import { useWindowDimensions } from '../components/utils';
 import { useWalletBalancesForAllMarkets } from '../utils/markets';
-import Emoji from '../components/Emoji';
 import RedeemForm from '../components/RedeemForm';
-import { PublicKey } from '@solana/web3.js';
 
 const BTC_TRAM = USE_REDEEMABLE_NFTS[0];
 
@@ -96,7 +94,7 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
     setShowModal(true);
   };
 
-  if (!BTC_TRAM) {
+  if (!BTC_TRAM || !BTC_TRAM.redeemAddress) {
     return null;
   }
 
@@ -122,6 +120,7 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
               />
             </div>
             <Modal
+              closable={false}
               visible={showModal}
               width="50%"
               centered={true}
@@ -133,9 +132,7 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
             >
               <RedeemForm
                 nftMint={BTC_TRAM.mintAddress}
-                destination={
-                  new PublicKey('FCHmpXY6AQifAwe6SjAEGfF6APTPEcCjyNFAHn83ijdb')
-                }
+                destination={BTC_TRAM.redeemAddress}
               />
             </Modal>
           </>
@@ -169,38 +166,6 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
           </Row>
         </>
       )}
-    </>
-  );
-};
-
-const ModalText = () => {
-  return (
-    <>
-      To redeem your NFT:
-      <ul>
-        <li style={{ paddingTop: 15 }}>
-          Send the NFT to the following address{' '}
-          <a
-            href="https://explorer.solana.com/address/8uKHDXE1hosqSYEp3wbjzvWPnoZF1GNmLeVwYXgLaoAX"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            8uKHDXE1hosqSYEp3wbjzvWPnoZF1GNmLeVwYXgLaoAX
-          </a>{' '}
-        </li>
-        <li>
-          Then email <a href="mailto:redeem@solible.com">redeem@solible.com</a>{' '}
-          with the transaction ID and your shipping information.
-        </li>
-      </ul>
-      <div>
-        <Emoji symbol="🔥" label="burn" class="emoji-redeem" /> Your NFT will be
-        redeemed and shipped within 48 hours
-      </div>
-      <div>
-        <Emoji symbol="🚫" label="warning" class="emoji-redeem" /> NFTs sent
-        without an email will be returned to the sender after 72 hours
-      </div>
     </>
   );
 };
