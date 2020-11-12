@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Col, Row, Modal } from 'antd';
+import { Col, Row, Modal, Button } from 'antd';
 import styled from 'styled-components';
 import { useMarket } from '../utils/markets';
 import { NftCardTrade } from '../components/NftCard';
@@ -8,6 +8,8 @@ import RedeemCard from '../components/RedeemCard';
 import { useWindowDimensions } from '../components/utils';
 import { useWalletBalancesForAllMarkets } from '../utils/markets';
 import Emoji from '../components/Emoji';
+import RedeemForm from '../components/RedeemForm';
+import { PublicKey } from '@solana/web3.js';
 
 const BTC_TRAM = USE_REDEEMABLE_NFTS[0];
 
@@ -121,11 +123,20 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
             </div>
             <Modal
               visible={showModal}
-              onOk={() => setShowModal(false)}
-              onCancel={() => setShowModal(false)}
               width="50%"
+              centered={true}
+              footer={[
+                <Button key="back" onClick={() => setShowModal(false)}>
+                  Close
+                </Button>,
+              ]}
             >
-              {<ModalText />}
+              <RedeemForm
+                nftMint={BTC_TRAM.mintAddress}
+                destination={
+                  new PublicKey('FCHmpXY6AQifAwe6SjAEGfF6APTPEcCjyNFAHn83ijdb')
+                }
+              />
             </Modal>
           </>
         </div>

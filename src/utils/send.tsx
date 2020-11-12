@@ -25,6 +25,7 @@ import { Order } from '@project-serum/serum/lib/market';
 import { Buffer } from 'buffer';
 import assert from 'assert';
 import { struct } from 'superstruct';
+import { Token, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 
 export async function createTokenAccountTransaction({
   connection,
@@ -870,3 +871,40 @@ export async function getMultipleSolanaAccounts(
     ),
   };
 }
+
+export const sendSplToken = async ({
+  connection,
+  owner,
+  sourceSpl,
+  destination,
+  amount,
+  wallet,
+}: {
+  connection: Connection;
+  owner: PublicKey;
+  sourceSpl: PublicKey;
+  destination: PublicKey;
+  amount: number;
+  wallet: Wallet;
+}) => {
+  const signers: Array<Account> = [];
+  const tx = new Transaction();
+  tx.add(
+    Token.createTransferInstruction(
+      TOKEN_PROGRAM_ID,
+      sourceSpl,
+      destination,
+      owner,
+      signers,
+      amount,
+    ),
+  );
+
+  return await sendTransaction({
+    transaction: tx,
+    signers: signers,
+    wallet: wallet,
+    connection: connection,
+    sendingMessage: 'Sending NFT to burn authority...',
+  });
+};
