@@ -88,6 +88,9 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
       width: '100%',
       paddingBottom: 30,
     } as React.CSSProperties,
+    body: { background: 'white', color: 'black' },
+    mask: { background: 'transparent' },
+    modal: { background: 'transparent' },
   };
 
   const onClick = () => {
@@ -122,13 +125,16 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
             <Modal
               closable={false}
               visible={showModal}
-              width="50%"
+              onOk={() => setShowModal(false)}
+              onCancel={() => setShowModal(false)}
+              width="800px"
               centered={true}
-              footer={[
-                <Button key="back" onClick={() => setShowModal(false)}>
-                  Close
-                </Button>,
-              ]}
+              keyboard={true}
+              maskClosable={true}
+              bodyStyle={styles.body}
+              maskStyle={styles.mask}
+              style={styles.modal}
+              footer={null}
             >
               <RedeemForm
                 nftMint={BTC_TRAM.mintAddress}
