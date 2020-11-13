@@ -8,6 +8,7 @@ import RedeemCard from '../components/RedeemCard';
 import { useWindowDimensions } from '../components/utils';
 import { useWalletBalancesForAllMarkets } from '../utils/markets';
 import RedeemForm from '../components/RedeemForm';
+import { useWallet } from '../utils/wallet';
 
 const BTC_TRAM = USE_REDEEMABLE_NFTS[0];
 
@@ -62,6 +63,7 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
   const walletBalances = useWalletBalancesForAllMarkets();
   const [disabled, setDisabled] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const { connected } = useWallet();
 
   useEffect(() => {
     if (walletBalances) {
@@ -124,7 +126,7 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
             </div>
             <Modal
               closable={false}
-              visible={showModal}
+              visible={showModal && connected}
               onOk={() => setShowModal(false)}
               onCancel={() => setShowModal(false)}
               width="800px"
