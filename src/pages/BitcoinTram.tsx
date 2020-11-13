@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Col, Row, Modal, Button } from 'antd';
+import { Col, Row, Modal } from 'antd';
 import styled from 'styled-components';
 import { useMarket } from '../utils/markets';
 import { NftCardTrade } from '../components/NftCard';
