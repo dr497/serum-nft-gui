@@ -18,7 +18,7 @@ export default function App() {
           <MarketProvider>
             <WalletProvider>
               <PreferencesProvider>
-                <Suspense fallback={() => <Spin size="large" />}>
+                <Suspense fallback={<Spin size="large" />}>
                   <Routes />
                 </Suspense>
               </PreferencesProvider>

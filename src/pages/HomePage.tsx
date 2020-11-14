@@ -15,8 +15,8 @@ const RowCard = ({ start, end, array }) => {
       <Col flex="auto" />
       {array.slice(start, end).map((NFT, key) => {
         return (
-          <WrappedCol>
-            <NftCard key={key} nft={NFT} />
+          <WrappedCol key={key}>
+            <NftCard nft={NFT} />
           </WrappedCol>
         );
       })}
@@ -34,9 +34,10 @@ const HomePageRow = ({ divider, longueur, array }) => {
   }
   return (
     <>
-      {MAP_ARRAY.map((e) => {
+      {MAP_ARRAY.map((e, key) => {
         return (
           <RowCard
+            key={key}
             start={divider * e}
             end={divider * e + divider}
             array={array}
