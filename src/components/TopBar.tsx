@@ -141,6 +141,9 @@ export default function TopBar() {
             Redeemable
             <Emoji symbol="🔥" label="burn" class="emoji-redeem-top-bar" />
           </Menu.Item>
+          <Menu.Item key="/list-nft">
+            List Your NFT
+          </Menu.Item>
         </Menu>
 
         {windowDimensions.width > 1000 && (
