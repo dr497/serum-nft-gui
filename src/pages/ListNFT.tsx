@@ -7,15 +7,19 @@ import {
   Input,
   InputNumber,
   Upload,
+  Select,
   Button,
 } from 'antd';
 import AWS from 'aws-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import { notify } from '../utils/notifications';
+import { postMintToken } from '../utils/network';
+import { TokenMintReq } from '../utils/types';
+import { useWallet, WALLET_PROVIDERS } from '../utils/wallet';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import Emoji from '../components/Emoji';
 
-const { Title, Paragraph, Text } = Typography;
+const { Title } = Typography;
 
 // todo: set env to github pages
 const AWS_S3_BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME;
@@ -45,6 +49,7 @@ const allowedAssetTypes = [
   'image/svg+xml',
   'video/mp4',
 ];
+const videoSuffixes = ['mp4', 'webm'];
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
 const styles = {
@@ -54,17 +59,17 @@ const styles = {
     paddingTop: 15,
     paddingRight: 10,
   },
-  paragraph: {
-    fontSize: '16px',
-  },
   form: {
     paddingTop: 32,
     fontSize: '16px',
     fontWeight: 'bold',
   } as React.CSSProperties,
   preview: {
-    width: '100%'
+    width: '100%',
   } as React.CSSProperties,
+  walletConnectButton: {
+    marginLeft: 16,
+  },
 };
 
 const formLayout = {
@@ -81,6 +86,13 @@ const tailLayout = {
 };
 
 const BookEmoji = <Emoji symbol="🛠" label="book" class="emoji-list-book" />;
+
+// check a s3 url if file type is listed in videoSuffixes
+const isVideo = (url): boolean => {
+  return videoSuffixes.indexOf(url.split('.').slice(-1)[0].toLowerCase()) > -1
+    ? true
+    : false;
+};
 
 const AssetUpload = (props) => {
   const [loading, setLoading] = useState(false);
@@ -140,23 +152,52 @@ const AssetUpload = (props) => {
       multiple={false}
       showUploadList={false}
     >
-      {/* todo: needs to handle videos */}
-      {assetUrl ? (
-        <img src={assetUrl} alt="digital-asset" style={styles.preview} />
-      ) : (
-        uploadButton
+      {assetUrl && isVideo(assetUrl) && (
+        <video muted loop autoPlay playsInline style={styles.preview}>
+          <source src={assetUrl} type="video/mp4" />
+        </video>
       )}
+      {assetUrl && !isVideo(assetUrl) && (
+        <img src={assetUrl} alt="digital-asset" style={styles.preview} />
+      )}
+      {!assetUrl && uploadButton}
     </Upload>
   );
 };
 
-const ListForm = () => {
+const ListForm = (props) => {
+  const { wallet } = props;
   const [form] = Form.useForm();
   const [assetUrl, setAssetUrl] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const onFinish = (values) => {
-    console.log('success');
-    console.log(values);
+  const onFinish = async (values) => {
+    setLoading(true);
+    // mint token
+    let req: TokenMintReq = {
+      publicKey: wallet.publicKey.toString(),
+      supply: values.supply,
+      decimals: 0, // nft, not fungible
+    };
+
+    try {
+      let res = await postMintToken(req);
+      if (res && res.success) {
+        // todo: save data to DB
+        // res.data.tokenMint
+        // redirect to my collection
+      } else {
+        throw new Error('Mint API returns error');
+      }
+    } catch (error) {
+      console.log(error);
+      notify({
+        message: 'Token mint error',
+        type: 'error',
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -165,8 +206,8 @@ const ListForm = () => {
 
   const setUploadedUrl = (url) => {
     setAssetUrl(url);
-    form.setFieldsValue({assetUrl: url});
-  }
+    form.setFieldsValue({ assetUrl: url });
+  };
 
   return (
     <Form
@@ -174,7 +215,7 @@ const ListForm = () => {
       {...formLayout}
       style={styles.form}
       name="list-nft"
-      initialValues={{ tokenName: '', totalSupply: 1, assetUrl: '' }}
+      initialValues={{ tokenName: '', supply: 1, assetUrl: '' }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
@@ -191,17 +232,16 @@ const ListForm = () => {
             message: 'Token name too long',
           },
           {
-            pattern: new RegExp('^[a-zA-Z0-9_.-]*$'),
-            message:
-              'Token name should only consists of letters, numbers, ., - and _',
+            pattern: new RegExp('^[a-zA-Z0-9_.-]+( [a-zA-Z0-9_.-]+)*$'),
+            message: 'Only letters, numbers, ., -, _, and spaces allowed',
           },
         ]}
       >
         <Input placeholder="Awesome Token Name" />
       </Form.Item>
       <Form.Item
-        label="Total Supply"
-        name="totalSupply"
+        label="supply"
+        name="supply"
         rules={[
           {
             required: true,
@@ -224,7 +264,7 @@ const ListForm = () => {
         <AssetUpload assetUrl={assetUrl} setHandle={setUploadedUrl} />
       </Form.Item>
       <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
+        <Button loading={loading} size="large" type="primary" htmlType="submit">
           Submit
         </Button>
       </Form.Item>
@@ -233,8 +273,9 @@ const ListForm = () => {
 };
 
 const ListNFT = () => {
+  const { connected, wallet, setProvider, providerUrl } = useWallet();
   return (
-    <Row align="middle" justify="center">
+    <Row style={{ marginTop: 32 }} align="middle" justify="center">
       <Col flex="auto" />
       <Col>
         <Row align="middle" justify="center">
@@ -245,10 +286,29 @@ const ListNFT = () => {
           </Col>
           <Col>{BookEmoji}</Col>
         </Row>
-        <Paragraph style={styles.paragraph}>
-          Create Your own NFT listing:
-        </Paragraph>
-        <ListForm />
+        {connected ? (
+          <>
+            <ListForm wallet={wallet} />
+          </>
+        ) : (
+          <Row justify="center" style={{ marginTop: 128 }}>
+            <Select size="large" onSelect={setProvider} value={providerUrl}>
+              {WALLET_PROVIDERS.map(({ name, url }) => (
+                <Select.Option value={url} key={url}>
+                  {name}
+                </Select.Option>
+              ))}
+            </Select>
+            <Button
+              style={styles.walletConnectButton}
+              size="large"
+              type="primary"
+              onClick={wallet.connect}
+            >
+              Connect wallet
+            </Button>
+          </Row>
+        )}
       </Col>
       <Col flex="auto" />
     </Row>

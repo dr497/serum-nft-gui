@@ -138,3 +138,9 @@ export interface BonfidaTrade {
   feeCost: number;
   marketAddress: string;
 }
+
+export interface TokenMintReq {
+  publicKey: string;
+  supply: number;
+  decimals: number;
+}
