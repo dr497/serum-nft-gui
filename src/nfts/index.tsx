@@ -327,7 +327,7 @@ export const USE_REDEEMABLE_NFTS: NFT[] = [
     'SRM tee-shirt',
     20,
     new PublicKey('7TRzvCqXN8KSXggbSyeEG2Z9YBBhEFmbtmv6FLbd4mmd'),
-    new PublicKey('7EapwYqr6ev4W6PH5DoXJfDsziynfma3318uQt99E6AA'),
+    new PublicKey('rxqQa92aD8ZZGuyc2mjCARG4f832dBmQo9xiasX5mzq'),
     true,
     ['srm', 't', 'shirt', 'tee-shirt', 'redeem'],
     NFT_Types.IMAGE,
