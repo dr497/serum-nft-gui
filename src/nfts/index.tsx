@@ -13,10 +13,12 @@ export class NFT {
   supply: number;
   mintAddress: PublicKey;
   marketAddress: PublicKey;
-  redeembale: boolean;
+  redeembable: boolean;
   keywords: string[];
   type: NFT_Types;
   redeemAddress?: PublicKey;
+  redeemDescription?: string;
+  auctionDeadLine?: string;
   constructor(
     img: Object,
     imgSmall: Object,
@@ -24,10 +26,12 @@ export class NFT {
     supply: number,
     mintAddress: PublicKey,
     marketAddress: PublicKey,
-    redeembale: boolean,
+    redeembable: boolean,
     keywords: string[],
     type: NFT_Types,
     redeemAddress?: PublicKey,
+    redeemDescription?: string,
+    auctionDeadLine?: string,
   ) {
     this.img = img;
     this.imgSmall = imgSmall;
@@ -35,10 +39,12 @@ export class NFT {
     this.supply = supply;
     this.mintAddress = mintAddress;
     this.marketAddress = marketAddress;
-    this.redeembale = redeembale;
+    this.redeembable = redeembable;
     this.keywords = keywords;
     this.type = type;
     this.redeemAddress = redeemAddress;
+    this.redeemDescription = redeemDescription;
+    this.auctionDeadLine = auctionDeadLine;
   }
 }
 
@@ -308,11 +314,38 @@ export const USE_REDEEMABLE_NFTS: NFT[] = [
     5,
     new PublicKey('AgdBQN2Sy2abiZ2KToWeUsQ9PHdCv95wt6kVWRf5zDkx'),
     new PublicKey('CWkuMPt24aZFA4sHTUs43zwp3N8Lh9UfKNAScQqQ8uUg'),
-    false,
+    true,
     ['bitcoin', 'tram', 'hong', 'kong'],
     NFT_Types.IMAGE,
     new PublicKey('FCHmpXY6AQifAwe6SjAEGfF6APTPEcCjyNFAHn83ijdb'),
+    'This NFT can be redeemed for a physical Bitcoin Tram model mailed to your door',
+    '2020-11-06T21:00:00.000+08:00',
+  ),
+  new NFT(
+    require('../assets/nfts/7TRzvCqXN8KSXggbSyeEG2Z9YBBhEFmbtmv6FLbd4mmd/7TRzvCqXN8KSXggbSyeEG2Z9YBBhEFmbtmv6FLbd4mmd.jpg'),
+    require('../assets/nfts/7TRzvCqXN8KSXggbSyeEG2Z9YBBhEFmbtmv6FLbd4mmd/small.jpg'),
+    'SRM tee-shirt',
+    20,
+    new PublicKey('7TRzvCqXN8KSXggbSyeEG2Z9YBBhEFmbtmv6FLbd4mmd'),
+    new PublicKey('7EapwYqr6ev4W6PH5DoXJfDsziynfma3318uQt99E6AA'),
+    true,
+    ['srm', 't', 'shirt', 'tee-shirt', 'redeem'],
+    NFT_Types.IMAGE,
+    new PublicKey('FCHmpXY6AQifAwe6SjAEGfF6APTPEcCjyNFAHn83ijdb'),
+    'This NFT can be redeemed for a physical SRM tee-shirt mailed to your door. The first 10 people to redeem their tee-shirt will receive one with a custom message and signature from SBF.',
   ),
 ];
 
-export const USE_ALL_NFTS = [...USE_NFTS, ...USE_REDEEMABLE_NFTS];
+export const USE_ALL_NFTS = [...USE_REDEEMABLE_NFTS, ...USE_NFTS];
+
+export const DEFAULT_NFT = new NFT(
+  require('../assets/nfts/AcstFzGGawvvdVhYV9bftr7fmBHbePUjhv53YK1W3dZo/AcstFzGGawvvdVhYV9bftr7fmBHbePUjhv53YK1W3dZo.gif'),
+  require('../assets/nfts/AcstFzGGawvvdVhYV9bftr7fmBHbePUjhv53YK1W3dZo/small.mp4'),
+  'LSD',
+  1,
+  new PublicKey('AcstFzGGawvvdVhYV9bftr7fmBHbePUjhv53YK1W3dZo'),
+  new PublicKey('BdU5UYU8AU9iTVJXF6Sxc63M6XY4XWqZpdq2PigoqA92'),
+  false,
+  ['lsd', 'gif'],
+  NFT_Types.VIDEO,
+);

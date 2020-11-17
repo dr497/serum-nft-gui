@@ -137,7 +137,10 @@ export default function TopBar() {
         >
           <Menu.Item key="/">Home</Menu.Item>
           {connected && <Menu.Item key="/balances">My Collection</Menu.Item>}
-          <Menu.Item key="/bitcoin-tram">
+          <Menu.Item
+            // SRM Tee shirt
+            key="/trade/7EapwYqr6ev4W6PH5DoXJfDsziynfma3318uQt99E6AA"
+          >
             Redeemable
             <Emoji symbol="🔥" label="burn" class="emoji-redeem-top-bar" />
           </Menu.Item>

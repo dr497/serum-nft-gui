@@ -1,12 +1,12 @@
-import React from 'react';
-import { Button, Card, Typography, Row, Col, Statistic } from 'antd';
+import React, { useState } from 'react';
+import { Button, Card, Typography, Row, Col, Statistic, Modal } from 'antd';
 import styled from 'styled-components';
 import Emoji from './Emoji';
+import { hasMoreImages } from '../nfts/utils';
+import Carousel from './Carousel';
 
 const { Paragraph } = Typography;
 const { Countdown } = Statistic;
-
-const deadline = Date.parse('2020-11-06T21:00:00.000+08:00');
 
 const RedeemButton = styled(Button)`
   width: auto;
@@ -19,6 +19,22 @@ const RedeemButton = styled(Button)`
     border-color: #000;
     color: #f23b69;
   }
+`;
+
+const MoreImagesButton = styled(Button)`
+  width: auto;
+  height: auto;
+  margin: 20px 0px 0px 0px;
+  background: transparent;
+  border-color: #f23b69;
+  border-radius: 50px;
+`;
+
+const CenteredDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const WrappedCard = styled(Card)`
@@ -54,26 +70,41 @@ const RedeemCard = ({ nft, disabled, onClick }) => {
     countdown: {
       paddingTop: '10px',
     },
+    body: { background: 'rgb(255,255,255,0.1)', color: 'black' },
+    mask: { background: 'transparent' },
+    modal: { background: 'transparent' },
   };
+
+  const [moreImages, hasMore] = hasMoreImages(nft.mintAddress.toBase58());
+  const [showModal, setShowModal] = useState(false);
+
   return (
-    <div style={style.div}>
-      <WrappedCard>
-        <Row align="middle" justify="center">
-          <div style={style.parent}>
-            <div style={style.children}>
-              <img src={nft.img} alt={nft.name} style={style.img} />
-              <WrapperParagraph>{redeemText}</WrapperParagraph>
-              <WrapperParagraph>
-                {auctionText}
-                <Countdown
-                  title="Countdown"
-                  value={deadline}
-                  style={style.countdown}
-                />
-              </WrapperParagraph>
-              <Row align="middle" justify="center">
-                <Col flex="auto" />
-                <Col>
+    <>
+      <div style={style.div}>
+        <WrappedCard>
+          <Row align="middle" justify="center">
+            <div style={style.parent}>
+              <div style={style.children}>
+                <img src={nft.img} alt={nft.name} style={style.img} />
+                {hasMore && (
+                  <CenteredDiv>
+                    <MoreImagesButton onClick={() => setShowModal(true)}>
+                      More images
+                    </MoreImagesButton>
+                  </CenteredDiv>
+                )}
+                <WrapperParagraph>{nft.redeemDescription}</WrapperParagraph>
+                {!!nft.auctionDeadLine && (
+                  <WrapperParagraph>
+                    {auctionText}
+                    <Countdown
+                      title="Countdown"
+                      value={Date.parse(nft.auctionDeadLine)}
+                      style={style.countdown}
+                    />
+                  </WrapperParagraph>
+                )}
+                <CenteredDiv>
                   <RedeemButton
                     disabled={disabled}
                     onClick={onClick}
@@ -84,24 +115,35 @@ const RedeemCard = ({ nft, disabled, onClick }) => {
                     <span style={{ paddingRight: 10 }}>{'Redeem'}</span>{' '}
                     <Emoji symbol="🔥" label="burn" class="emoji-redeem" />
                   </RedeemButton>
-                </Col>
-                <Col flex="auto" />
-              </Row>
+                </CenteredDiv>
+              </div>
             </div>
-          </div>
-          <Col flex="auto" />
-        </Row>
-      </WrappedCard>
-    </div>
+            <Col flex="auto" />
+          </Row>
+        </WrappedCard>
+      </div>
+      <Modal
+        closable={false}
+        visible={showModal}
+        onOk={() => setShowModal(false)}
+        onCancel={() => setShowModal(false)}
+        width="80vw"
+        centered={true}
+        keyboard={true}
+        maskClosable={true}
+        bodyStyle={style.body}
+        maskStyle={style.mask}
+        style={style.modal}
+        footer={null}
+      >
+        <Carousel images={moreImages} />
+      </Modal>
+    </>
   );
 };
 
 export default RedeemCard;
 
-const redeemText = `
-This NFT can be redeemed for a physical Bitcoin Tram model mailed to your door
-`;
-
 const auctionText = `
-The auction will end on 06/11/2020 at 9pm UTC+8
+The auction will end in
 `;

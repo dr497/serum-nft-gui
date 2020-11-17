@@ -18,7 +18,12 @@ export function Routes() {
         <BasicLayout>
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route exact path="/trade" component={TradePage} />
+            <Route exact path="/trade/:marketAddress">
+              <TradePage />
+            </Route>
+            <Route exact path="/trade">
+              <TradePage />
+            </Route>
             <Route exact path="/orders" component={OpenOrdersPage} />
             <Route exact path="/balances" component={BalancesPage} />
             <Route

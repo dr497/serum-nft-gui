@@ -95,7 +95,7 @@ const NftCard = ({ nft }) => {
   const { setMarketAddress } = useMarket();
   const handleClick = () => {
     setMarketAddress(nft.marketAddress.toBase58());
-    history.push('/trade');
+    history.push(`/trade/${nft.marketAddress.toBase58()}`);
   };
 
   return (

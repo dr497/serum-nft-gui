@@ -2,7 +2,7 @@ import React from 'react';
 import NftCard from '../components/NftCard';
 import { Col, Row } from 'antd';
 import styled from 'styled-components';
-import USE_NFTS from '../nfts';
+import { USE_ALL_NFTS } from '../nfts';
 import { useWindowDimensions } from '../components/utils';
 
 export const WrappedCol = styled(Col)`
@@ -50,22 +50,22 @@ const HomePageRow = ({ divider, longueur, array }) => {
 
 const HomePage = () => {
   const windowDimensions = useWindowDimensions();
-  const longueur = USE_NFTS.length;
+  const longueur = USE_ALL_NFTS.length;
   return (
     <>
       {windowDimensions.width > 1600 && (
         <>
-          <HomePageRow divider={3} longueur={longueur} array={USE_NFTS} />
+          <HomePageRow divider={3} longueur={longueur} array={USE_ALL_NFTS} />
         </>
       )}
       {1100 < windowDimensions.width && windowDimensions.width < 1600 && (
         <>
-          <HomePageRow divider={2} longueur={longueur} array={USE_NFTS} />
+          <HomePageRow divider={2} longueur={longueur} array={USE_ALL_NFTS} />
         </>
       )}
       {windowDimensions.width < 1100 && (
         <>
-          {USE_NFTS.map((NFT, key) => {
+          {USE_ALL_NFTS.map((NFT, key) => {
             return (
               <Row style={{ padding: 20 }} align="middle" justify="center">
                 <Col flex="auto" />
