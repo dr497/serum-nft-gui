@@ -83,6 +83,17 @@ const USE_NFTS: NFT[] = [
     NFT_Types.VIDEO,
   ),
   new NFT(
+    require('../assets/nfts/3cZHQmZcubytufUeJjwRr7d68Qei2by7mPeSP5gVVUcX/3cZHQmZcubytufUeJjwRr7d68Qei2by7mPeSP5gVVUcX.gif'),
+    require('../assets/nfts/3cZHQmZcubytufUeJjwRr7d68Qei2by7mPeSP5gVVUcX/small.mp4'),
+    'YFI',
+    111,
+    new PublicKey('3cZHQmZcubytufUeJjwRr7d68Qei2by7mPeSP5gVVUcX'),
+    new PublicKey('6QSD6Fcc4gwwBBvRbbGXTsZ8cnb4iBjwh9jC5PjJDCpm'),
+    false,
+    ['yfi', 'andre', 'cronje'],
+    NFT_Types.VIDEO,
+  ),
+  new NFT(
     require('../assets/nfts/HsY8PNar8VExU335ZRYzg89fX7qa4upYu6vPMPFyCDdK/HsY8PNar8VExU335ZRYzg89fX7qa4upYu6vPMPFyCDdK.gif'),
     require('../assets/nfts/HsY8PNar8VExU335ZRYzg89fX7qa4upYu6vPMPFyCDdK/small.mp4'),
     'ADOR OPENS',
