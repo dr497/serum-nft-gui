@@ -15,22 +15,22 @@ import { v4 as uuidv4 } from 'uuid';
 import { notify } from '../utils/notifications';
 import { postMintToken } from '../utils/network';
 import { TokenMintReq } from '../utils/types';
+import {
+  AWS_S3_BUCKET_NAME,
+  AWS_S3_BUCKET_REGION,
+  AWS_S3_BUCKET_POOL_ID,
+} from '../utils/credentials';
 import { useWallet, WALLET_PROVIDERS } from '../utils/wallet';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import Emoji from '../components/Emoji';
 
 const { Title } = Typography;
 
-// todo: set env to github pages
-const AWS_S3_BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME;
-const AWS_S3_BUCKET_REGION = process.env.AWS_S3_BUCKET_REGION;
-const AWS_S3_BUCKET_POOL_ID = process.env.AWS_S3_BUCKET_POOL_ID;
-
 AWS.config.update({
   region: AWS_S3_BUCKET_REGION,
   credentials: new AWS.CognitoIdentityCredentials({
     IdentityPoolId: AWS_S3_BUCKET_POOL_ID,
-  }),
+  } as any),
 });
 
 const s3 = new AWS.S3({
@@ -120,7 +120,7 @@ const AssetUpload = (props) => {
           Key: key,
           Body: e.file,
           ACL: 'public-read', // note IAM policy needs to enable PutObjectAcl permission
-        })
+        } as any)
         .promise();
       setHandle(res.Location);
     } catch (error) {
