@@ -1,6 +1,6 @@
 import { PublicKey } from '@solana/web3.js';
 
-enum NFT_Types {
+export enum NFT_Types {
   VIDEO = 'VIDEO',
   IMAGE = 'IMAGE',
   REDEEMABLE = 'REDEEMABLE',

@@ -3,6 +3,7 @@ import Wallet from '@project-serum/sol-wallet-adapter';
 import { Market, OpenOrders } from '@project-serum/serum';
 import { Event } from '@project-serum/serum/lib/queue';
 import { Order } from '@project-serum/serum/lib/market';
+import { NFT_Types } from '../nfts';
 
 export interface ConnectionContextValues {
   endpoint: string;
@@ -143,4 +144,17 @@ export interface TokenMintReq {
   publicKey: string;
   supply: number;
   decimals: number;
+}
+
+export interface DBNFTPostReq {
+  img: string;
+  imgSmall: string;
+  name: string;
+  supply: number;
+  mintAddress: string;
+  marketAddress: string;
+  redeemable: boolean;
+  keywords: string[];
+  type: NFT_Types;
+  redeemAddress?: string;
 }

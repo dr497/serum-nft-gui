@@ -1,5 +1,6 @@
 import Urls from './Urls';
-import { TokenMintReq } from './types';
+import { TokenMintReq, DBNFTPostReq } from './types';
+import { DB_API_KEY } from './credentials';
 
 export async function apiPost(path, body, headers) {
   try {
@@ -30,6 +31,17 @@ export const postRedeemForm = async (data) => {
 export const postMintToken = async (data: TokenMintReq) => {
   try {
     const result = await apiPost(Urls.postMintToken, data, {});
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const postNFTData = async (data: DBNFTPostReq) => {
+  try {
+    const result = await apiPost(Urls.dbAPI, data, {
+      Authorization: 'Api-key ' + DB_API_KEY,
+    });
     return result;
   } catch (error) {
     throw error;
