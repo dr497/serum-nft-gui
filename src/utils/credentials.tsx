@@ -2,4 +2,3 @@
 export const AWS_S3_BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME;
 export const AWS_S3_BUCKET_REGION = process.env.AWS_S3_BUCKET_REGION;
 export const AWS_S3_BUCKET_POOL_ID = process.env.AWS_S3_BUCKET_POOL_ID;
-export const DB_API_KEY = process.env.DB_API_KEY;
