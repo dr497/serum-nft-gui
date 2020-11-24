@@ -344,7 +344,7 @@ export default function TradeForm({
         </BuyButton>
       ) : (
         <SellButton
-          disabled={!price || !baseSize}
+          disabled={!price || !baseSize || !canSell}
           onClick={onSubmit}
           block
           type="primary"
