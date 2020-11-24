@@ -13,7 +13,7 @@ import {
 import AWS from 'aws-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import { notify } from '../utils/notifications';
-import { postMintToken } from '../utils/network';
+import { postMintToken, postNFTData } from '../utils/network';
 import { TokenMintReq } from '../utils/types';
 import {
   AWS_S3_BUCKET_NAME,
@@ -23,6 +23,7 @@ import {
 import { useWallet, WALLET_PROVIDERS } from '../utils/wallet';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import Emoji from '../components/Emoji';
+import { NFT_Types } from '../nfts';
 
 const { Title } = Typography;
 
@@ -124,6 +125,7 @@ const AssetUpload = (props) => {
         .promise();
       setHandle(res.Location);
     } catch (error) {
+      console.log(error);
       notify({
         message: 'Upload asset file error',
         type: 'error',
@@ -166,7 +168,7 @@ const AssetUpload = (props) => {
 };
 
 const ListForm = (props) => {
-  const { wallet } = props;
+  const { wallet, setComplete } = props;
   const [form] = Form.useForm();
   const [assetUrl, setAssetUrl] = useState('');
   const [loading, setLoading] = useState(false);
@@ -181,13 +183,23 @@ const ListForm = (props) => {
     };
 
     try {
-      let res = await postMintToken(req);
-      if (res && res.success) {
-        // todo: save data to DB
-        // res.data.tokenMint
-        // redirect to my collection
+      // call mint api
+      let mint = await postMintToken(req);
+      if (mint && mint.success) {
+        // save data to DB
+        let db = await postNFTData({
+          name: values.tokenName,
+          img: values.assetUrl,
+          supply: values.supply,
+          mintAddress: wallet.publicKey.toString(),
+          marketAddress: mint.data.tokenMint,
+          redeemable: false,
+          keywords: values.tokenName.split(' '),
+          type: isVideo(values.assetUrl) ? NFT_Types.VIDEO : NFT_Types.IMAGE,
+        });
+        setComplete(true);
       } else {
-        throw new Error('Mint API returns error');
+        throw new Error('Mint API returns error, please try again');
       }
     } catch (error) {
       console.log(error);
@@ -274,6 +286,7 @@ const ListForm = (props) => {
 
 const ListNFT = () => {
   const { connected, wallet, setProvider, providerUrl } = useWallet();
+  const [complete, setComplete] = useState<boolean>(false);
 
   return (
     <Row style={{ marginTop: 32 }} align="middle" justify="center">
@@ -287,11 +300,12 @@ const ListNFT = () => {
           </Col>
           <Col>{BookEmoji}</Col>
         </Row>
-        {connected ? (
+        {!complete && connected && (
           <>
-            <ListForm wallet={wallet} />
+            <ListForm wallet={wallet} setComplete={setComplete} />
           </>
-        ) : (
+        )}
+        {!complete && !connected && (
           <Row justify="center" style={{ marginTop: 128 }}>
             <Select size="large" onSelect={setProvider} value={providerUrl}>
               {WALLET_PROVIDERS.map(({ name, url }) => (
@@ -308,6 +322,15 @@ const ListNFT = () => {
             >
               Connect wallet
             </Button>
+          </Row>
+        )}
+        {complete && (
+          <Row style={{ marginTop: 64 }}>
+            <Col span={24}>
+              <Title level={2}>
+                Contratulations, you have successfully listed your NFT!
+              </Title>
+            </Col>
           </Row>
         )}
       </Col>

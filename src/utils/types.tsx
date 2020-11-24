@@ -148,7 +148,6 @@ export interface TokenMintReq {
 
 export interface DBNFTPostReq {
   img: string;
-  imgSmall: string;
   name: string;
   supply: number;
   mintAddress: string;

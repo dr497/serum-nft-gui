@@ -71,7 +71,9 @@ export const getNFTData = async (filter: NFT_Filter) => {
 
 export const postNFTData = async (data: DBNFTPostReq) => {
   try {
-    const result = await apiPost(Urls.dbAPI, data, {});
+    const result = await apiPost(Urls.dbAPI + '/nft', data, {
+      'Content-Type': 'application/json',
+    });
     return result;
   } catch (error) {
     throw error;
