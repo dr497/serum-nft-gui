@@ -75,7 +75,7 @@ export default function TradeForm({
   const [submitting, setSubmitting] = useState(false);
   const [sizeFraction, setSizeFraction] = useState(0);
 
-  const [canSell, setCanSell] = useState(true);
+  const [cannotSell, setCannotSell] = useState(false);
 
   let NFT: any;
   if (market) {
@@ -86,13 +86,13 @@ export default function TradeForm({
 
   useEffect(() => {
     if (market && connected) {
-      setCanSell(
+      setCannotSell(
         // @ts-ignore
-        DISABLE_SELL.includes(market.address.toBase58()) ||
+        DISABLE_SELL.includes(market.address.toBase58()) &&
           wallet.publicKey.toBase58() != PUBLIC_KEY_GOD,
       );
     }
-  }, [wallet, market, connected]);
+  }, [wallet, market, connected, price, baseSize, quoteSize, side]);
 
   const availableQuote =
     openOrdersAccount && market
@@ -278,7 +278,7 @@ export default function TradeForm({
             BUY
           </Radio.Button>
           <Radio.Button
-            disabled={!canSell}
+            disabled={cannotSell}
             value="sell"
             style={{
               width: '50%',
@@ -344,7 +344,7 @@ export default function TradeForm({
         </BuyButton>
       ) : (
         <SellButton
-          disabled={!price || !baseSize || !canSell}
+          disabled={!price || !baseSize || cannotSell}
           onClick={onSubmit}
           block
           type="primary"
