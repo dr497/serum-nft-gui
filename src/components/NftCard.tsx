@@ -154,7 +154,7 @@ export const NftCardTrade = ({
             <Row align="middle" justify="center" style={{ width: '100%' }}>
               <Col>
                 <Paragraph copyable ellipsis>
-                  {nft.mintAddress.toString()}
+                  {nft?.mintAddress?.toBase58()}
                 </Paragraph>
               </Col>
               <Col
@@ -233,7 +233,7 @@ export const NftCardBalance = ({
         <Row align="middle" justify="center" style={{ width: '100%' }}>
           <Col>
             <Paragraph copyable ellipsis>
-              {mintAddress.toString()}
+              {mintAddress?.toBase58()}
             </Paragraph>
           </Col>
           <Col
