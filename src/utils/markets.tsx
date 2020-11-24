@@ -40,22 +40,89 @@ import {
 import { WRAPPED_SOL_MINT } from '@project-serum/serum/lib/token-instructions';
 import { Order } from '@project-serum/serum/lib/market';
 import BonfidaApi from './bonfidaConnector';
-import { USE_ALL_NFTS } from '../nfts';
+import { getMarketData } from './network';
 
-let USE_MARKETS: MarketInfo[] = [];
-
-USE_ALL_NFTS.forEach((NFT) => {
-  USE_MARKETS.push({
-    name: NFT.name,
-    address: NFT.marketAddress,
-    programId: new PublicKey('EUqojwWA2rd19FZrzeBncJsm38Jm1hEhE3zsmX3bRc2o'),
-    deprecated: false,
-  });
-});
-
-export function useMarketsList() {
-  return USE_MARKETS.filter(({ deprecated }) => !deprecated);
+export interface DBMarketRes {
+  name: string;
+  address: string;
+  programId: string;
+  deprecated: boolean;
 }
+
+export class SolibleMarket {
+  name: string;
+  address: PublicKey;
+  programId: PublicKey;
+  deprecated: boolean;
+  constructor(
+    name: string,
+    address: PublicKey,
+    programId: PublicKey,
+    deprecated: boolean,
+  ) {
+    this.name = name;
+    this.address = address;
+    this.programId = programId;
+    this.deprecated = deprecated;
+  }
+}
+
+export interface MarketFilter {
+  name?: string;
+  address?: string;
+  programId?: string;
+  deprecated?: boolean;
+}
+
+export const useMarkets = (f: MarketFilter = {}) => {
+  const [markets, setMarkets] = useState<SolibleMarket[]>([]);
+  const [filter, setFilter] = useState<MarketFilter>(f);
+
+  useEffect(() => {
+    const update = async () => {
+      try {
+        let m: SolibleMarket[] = [];
+        let r: DBMarketRes[] = await getMarketData(filter);
+        r.forEach((e) => {
+          m.push(
+            new SolibleMarket(
+              e.name,
+              new PublicKey(e.address),
+              new PublicKey(e.programId),
+              e.deprecated,
+            ),
+          );
+        });
+        setMarkets(m);
+      } catch (error) {
+        throw error;
+      }
+    };
+    update();
+  }, [filter]);
+
+  return [markets, setFilter] as const;
+};
+
+export const getMarkets = async (f: MarketFilter = {}) => {
+  try {
+    let m: SolibleMarket[] = [];
+    let r: DBMarketRes[] = await getMarketData(f);
+    r.forEach((e) => {
+      m.push(
+        new SolibleMarket(
+          e.name,
+          new PublicKey(e.address),
+          new PublicKey(e.programId),
+          e.deprecated,
+        ),
+      );
+    });
+    return m;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export function useAllMarkets(customMarkets) {
   const connection = useConnection();
@@ -104,6 +171,7 @@ export function useAllMarkets(customMarkets) {
 export function useUnmigratedOpenOrdersAccounts() {
   const connection = useConnection();
   const { wallet } = useWallet();
+  const [markets, setFilter] = useMarkets({});
 
   async function getUnmigratedOpenOrdersAccounts(): Promise<OpenOrders[]> {
     if (!wallet || !connection || !wallet.publicKey) {
@@ -111,45 +179,51 @@ export function useUnmigratedOpenOrdersAccounts() {
     }
     console.log('refreshing useUnmigratedOpenOrdersAccounts');
     let deprecatedOpenOrdersAccounts: OpenOrders[] = [];
-    const deprecatedProgramIds = Array.from(
-      new Set(
-        USE_MARKETS.filter(
-          ({ deprecated }) => deprecated,
-        ).map(({ programId }) => programId.toBase58()),
-      ),
-    ).map((publicKeyStr) => new PublicKey(publicKeyStr));
-    let programId: PublicKey;
-    for (programId of deprecatedProgramIds) {
-      try {
-        const openOrdersAccounts = await OpenOrders.findForOwner(
-          connection,
-          wallet.publicKey,
-          programId,
-        );
-        deprecatedOpenOrdersAccounts = deprecatedOpenOrdersAccounts.concat(
-          openOrdersAccounts
-            .filter(
-              (openOrders) =>
-                openOrders.baseTokenTotal.toNumber() ||
-                openOrders.quoteTokenTotal.toNumber(),
-            )
-            .filter((openOrders) =>
-              USE_MARKETS.some(
-                (market) =>
-                  market.deprecated && market.address.equals(openOrders.market),
+    try {
+      let markets = await getMarketData({ deprecated: true });
+      const deprecatedProgramIds = Array.from(
+        new Set(
+          markets
+            .filter(({ deprecated }) => deprecated)
+            .map(({ programId }) => programId.toBase58()),
+        ),
+      ).map((publicKeyStr) => new PublicKey(publicKeyStr as any));
+      let programId: PublicKey;
+      for (programId of deprecatedProgramIds) {
+        try {
+          const openOrdersAccounts = await OpenOrders.findForOwner(
+            connection,
+            wallet.publicKey,
+            programId,
+          );
+          deprecatedOpenOrdersAccounts = deprecatedOpenOrdersAccounts.concat(
+            openOrdersAccounts
+              .filter(
+                (openOrders) =>
+                  openOrders.baseTokenTotal.toNumber() ||
+                  openOrders.quoteTokenTotal.toNumber(),
+              )
+              .filter((openOrders) =>
+                markets.some(
+                  (market) =>
+                    market.deprecated &&
+                    market.address.equals(openOrders.market),
+                ),
               ),
-            ),
-        );
-      } catch (e) {
-        console.log(
-          'Error loading deprecated markets',
-          programId?.toBase58(),
-          e.message,
-        );
+          );
+        } catch (e) {
+          console.log(
+            'Error loading deprecated markets',
+            programId?.toBase58(),
+            e.message,
+          );
+        }
       }
+      // Maybe sort
+      return deprecatedOpenOrdersAccounts;
+    } catch (error) {
+      throw error;
     }
-    // Maybe sort
-    return deprecatedOpenOrdersAccounts;
   }
 
   const cacheKey = tuple(
@@ -178,10 +252,6 @@ const _SLOW_REFRESH_INTERVAL = 5 * 1000;
 
 // For things that change frequently
 const _FAST_REFRESH_INTERVAL = 1000;
-
-export const DEFAULT_MARKET = USE_MARKETS.find(
-  ({ name, deprecated }) => name === 'LSD/SRM' && !deprecated,
-);
 
 export function getMarketDetails(
   market: Market | undefined | null,
@@ -219,55 +289,39 @@ export function getMarketDetails(
 export function MarketProvider({ children }) {
   const [marketAddress, setMarketAddress] = useLocalStorageState(
     'marketAddress',
-    DEFAULT_MARKET?.address.toBase58(),
+    '',
   );
   const [customMarkets, setCustomMarkets] = useLocalStorageState<
     CustomMarketInfo[]
   >('customMarkets', []);
 
-  const address = marketAddress && new PublicKey(marketAddress);
   const connection = useConnection();
-  const marketInfos = getMarketInfos(customMarkets);
-  const marketInfo =
-    address && marketInfos.find((market) => market.address.equals(address));
+  const [markets, setFilter] = useMarkets({ deprecated: false });
+  const [market, setMarket] = useState<Market | null>(null);
 
-  // Replace existing market with a non-deprecated one on first load
   useEffect(() => {
-    if (marketInfo && marketInfo.deprecated) {
-      console.log('Switching markets from deprecated', marketInfo);
-      if (DEFAULT_MARKET) {
-        setMarketAddress(DEFAULT_MARKET.address.toBase58());
+    setFilter({address: marketAddress, deprecated: false});
+  }, [marketAddress])
+
+  useEffect(() => {
+    const loadMarket = async () => {
+      if (markets.length === 0) {
+        console.log('Error loading market');
+        return;
       }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const [market, setMarket] = useState<Market | null>();
-  useEffect(() => {
-    if (
-      market &&
-      marketInfo &&
-      // @ts-ignore
-      market._decoded.ownAddress?.equals(marketInfo?.address)
-    ) {
-      return;
-    }
-    setMarket(null);
-    if (!marketInfo || !marketInfo.address) {
-      console.log('Error loading market');
-      return;
-    }
-    Market.load(connection, marketInfo.address, {}, marketInfo.programId)
-      .then(setMarket)
-      .catch((e) =>
-        notify({
-          message: 'Error loading market',
-          description: e.message,
-          type: 'error',
-        }),
-      );
+      Market.load(connection, markets[0].address, {}, markets[0].programId)
+        .then(setMarket)
+        .catch((e) =>
+          notify({
+            message: 'Error loading market',
+            description: e.message,
+            type: 'error',
+          }),
+        );
+    };
+    loadMarket();
     // eslint-disable-next-line
-  }, [connection, marketInfo]);
+  }, [connection, JSON.stringify(markets)]);
 
   return (
     <MarketContext.Provider
@@ -929,9 +983,8 @@ export function useUnmigratedDeprecatedMarkets() {
       return null;
     }
     const getMarket = async (address) => {
-      const marketInfo = USE_MARKETS.find((market) =>
-        market.address.equals(address),
-      );
+      const markets = await getMarkets({address: address})
+      const marketInfo = markets.length > 0 ? markets[0] : undefined;
       if (!marketInfo) {
         console.log('Failed loading market');
         notify({
@@ -1131,7 +1184,7 @@ export function getMarketInfos(
     deprecated: false,
   }));
 
-  return [...customMarketsInfo, ...USE_MARKETS];
+  return [...customMarketsInfo];
 }
 
 export function useMarketInfos() {
