@@ -345,6 +345,20 @@ export const USE_REDEEMABLE_NFTS: NFT[] = [
     new PublicKey('4bGXwBj7222chiksjAF4XcsqebamRNQUBqxdRQeYHYMr'),
     'This NFT can be redeemed for a physical SRM tee-shirt mailed to your door. All sizes are availble (M/F). The first 10 people to redeem their tee-shirt will receive one with a custom message and signature from SBF.',
   ),
+  new NFT(
+    require('../assets/nfts/8xH9FWLA5wbETiV6WM1yUUbAnSE3N2pZqZR6WW3aUQTJ/8xH9FWLA5wbETiV6WM1yUUbAnSE3N2pZqZR6WW3aUQTJ.png'),
+    require('../assets/nfts/8xH9FWLA5wbETiV6WM1yUUbAnSE3N2pZqZR6WW3aUQTJ/small.png'),
+    'Ledger Nano X',
+    30,
+    new PublicKey('8xH9FWLA5wbETiV6WM1yUUbAnSE3N2pZqZR6WW3aUQTJ'),
+    new PublicKey('327ubUZkUUAEdeWvyQYh1Ycs9mt6yDnt7jDAW47U3krw'),
+    true,
+    ['ledger', 'nano', 'x', 'black', 'friday'],
+    NFT_Types.IMAGE,
+    new PublicKey('EvXsVnNu9mxo63tPiGNbLy3mwb6Zy4qT59RR62Y2UJW1'),
+    'This NFT can be redeemed for a Ledger Nano X branded Serum mailed to your door. The market will be unlisted on 30/11/2020 at 9pm UTC +8. After this date you will only be able to redeem.',
+    '2020-11-30T21:00:00.000+08:00',
+  ),
 ];
 
 export const USE_ALL_NFTS = [...USE_REDEEMABLE_NFTS, ...USE_NFTS];

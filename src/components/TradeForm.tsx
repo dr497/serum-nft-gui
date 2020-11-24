@@ -21,6 +21,7 @@ import { useSendConnection } from '../utils/connection';
 import FloatingElement from './layout/FloatingElement';
 import { placeOrder } from '../utils/send';
 import { USE_ALL_NFTS } from '../nfts';
+import { DISABLE_SELL, PUBLIC_KEY_GOD } from '../nfts/utils';
 
 const SellButton = styled(Button)`
   margin: 20px 0px 0px 0px;
@@ -62,7 +63,7 @@ export default function TradeForm({
   const baseCurrencyAccount = useSelectedBaseCurrencyAccount();
   const quoteCurrencyAccount = useSelectedQuoteCurrencyAccount();
   const openOrdersAccount = useSelectedOpenOrdersAccount(true);
-  const { wallet } = useWallet();
+  const { wallet, connected } = useWallet();
   const sendConnection = useSendConnection();
   const markPrice = useMarkPrice();
 
@@ -74,12 +75,24 @@ export default function TradeForm({
   const [submitting, setSubmitting] = useState(false);
   const [sizeFraction, setSizeFraction] = useState(0);
 
+  const [canSell, setCanSell] = useState(true);
+
   let NFT: any;
   if (market) {
     NFT = USE_ALL_NFTS.filter(
       (nft) => nft.marketAddress.toBase58() === market.address.toBase58(),
     )[0];
   }
+
+  useEffect(() => {
+    if (market && connected) {
+      setCanSell(
+        // @ts-ignore
+        DISABLE_SELL.includes(market.address.toBase58()) ||
+          wallet.publicKey.toBase58() != PUBLIC_KEY_GOD,
+      );
+    }
+  }, [wallet, market, connected]);
 
   const availableQuote =
     openOrdersAccount && market
@@ -265,6 +278,7 @@ export default function TradeForm({
             BUY
           </Radio.Button>
           <Radio.Button
+            disabled={!canSell}
             value="sell"
             style={{
               width: '50%',
