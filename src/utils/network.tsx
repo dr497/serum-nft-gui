@@ -1,6 +1,7 @@
 import Urls from './Urls';
 import { TokenMintReq, DBNFTPostReq } from './types';
-import { DB_API_KEY } from './credentials';
+import { MarketFilter } from './markets';
+import { NFT_Filter } from '../nfts';
 
 export async function apiPost(path, body, headers) {
   try {
@@ -9,13 +10,25 @@ export async function apiPost(path, body, headers) {
       body: JSON.stringify(body),
       headers: headers,
     });
-    if (!response.ok) {
-      return [];
-    }
+
     let json = await response.json();
     return json;
   } catch (err) {
     throw err;
+  }
+}
+
+export async function apiGet(path, headers) {
+  try {
+    let response = await fetch(path, {
+      method: 'GET',
+      headers: headers,
+    });
+
+    let json = await response.json();
+    return json;
+  } catch (error) {
+    throw error;
   }
 }
 
@@ -37,11 +50,50 @@ export const postMintToken = async (data: TokenMintReq) => {
   }
 };
 
+export const getNFTData = async (filter: NFT_Filter) => {
+  try {
+    let search = new URLSearchParams();
+    for (const [key, value] of Object.entries(filter)) {
+      if (Array.isArray(value)) {
+        for (let v of value) {
+          search.append(key, v);
+        }
+      } else {
+        search.append(key, value as string);
+      }
+    }
+    const result = await apiGet(Urls.dbAPI + '/nft?' + search.toString(), {});
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const postNFTData = async (data: DBNFTPostReq) => {
   try {
-    const result = await apiPost(Urls.dbAPI, data, {
-      Authorization: 'Api-key ' + DB_API_KEY,
-    });
+    const result = await apiPost(Urls.dbAPI, data, {});
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getMarketData = async (filter: MarketFilter) => {
+  try {
+    let search = new URLSearchParams();
+    for (const [key, value] of Object.entries(filter)) {
+      if (Array.isArray(value)) {
+        for (let v of value) {
+          search.append(key, v);
+        }
+      } else {
+        search.append(key, value as string);
+      }
+    }
+    const result = await apiGet(
+      Urls.dbAPI + '/market?' + search.toString(),
+      {},
+    );
     return result;
   } catch (error) {
     throw error;

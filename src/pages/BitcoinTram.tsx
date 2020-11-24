@@ -3,14 +3,12 @@ import { Col, Row, Modal } from 'antd';
 import styled from 'styled-components';
 import { useMarket } from '../utils/markets';
 import { NftCardTrade } from '../components/NftCard';
-import { USE_REDEEMABLE_NFTS } from '../nfts';
+import { useNFTs, NFT } from '../nfts';
 import RedeemCard from '../components/RedeemCard';
 import { useWindowDimensions } from '../components/utils';
 import { useWalletBalancesForAllMarkets } from '../utils/markets';
 import RedeemForm from '../components/RedeemForm';
 import { useWallet } from '../utils/wallet';
-
-const BTC_TRAM = USE_REDEEMABLE_NFTS[0];
 
 const Wrapper = styled.div`
   height: 100%;
@@ -24,9 +22,16 @@ const Wrapper = styled.div`
 
 const BitcoinTram = () => {
   const { marketName, setMarketAddress } = useMarket();
+  const [markets, setFilter] = useNFTs({redeemable: true});
+  const [btcTram, setBtcTram] = useState<NFT | null>(null);
+
+  useEffect(()=> {
+    if(markets.length > 0) setBtcTram(markets[0]);
+  }, [markets.length])
 
   useEffect(() => {
-    setMarketAddress(BTC_TRAM.marketAddress.toBase58());
+    if (btcTram)
+      setMarketAddress(btcTram.marketAddress.toBase58());
   }, [setMarketAddress]);
 
   useEffect(() => {
@@ -52,13 +57,13 @@ const BitcoinTram = () => {
   return (
     <>
       <Wrapper>
-        <RenderTradePage {...componentProps} />
+        <RenderTradePage {...componentProps} nft={btcTram}/>
       </Wrapper>
     </>
   );
 };
 
-const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
+const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize, nft }) => {
   const windowDimensions = useWindowDimensions();
   const walletBalances = useWalletBalancesForAllMarkets();
   const [disabled, setDisabled] = useState(true);
@@ -68,7 +73,7 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
   useEffect(() => {
     if (walletBalances) {
       setDisabled(
-        walletBalances.filter((e) => e.mint === BTC_TRAM.mintAddress.toBase58())
+        walletBalances.filter((e) => e.mint === nft.mintAddress.toBase58())
           .length > 0
           ? false
           : true,
@@ -99,7 +104,7 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
     setShowModal(true);
   };
 
-  if (!BTC_TRAM || !BTC_TRAM.redeemAddress) {
+  if (!nft || !nft.redeemAddress) {
     return null;
   }
 
@@ -110,14 +115,14 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
           <>
             <div style={styles.child}>
               <RedeemCard
-                nft={BTC_TRAM}
+                nft={nft}
                 disabled={disabled}
                 onClick={onClick}
               />
             </div>
             <div style={styles.child}>
               <NftCardTrade
-                nft={BTC_TRAM}
+                nft={nft}
                 setChangeOrderRef={onChangeOrderRef}
                 smallScreen={false}
                 onPrice={onPrice}
@@ -139,8 +144,8 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
               footer={null}
             >
               <RedeemForm
-                nftMint={BTC_TRAM.mintAddress}
-                destination={BTC_TRAM.redeemAddress}
+                nftMint={nft.mintAddress}
+                destination={nft.redeemAddress}
               />
             </Modal>
           </>
@@ -152,8 +157,8 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
             <Col flex="auto" />
             <Col>
               <img
-                src={BTC_TRAM.img.toString()}
-                alt={BTC_TRAM.name}
+                src={nft.img}
+                alt={nft.name}
                 style={styles.img}
               />
             </Col>
@@ -163,7 +168,7 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
             <Col flex="auto" />
             <Col>
               <NftCardTrade
-                nft={BTC_TRAM}
+                nft={nft}
                 setChangeOrderRef={onChangeOrderRef}
                 smallScreen={false}
                 onPrice={onPrice}

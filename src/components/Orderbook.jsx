@@ -7,7 +7,7 @@ import { useInterval } from '../utils/useInterval';
 import FloatingElement from './layout/FloatingElement';
 import usePrevious from '../utils/usePrevious';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
-import { USE_ALL_NFTS } from '../nfts';
+import { useNFTs } from '../nfts';
 
 const Title = styled.div`
   color: rgba(255, 255, 255, 1);
@@ -56,11 +56,10 @@ export default function Orderbook({ smallScreen, depth = 7, onPrice, onSize }) {
   const [orderbookData, setOrderbookData] = useState(null);
 
   let NFT;
-  if (market) {
-    NFT = USE_ALL_NFTS.filter(
-      (nft) => nft.marketAddress.toBase58() === market.address.toBase58(),
-    )[0];
-  }
+  const [NFTs, setFilter] = useNFTs({
+    marketAddress: market.address.toBase58(),
+  });
+  if (market && NFTs.length > 0) NFT = NFTs[0];
 
   useInterval(() => {
     if (

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { Col, Row } from 'antd';
 import styled from 'styled-components';
 import { useMarket } from '../utils/markets';
-import USE_NFTS from '../nfts';
+import { useNFTs } from '../nfts';
 import { NftCardTrade, NftView } from '../components/NftCard';
 import { useWindowDimensions } from '../components/utils';
 
@@ -68,11 +68,10 @@ const RenderTradePage = ({ onChangeOrderRef, onPrice, onSize }) => {
     } as React.CSSProperties,
   };
 
+  const [NFTs, setFilter] = useNFTs({marketAddress: market?.address.toBase58()});
   let NFT: any;
-  if (market) {
-    NFT = USE_NFTS.filter(
-      (nft) => nft.marketAddress.toBase58() === market.address.toBase58(),
-    )[0];
+  if (market && NFTs.length > 0) {
+    NFT = NFTs[0];
   }
   if (!NFT) {
     return null;

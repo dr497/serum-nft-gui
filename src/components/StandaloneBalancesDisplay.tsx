@@ -17,7 +17,7 @@ import { settleFunds } from '../utils/send';
 import { useSendConnection } from '../utils/connection';
 import { notify } from '../utils/notifications';
 import { Balances } from '../utils/types';
-import USE_NFTS from '../nfts';
+import { useNFTs } from '../nfts';
 import StandaloneTokenAccountsSelect from './StandaloneTokenAccountSelect';
 
 const RowBox = styled(Row)`
@@ -55,11 +55,11 @@ export default function StandaloneBalancesDisplay() {
   const quoteCurrencyBalances =
     balances && balances.find((b) => b.coin === quoteCurrency);
 
+  const [NFTs, setFilter] = useNFTs({marketAddress: market?.address.toBase58()});
+
   let NFT: any;
-  if (market) {
-    NFT = USE_NFTS.filter(
-      (nft) => nft.marketAddress.toBase58() === market.address.toBase58(),
-    )[0];
+  if (market && NFTs.length > 0) {
+    NFT = NFTs[0];
   }
 
   async function onSettleFunds() {

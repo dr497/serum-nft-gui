@@ -10,7 +10,7 @@ import { useSendConnection } from '../../utils/connection';
 import { useWallet } from '../../utils/wallet';
 import { settleFunds } from '../../utils/send';
 import { notify } from '../../utils/notifications';
-import { USE_ALL_NFTS } from '../../nfts';
+import { useNFTs } from '../../nfts';
 
 export default function BalancesTable({
   balances,
@@ -22,12 +22,13 @@ export default function BalancesTable({
   const connection = useSendConnection();
   const { wallet } = useWallet();
   const { market } = useMarket();
+  const [NFTs, setFilter] = useNFTs({
+    marketAddress: market.address.toBase58(),
+  });
 
   let NFT;
-  if (market) {
-    NFT = USE_ALL_NFTS.filter(
-      (nft) => nft.marketAddress.toBase58() === market.address.toBase58(),
-    )[0];
+  if (market && NFTs.length > 0) {
+    NFT = NFTs[0];
   }
 
   balances.forEach((item, i) => {

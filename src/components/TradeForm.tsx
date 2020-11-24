@@ -20,7 +20,7 @@ import {
 import { useSendConnection } from '../utils/connection';
 import FloatingElement from './layout/FloatingElement';
 import { placeOrder } from '../utils/send';
-import { USE_ALL_NFTS } from '../nfts';
+import { useNFTs } from '../nfts';
 
 const SellButton = styled(Button)`
   margin: 20px 0px 0px 0px;
@@ -74,12 +74,9 @@ export default function TradeForm({
   const [submitting, setSubmitting] = useState(false);
   const [sizeFraction, setSizeFraction] = useState(0);
 
+  const [NFTs, setFilter] = useNFTs({marketAddress: market?.address.toBase58()})
   let NFT: any;
-  if (market) {
-    NFT = USE_ALL_NFTS.filter(
-      (nft) => nft.marketAddress.toBase58() === market.address.toBase58(),
-    )[0];
-  }
+  if (NFTs.length > 0) NFT = NFTs[0];
 
   const availableQuote =
     openOrdersAccount && market

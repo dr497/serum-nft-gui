@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Typography } from 'antd';
-import { NFT, USE_ALL_NFTS } from '../nfts';
+import { NFT, useNFTs } from '../nfts';
 import { WrappedCol } from './HomePage';
 import { useWindowDimensions } from '../components/utils';
 import NftCard from '../components/NftCard';
@@ -65,26 +65,24 @@ type TParams = { searchParameters: string };
 const SearchPage = ({ match }: RouteComponentProps<TParams>) => {
   const windowDimensions = useWindowDimensions();
   const [searchResults, setSearchResults] = useState<NFT[] | null>(null);
-  const [keywords, setKeywords] = useState<string[] | null>(null);
-
+  const [keywords, setKeywords] = useState<string | null>(null);
   const [notFound, setNotFound] = useState(false);
+  const [NFTs, setFilter] = useNFTs({});
 
   // Update results
   useEffect(() => {
-    let temp: NFT[] = [];
-    keywords?.forEach((keyword) => {
-      USE_ALL_NFTS.forEach((nft) => {
-        if (searchWord(nft, keyword.toLowerCase())) {
-          temp.push(nft);
-        }
-      });
-    });
-    setSearchResults(temp);
+    setSearchResults(NFTs);
+    console.log(NFTs.length);
+  }, [JSON.stringify(NFTs)]);
+
+  useEffect(() => {
+    if (keywords)
+      setFilter({name : keywords})
   }, [keywords]);
 
   React.useEffect(() => {
     setKeywords(
-      match?.params.searchParameters.split('&').map((e) => e.toLowerCase()),
+      match?.params.searchParameters.toString().toLowerCase(),
     );
   }, [match]);
 

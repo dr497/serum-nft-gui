@@ -274,6 +274,7 @@ const ListForm = (props) => {
 
 const ListNFT = () => {
   const { connected, wallet, setProvider, providerUrl } = useWallet();
+
   return (
     <Row style={{ marginTop: 32 }} align="middle" justify="center">
       <Col flex="auto" />

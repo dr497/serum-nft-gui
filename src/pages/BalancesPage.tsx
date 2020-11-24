@@ -1,28 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Typography } from 'antd';
 import {
   useAllOpenOrdersBalances,
   useWalletBalancesForAllMarkets,
 } from '../utils/markets';
 import { useWindowDimensions } from '../components/utils';
-import { NFT, USE_ALL_NFTS } from '../nfts';
+import { NFT, useNFTs } from '../nfts';
 import { NftCardBalance } from '../components/NftCard';
 import styled from 'styled-components';
 import { useWallet } from '../utils/wallet';
 import notConnected from '../assets/not-connected.gif';
 import notFoundGif from '../assets/not-found.gif';
+import { JsxEmit } from 'typescript';
 const { Title } = Typography;
 
 const WrappedCol = styled(Col)`
   padding: 30px;
 `;
-
-const getNftByMintAddress = (mintAddress: string): NFT | null => {
-  const result = USE_ALL_NFTS.filter(
-    (nft) => nft.mintAddress.toBase58() === mintAddress,
-  );
-  return result.length === 1 ? result[0] : null;
-};
 
 const RowCard = ({ start, end, array }) => {
   return (
@@ -107,27 +101,52 @@ const TopPage = () => {
   );
 };
 
+interface BalanceData {
+  nft: NFT;
+  mint: string;
+  walletBalance: number;
+  openOrdersFree: number;
+  openOrdersTotal: number; 
+}
+
 export default function BalancesPage() {
   const walletBalances = useWalletBalancesForAllMarkets();
   const openOrdersBalances = useAllOpenOrdersBalances();
   const windowDimensions = useWindowDimensions();
   const { connected } = useWallet();
-
-  let data = (walletBalances || []).map((balance) => {
-    const balances = {
-      nft: getNftByMintAddress(balance.mint),
-      mint: balance.mint,
-      walletBalance: balance.balance,
-      openOrdersFree: 0,
-      openOrdersTotal: 0,
-    };
-    for (let openOrdersAccount of openOrdersBalances[balance.mint] || []) {
-      balances['openOrdersFree'] += openOrdersAccount.free;
-      balances['openOrdersTotal'] += openOrdersAccount.total;
-    }
-    return balances;
+  const mintAddresses = walletBalances.map((w) => w.mint);
+  const [NFTs, setFilter] = useNFTs({
+    mintAddress: mintAddresses,
   });
-  data = data.filter((balance) => !!balance.nft && balance.walletBalance > 0);
+  const [data, setData] = useState<BalanceData[]>([]);
+
+  // todo: here needs test
+  useEffect(() => {
+    if (!connected) return;
+    let tempArray : BalanceData[] = [];
+    for (let nft of NFTs) {
+      let idx = mintAddresses.indexOf(nft.mintAddress.toString());
+      if (idx > -1 && walletBalances[idx].balance > 0) {
+        let e : BalanceData= {
+          nft: nft,
+          mint: mintAddresses[idx],
+          walletBalance: walletBalances[idx].balance,
+          openOrdersFree: 0,
+          openOrdersTotal: 0,
+        };
+
+        for (let openOrdersAccount of openOrdersBalances[mintAddresses[idx]] ||
+          []) {
+          e['openOrdersFree'] += openOrdersAccount.free;
+          e['openOrdersTotal'] += openOrdersAccount.total;
+        }
+        tempArray.push(e);
+      }
+    }
+    setData(tempArray);
+
+  }, [connected, NFTs.length]);
+
   const longueur = data.length;
 
   return (
