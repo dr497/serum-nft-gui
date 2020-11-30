@@ -13,6 +13,11 @@ const footerElements = [
     external: true,
   },
   { description: 'List NFT', link: '/list-nft', external: false },
+  {
+    description: 'Customer Support',
+    link: 'https://help.bonfida.com',
+    external: true,
+  },
 ];
 const styles = {
   footer: {
