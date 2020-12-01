@@ -61,6 +61,17 @@ const USE_NFTS: NFT[] = [
     NFT_Types.VIDEO,
   ),
   new NFT(
+    require('../assets/nfts/4fRZgSrbc9o9BTqNwX2zsqLthwK63egGDu3VjWaZipmb/4fRZgSrbc9o9BTqNwX2zsqLthwK63egGDu3VjWaZipmb.gif'),
+    require('../assets/nfts/4fRZgSrbc9o9BTqNwX2zsqLthwK63egGDu3VjWaZipmb/small.mp4'),
+    'FTX x Frontier Round 1',
+    10,
+    new PublicKey('4fRZgSrbc9o9BTqNwX2zsqLthwK63egGDu3VjWaZipmb'),
+    new PublicKey('C4YD46QQ7K59MY6cDd8qJwcfPTggiWa2fCsWXUUfq6nk'),
+    false,
+    ['front', 'frontier', 'ftx', 'round'],
+    NFT_Types.VIDEO,
+  ),
+  new NFT(
     require('../assets/nfts/91fSFQsPzMLat9DHwLdQacW3i3EGnWds5tA5mt7yLiT9/91fSFQsPzMLat9DHwLdQacW3i3EGnWds5tA5mt7yLiT9.gif'),
     require('../assets/nfts/91fSFQsPzMLat9DHwLdQacW3i3EGnWds5tA5mt7yLiT9/small.mp4'),
     'Unlimited Energy',
