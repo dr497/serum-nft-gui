@@ -327,7 +327,7 @@ const USE_NFTS: NFT[] = [
   new NFT(
     require('../assets/nfts/6Ajg314uN3LiYwzAzvNQU3pYiPmtUt4kUGcKHtdSQuyS/6Ajg314uN3LiYwzAzvNQU3pYiPmtUt4kUGcKHtdSQuyS.gif'),
     require('../assets/nfts/6Ajg314uN3LiYwzAzvNQU3pYiPmtUt4kUGcKHtdSQuyS/small.mp4'),
-    'Eduardo Alimonda',
+    '1EA',
     100,
     new PublicKey('6Ajg314uN3LiYwzAzvNQU3pYiPmtUt4kUGcKHtdSQuyS'),
     new PublicKey('4bjKcseam7kGa3QieMPxaJ3yZy1FXtwWxZ1meMYLancz'),
