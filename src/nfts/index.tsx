@@ -376,7 +376,7 @@ export const USE_REDEEMABLE_NFTS: NFT[] = [
     ['srm', 't', 'shirt', 'tee-shirt', 'redeem'],
     NFT_Types.IMAGE,
     new PublicKey('4bGXwBj7222chiksjAF4XcsqebamRNQUBqxdRQeYHYMr'),
-    'This NFT can be redeemed for a physical SRM tee-shirt mailed to your door. All sizes are availble (M/F). The first 10 people to redeem their tee-shirt will receive one with a custom message and signature from SBF.',
+    'This NFT can be redeemed for a physical SRM tee-shirt mailed to your door. All sizes are availble (M/F).',
   ),
   new NFT(
     require('../assets/nfts/8xH9FWLA5wbETiV6WM1yUUbAnSE3N2pZqZR6WW3aUQTJ/8xH9FWLA5wbETiV6WM1yUUbAnSE3N2pZqZR6WW3aUQTJ.png'),
