@@ -50,14 +50,14 @@ export class NFT {
 
 const USE_NFTS: NFT[] = [
   new NFT(
-    require('../assets/nfts/AcstFzGGawvvdVhYV9bftr7fmBHbePUjhv53YK1W3dZo/AcstFzGGawvvdVhYV9bftr7fmBHbePUjhv53YK1W3dZo.gif'),
-    require('../assets/nfts/AcstFzGGawvvdVhYV9bftr7fmBHbePUjhv53YK1W3dZo/small.mp4'),
-    'LSD',
-    1,
-    new PublicKey('AcstFzGGawvvdVhYV9bftr7fmBHbePUjhv53YK1W3dZo'),
-    new PublicKey('BdU5UYU8AU9iTVJXF6Sxc63M6XY4XWqZpdq2PigoqA92'),
+    require('../assets/nfts/FBycjnjoUW9hZh6a4VzkLCoYzFgjQBjHgbBhNuxZv3WA/FBycjnjoUW9hZh6a4VzkLCoYzFgjQBjHgbBhNuxZv3WA.gif'),
+    require('../assets/nfts/FBycjnjoUW9hZh6a4VzkLCoYzFgjQBjHgbBhNuxZv3WA/small.mp4'),
+    'FIDA - NFT.',
+    10,
+    new PublicKey('FBycjnjoUW9hZh6a4VzkLCoYzFgjQBjHgbBhNuxZv3WA'),
+    new PublicKey('Hoo738bVaLdJmjXL6TbdyHmWME7ZijhdkpTR7AwZPT9m'),
     false,
-    ['lsd', 'gif'],
+    ['fida', 'bonfida'],
     NFT_Types.VIDEO,
   ),
   new NFT(
@@ -91,6 +91,17 @@ const USE_NFTS: NFT[] = [
     new PublicKey('6u8M7NH853WRpxnLs9qKKZn3ShR9QK4Y6kE6X9A1s7wK'),
     false,
     ['need', 'speed', 'front'],
+    NFT_Types.VIDEO,
+  ),
+  new NFT(
+    require('../assets/nfts/AcstFzGGawvvdVhYV9bftr7fmBHbePUjhv53YK1W3dZo/AcstFzGGawvvdVhYV9bftr7fmBHbePUjhv53YK1W3dZo.gif'),
+    require('../assets/nfts/AcstFzGGawvvdVhYV9bftr7fmBHbePUjhv53YK1W3dZo/small.mp4'),
+    'LSD',
+    1,
+    new PublicKey('AcstFzGGawvvdVhYV9bftr7fmBHbePUjhv53YK1W3dZo'),
+    new PublicKey('BdU5UYU8AU9iTVJXF6Sxc63M6XY4XWqZpdq2PigoqA92'),
+    false,
+    ['lsd', 'gif'],
     NFT_Types.VIDEO,
   ),
   new NFT(
