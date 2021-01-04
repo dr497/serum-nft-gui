@@ -1,5 +1,5 @@
 const Urls = {
-  postRedeemForm: 'https://bonfida.com/api/redeem',
+  postRedeemForm: 'https://wallet-api.bonfida.com/redeem',
 };
 
 export default Urls;

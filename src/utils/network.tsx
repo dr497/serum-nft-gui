@@ -19,6 +19,8 @@ export async function apiPost(path, body, headers) {
 }
 
 export const postRedeemForm = async (data) => {
-  const result = await apiPost(Urls.postRedeemForm, data, {});
+  const result = await apiPost(Urls.postRedeemForm, data, {
+    'Content-Type': 'application/json',
+  });
   return result;
 };
