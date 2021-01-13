@@ -5009,19 +5009,13 @@
                     ),
                     a.a.createElement(
                       se.a,
-                      {
-                        style: {
-                          marginTop: 20,
-                          paddingLeft: 20,
-                          paddingRight: 10,
-                        },
-                      },
+                      { style: { paddingLeft: 20, paddingRight: 10 } },
                       n.redeembable && a.a.createElement(gn, null),
                     ),
                     c &&
                       a.a.createElement(
                         se.a,
-                        { style: { marginTop: 20 } },
+                        null,
                         a.a.createElement(En, null),
                       ),
                   ),
@@ -6042,4 +6036,4 @@
   },
   [[314, 1, 2]],
 ]);
-//# sourceMappingURL=main.b1e1820c.chunk.js.map
+//# sourceMappingURL=main.59efc537.chunk.js.map
