@@ -357,8 +357,8 @@
         o = n.n(i),
         c = (n(302), n(303), n(5)),
         s = n.n(c),
-        A = n(12),
-        l = n(13),
+        l = n(12),
+        A = n(13),
         u = n(22),
         d = (n(58), n(11)),
         m = n(139),
@@ -368,7 +368,7 @@
         return g.apply(this, arguments);
       }
       function g() {
-        return (g = Object(A.a)(
+        return (g = Object(l.a)(
           s.a.mark(function e(t) {
             return s.a.wrap(function (e) {
               for (;;)
@@ -401,14 +401,14 @@
           : 0;
       }
       var h = {};
-      function y(e) {
+      function w(e) {
         var t =
             arguments.length > 1 && void 0 !== arguments[1]
               ? arguments[1]
               : null,
           n = localStorage.getItem(e) || t,
           a = Object(r.useState)(e + '\n' + n),
-          i = Object(l.a)(a, 2),
+          i = Object(A.a)(a, 2),
           o = i[1];
         Object(r.useEffect)(
           function () {
@@ -439,13 +439,13 @@
         );
         return [n, c];
       }
-      function w(e) {
+      function y(e) {
         var t =
             arguments.length > 1 && void 0 !== arguments[1]
               ? arguments[1]
               : null,
-          n = y(e, JSON.stringify(t)),
-          a = Object(l.a)(n, 2),
+          n = w(e, JSON.stringify(t)),
+          a = Object(A.a)(n, 2),
           i = a[0],
           o = a[1];
         return [
@@ -460,14 +460,75 @@
           },
         ];
       }
-      var v = n(72),
-        k = n(64),
-        x = n(9),
-        B = n.n(x),
-        j = new Date(),
-        C = new Map(),
-        I = function e(t, n, r, a, i, o) {
-          Object(k.a)(this, e),
+      var v = (function () {
+          var e = Object(l.a)(
+            s.a.mark(function e(t, n) {
+              var r, a;
+              return s.a.wrap(
+                function (e) {
+                  for (;;)
+                    switch ((e.prev = e.next)) {
+                      case 0:
+                        return (
+                          (e.prev = 0),
+                          (e.next = 3),
+                          fetch(O, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                              jsonrpc: '2.0',
+                              id: 1,
+                              method: t,
+                              params: n,
+                            }),
+                          })
+                        );
+                      case 3:
+                        if ((r = e.sent).ok) {
+                          e.next = 6;
+                          break;
+                        }
+                        return e.abrupt('return', []);
+                      case 6:
+                        if (200 === r.status && r.ok) {
+                          e.next = 8;
+                          break;
+                        }
+                        throw new Error('Error rpcRequest ');
+                      case 8:
+                        return (e.next = 10), r.json();
+                      case 10:
+                        return (a = e.sent), e.abrupt('return', a.result);
+                      case 14:
+                        throw (
+                          ((e.prev = 14),
+                          (e.t0 = e.catch(0)),
+                          console.error(e.t0),
+                          new Error('Error rpcRequest = '.concat(e.t0)))
+                        );
+                      case 18:
+                      case 'end':
+                        return e.stop();
+                    }
+                },
+                e,
+                null,
+                [[0, 14]],
+              );
+            }),
+          );
+          return function (t, n) {
+            return e.apply(this, arguments);
+          };
+        })(),
+        k = n(72),
+        x = n(64),
+        B = n(9),
+        j = n.n(B),
+        C = new Date(),
+        I = new Map(),
+        T = function e(t, n, r, a, i, o) {
+          Object(x.a)(this, e),
             (this.cacheKey = void 0),
             (this.fn = void 0),
             (this.refreshInterval = void 0),
@@ -481,17 +542,17 @@
             (this.callback = i),
             (this.cacheNullValues = o);
         },
-        T = (function () {
+        S = (function () {
           function e(t, n, r) {
             var a = this;
-            Object(k.a)(this, e),
+            Object(x.a)(this, e),
               (this.cacheKey = void 0),
               (this.fn = void 0),
               (this.timeoutId = void 0),
               (this.listeners = void 0),
               (this.errors = void 0),
               (this.cacheNullValues = !0),
-              (this.refresh = Object(A.a)(
+              (this.refresh = Object(l.a)(
                 s.a.mark(function e() {
                   var t, n, r, i;
                   return s.a.wrap(
@@ -529,7 +590,7 @@
                             );
                           case 14:
                             return (
-                              C.set(a.cacheKey, n),
+                              I.set(a.cacheKey, n),
                               (a.errors = 0),
                               a.notifyListeners(),
                               e.abrupt('return', n)
@@ -558,7 +619,7 @@
                                     1e3 * Math.pow(2, a.errors - 1),
                                     6e4,
                                   )),
-                                (i = +new Date() - +j) < 5e3 &&
+                                (i = +new Date() - +C) < 5e3 &&
                                   (r += 5e3 - i / 2),
                                 'hidden' === document.visibilityState
                                   ? (r = 6e4)
@@ -586,7 +647,7 @@
               (this.cacheNullValues = r);
           }
           return (
-            Object(v.a)(e, [
+            Object(k.a)(e, [
               {
                 key: 'addListener',
                 value: function (e) {
@@ -598,7 +659,7 @@
               {
                 key: 'removeListener',
                 value: function (e) {
-                  B()(this.listeners.delete(e)),
+                  j()(this.listeners.delete(e)),
                     this.stopped &&
                       this.timeoutId &&
                       (clearTimeout(this.timeoutId), (this.timeoutId = null));
@@ -650,19 +711,19 @@
             e
           );
         })(),
-        S = new ((function () {
+        Q = new ((function () {
           function e() {
-            Object(k.a)(this, e), (this.loops = new Map());
+            Object(x.a)(this, e), (this.loops = new Map());
           }
           return (
-            Object(v.a)(e, [
+            Object(k.a)(e, [
               {
                 key: 'addListener',
                 value: function (e) {
                   this.loops.has(e.cacheKey) ||
                     this.loops.set(
                       e.cacheKey,
-                      new T(e.cacheKey, e.fn, e.cacheNullValues),
+                      new S(e.cacheKey, e.fn, e.cacheNullValues),
                     ),
                     this.loops.get(e.cacheKey).addListener(e);
                 },
@@ -673,7 +734,7 @@
                   var t = this.loops.get(e.cacheKey);
                   t.removeListener(e),
                     t.stopped &&
-                      (this.loops.delete(e.cacheKey), C.delete(e.cacheKey));
+                      (this.loops.delete(e.cacheKey), I.delete(e.cacheKey));
                 },
               },
               {
@@ -696,7 +757,7 @@
             e
           );
         })())();
-      function Q(e, t) {
+      function N(e, t) {
         var n =
             arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {},
           a = n.refreshInterval,
@@ -705,20 +766,20 @@
           c = void 0 === o ? null : o,
           s =
             !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3],
-          A = Object(r.useReducer)(function (e) {
+          l = Object(r.useReducer)(function (e) {
             return e + 1;
           }, 0),
-          u = Object(l.a)(A, 2),
+          u = Object(A.a)(l, 2),
           d = u[1];
         if (
           (Object(r.useEffect)(
             function () {
               if (!t) return function () {};
-              var n = new I(t, e, i, c, d, s);
+              var n = new T(t, e, i, c, d, s);
               return (
-                S.addListener(n),
+                Q.addListener(n),
                 function () {
-                  return S.removeListener(n);
+                  return Q.removeListener(n);
                 }
               );
             },
@@ -727,12 +788,13 @@
           !t)
         )
           return [null, !1];
-        var m = C.has(t),
-          p = m ? C.get(t) : void 0;
+        var m = I.has(t),
+          p = m ? I.get(t) : void 0;
         return [p, m];
       }
-      var N = n(59),
-        F = [
+      var F = n(59),
+        O = 'https://solana-api.projectserum.com',
+        K = [
           {
             name: 'mainnet-beta',
             endpoint: 'https://api.mainnet-beta.solana.com',
@@ -740,19 +802,19 @@
           },
           { name: 'localnet', endpoint: 'http://127.0.0.1:8899', custom: !1 },
         ],
-        O = new Map(),
-        K = a.a.createContext(null);
-      function D(e) {
+        P = new Map(),
+        D = a.a.createContext(null);
+      function R(e) {
         var t = e.children,
-          n = w('connectionEndpts', F[0].endpoint),
-          i = Object(l.a)(n, 2),
+          n = y('connectionEndpts', K[0].endpoint),
+          i = Object(A.a)(n, 2),
           o = i[0],
           c = i[1],
-          s = w('customConnectionEndpoints', []),
-          A = Object(l.a)(s, 2),
-          u = A[0],
-          m = A[1],
-          p = F.concat(u),
+          s = y('customConnectionEndpoints', []),
+          l = Object(A.a)(s, 2),
+          u = l[0],
+          m = l[1],
+          p = K.concat(u),
           f = Object(r.useMemo)(
             function () {
               return new d.Connection(o, 'recent');
@@ -813,7 +875,7 @@
             [b],
           ),
           a.a.createElement(
-            K.Provider,
+            D.Provider,
             {
               value: {
                 endpoint: o,
@@ -828,19 +890,19 @@
           )
         );
       }
-      function P() {
-        var e = Object(r.useContext)(K);
+      function U() {
+        var e = Object(r.useContext)(D);
         if (!e) throw new Error('Missing connection context');
         return e.connection;
       }
-      function R(e) {
-        var t = P(),
-          n = Object(N.a)(
+      function L(e) {
+        var t = U(),
+          n = Object(F.a)(
             t,
             null === e || void 0 === e ? void 0 : e.toBase58(),
           ),
-          a = Q(
-            Object(A.a)(
+          a = N(
+            Object(l.a)(
               s.a.mark(function n() {
                 return s.a.wrap(function (n) {
                   for (;;)
@@ -860,14 +922,14 @@
             n,
             { refreshInterval: 6e4 },
           ),
-          i = Object(l.a)(a, 2),
+          i = Object(A.a)(a, 2),
           o = i[0],
           c = i[1];
         Object(r.useEffect)(
           function () {
             if (e) {
-              if (O.has(n)) {
-                ++O.get(n).count;
+              if (P.has(n)) {
+                ++P.get(n).count;
               } else {
                 var r = null,
                   a = t.onAccountChange(e, function (e) {
@@ -880,20 +942,20 @@
                               : {},
                           r = n.initializeOnly,
                           a = void 0 !== r && r;
-                        if (!a || !C.has(e)) {
-                          C.set(e, t);
-                          var i = S.loops.get(e);
+                        if (!a || !I.has(e)) {
+                          I.set(e, t);
+                          var i = Q.loops.get(e);
                           i && i.notifyListeners();
                         }
                       })(n, e));
                   });
-                O.set(n, { count: 1, subscriptionId: a });
+                P.set(n, { count: 1, subscriptionId: a });
               }
               return function () {
-                var e = O.get(n);
+                var e = P.get(n);
                 e.count - 1 <= 0
                   ? (t.removeAccountChangeListener(e.subscriptionId),
-                    O.delete(n))
+                    P.delete(n))
                   : --e.count;
               };
             }
@@ -910,22 +972,22 @@
           [u.current, c]
         );
       }
-      function U(e) {
-        var t = R(e),
-          n = Object(l.a)(t, 1)[0];
+      function q(e) {
+        var t = L(e),
+          n = Object(A.a)(t, 1)[0];
         return n && n.data;
       }
-      var L = n(266),
-        q = n(295),
-        M = n(208),
-        W = n(63);
-      function H(e) {
+      var M = n(266),
+        W = n(295),
+        H = n(208),
+        V = n(63);
+      function Z(e) {
         var t = e.external,
           n = void 0 !== t && t,
-          r = Object(M.a)(e, ['external']),
+          r = Object(H.a)(e, ['external']),
           i = r.to,
           o = r.children,
-          c = Object(M.a)(r, ['to', 'children']);
+          c = Object(H.a)(r, ['to', 'children']);
         return n
           ? a.a.createElement(
               'a',
@@ -935,9 +997,9 @@
               ),
               o,
             )
-          : a.a.createElement(W.b, Object.assign({ to: i }, c), o);
+          : a.a.createElement(V.b, Object.assign({ to: i }, c), o);
       }
-      function V(e) {
+      function J(e) {
         var t = e.message,
           n = e.description,
           r = e.txid,
@@ -947,7 +1009,7 @@
           s = void 0 === c ? 'bottomLeft' : c;
         r &&
           (n = a.a.createElement(
-            H,
+            Z,
             {
               external: !0,
               to: 'https://explorer.solana.com/tx/' + r,
@@ -958,7 +1020,7 @@
             '...',
             r.slice(r.length - 8),
           )),
-          q.a[o]({
+          W.a[o]({
             message: a.a.createElement(
               'span',
               { style: { color: '#FFFFFF' } },
@@ -977,18 +1039,18 @@
             },
           });
       }
-      var Z = [
+      var z = [
           { name: 'sollet.io', url: 'https://www.sollet.io' },
           { name: 'Bonfida Wallet', url: 'https://www.bonfida.com/wallet' },
         ],
-        J = a.a.createContext(null);
-      function z(e) {
+        Y = a.a.createContext(null);
+      function G(e) {
         var t,
           n,
           i,
           o = e.children,
           c = (function () {
-            var e = Object(r.useContext)(K);
+            var e = Object(r.useContext)(D);
             if (!e) throw new Error('Missing connection context');
             return {
               endpoint: e.endpoint,
@@ -1000,19 +1062,19 @@
               setCustomEndpoints: e.setCustomEndpoints,
             };
           })().endpoint,
-          s = w('walletProvider', 'https://www.sollet.io'),
-          A = Object(l.a)(s, 2),
-          u = A[0],
-          d = A[1];
+          s = y('walletProvider', 'https://www.sollet.io'),
+          l = Object(A.a)(s, 2),
+          u = l[0],
+          d = l[1];
         i = u || 'https://www.sollet.io';
         var m = Object(r.useMemo)(
             function () {
-              return new L.a(i, c);
+              return new M.a(i, c);
             },
             [i, c],
           ),
           p = Object(r.useState)(!1),
-          f = Object(l.a)(p, 2),
+          f = Object(A.a)(p, 2),
           b = f[0],
           g = f[1];
         return (
@@ -1025,7 +1087,7 @@
                     localStorage.removeItem('feeDiscountKey'),
                     g(!0);
                   var e = m.publicKey.toBase58();
-                  V({
+                  J({
                     message: 'Wallet update',
                     description:
                       'Connected to wallet ' +
@@ -1038,7 +1100,7 @@
                 }),
                 m.on('disconnect', function () {
                   g(!1),
-                    V({
+                    J({
                       message: 'Wallet update',
                       description: 'Disconnected from wallet',
                     }),
@@ -1052,7 +1114,7 @@
             [m],
           ),
           a.a.createElement(
-            J.Provider,
+            Y.Provider,
             {
               value: {
                 wallet: m,
@@ -1063,7 +1125,7 @@
                   null !==
                     (t =
                       null ===
-                        (n = Z.find(function (e) {
+                        (n = z.find(function (e) {
                           return e.url === i;
                         })) || void 0 === n
                         ? void 0
@@ -1076,8 +1138,8 @@
           )
         );
       }
-      function Y() {
-        var e = Object(r.useContext)(J);
+      function X() {
+        var e = Object(r.useContext)(Y);
         if (!e) throw new Error('Missing wallet context');
         return {
           connected: e.connected,
@@ -1087,30 +1149,73 @@
           providerName: e.providerName,
         };
       }
-      var G = n(98),
-        X = n(99);
-      function _() {
-        var e = Object(G.a)([
+      var _ = (function () {
+          var e = Object(l.a)(
+            s.a.mark(function e(t) {
+              var n, r;
+              return s.a.wrap(function (e) {
+                for (;;)
+                  switch ((e.prev = e.next)) {
+                    case 0:
+                      return (
+                        (n = [
+                          'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+                          {
+                            encoding: 'jsonParsed',
+                            filters: [
+                              { dataSize: 165 },
+                              {
+                                memcmp: {
+                                  offset: 32,
+                                  bytes:
+                                    null === t || void 0 === t
+                                      ? void 0
+                                      : t.toBase58(),
+                                },
+                              },
+                            ],
+                          },
+                        ]),
+                        (e.next = 3),
+                        v('getProgramAccounts', n)
+                      );
+                    case 3:
+                      return (r = e.sent), e.abrupt('return', r);
+                    case 5:
+                    case 'end':
+                      return e.stop();
+                  }
+              }, e);
+            }),
+          );
+          return function (t) {
+            return e.apply(this, arguments);
+          };
+        })(),
+        $ = n(98),
+        ee = n(99);
+      function te() {
+        var e = Object($.a)([
           '\nhtml,body{\n  background: #11161D;\n}\ninput[type=number]::-webkit-inner-spin-button {\n  opacity: 0;\n}\ninput[type=number]:hover::-webkit-inner-spin-button,\ninput[type=number]:focus::-webkit-inner-spin-button {\n  opacity: 0.25;\n}\n/* width */\n::-webkit-scrollbar {\n  width: 15px;\n}\n/* Track */\n::-webkit-scrollbar-track {\n  background: #2d313c;\n}\n/* Handle */\n::-webkit-scrollbar-thumb {\n  background: #5b5f67;\n}\n/* Handle on hover */\n::-webkit-scrollbar-thumb:hover {\n  background: #5b5f67;\n}\n.ant-slider-track, .ant-slider:hover .ant-slider-track {\n  background-color: #2abdd2;\n  opacity: 0.75;\n}\n.ant-slider-track,\n.ant-slider ant-slider-track:hover {\n  background-color: #2abdd2;\n  opacity: 0.75;\n}\n.ant-slider-dot-active,\n.ant-slider-handle,\n.ant-slider-handle-click-focused,\n.ant-slider:hover .ant-slider-handle:not(.ant-tooltip-open)  {\n  border: 2px solid #2abdd2; \n}\n.ant-table-tbody > tr.ant-table-row:hover > td {\n  background: #273043;\n}\n.ant-table-tbody > tr > td {\n  border-bottom: 8px solid #1A2029;\n}\n.ant-table-container table > thead > tr:first-child th {\n  border-bottom: none;\n}\n.ant-divider-horizontal.ant-divider-with-text::before, .ant-divider-horizontal.ant-divider-with-text::after {\n  border-top: 1px solid #434a59 !important;\n}\n.ant-layout {\n  background: linear-gradient(258.48deg, rgba(128, 128, 255, 0.1) 0%, rgba(71, 71, 240, 0.1) 100%), #121837;\n  }\n  .ant-table {\n    background: #212734;\n  }\n  .ant-table-thead > tr > th {\n    background: #1A2029;\n  }\n.ant-select-item-option-content {\n  img {\n    margin-right: 4px;\n  }\n}\n.ant-modal-content {\n  background-color: #212734;\n}\n\n@-webkit-keyframes highlight {\n  from { background-color: #2abdd2;}\n  to {background-color: #1A2029;}\n}\n@-moz-keyframes highlight {\n  from { background-color: #2abdd2;}\n  to {background-color: #1A2029;}\n}\n@-keyframes highlight {\n  from { background-color: #2abdd2;}\n  to {background-color: #1A2029;}\n}\n.flash {\n  -moz-animation: highlight 0.5s ease 0s 1 alternate ;\n  -webkit-animation: highlight 0.5s ease 0s 1 alternate;\n  animation: highlight 0.5s ease 0s 1 alternate;\n}',
         ]);
         return (
-          (_ = function () {
+          (te = function () {
             return e;
           }),
           e
         );
       }
-      var $ = Object(X.a)(_()),
-        ee = n(570),
-        te = n(121),
-        ne = n(120),
-        re = n(572).a.Title,
-        ae = (function (e) {
-          Object(te.a)(n, e);
-          var t = Object(ne.a)(n);
+      var ne = Object(ee.a)(te()),
+        re = n(570),
+        ae = n(121),
+        ie = n(120),
+        oe = n(572).a.Title,
+        ce = (function (e) {
+          Object(ae.a)(n, e);
+          var t = Object(ie.a)(n);
           function n() {
             var e;
-            Object(k.a)(this, n);
+            Object(x.a)(this, n);
             for (var r = arguments.length, a = new Array(r), i = 0; i < r; i++)
               a[i] = arguments[i];
             return (
@@ -1121,7 +1226,7 @@
             );
           }
           return (
-            Object(v.a)(
+            Object(k.a)(
               n,
               [
                 {
@@ -1135,12 +1240,12 @@
                             'div',
                             null,
                             a.a.createElement(
-                              re,
+                              oe,
                               { level: 2 },
                               'Something went wrong.',
                             ),
                             a.a.createElement(
-                              re,
+                              oe,
                               { level: 4 },
                               'Please try again later.',
                             ),
@@ -1162,29 +1267,29 @@
             n
           );
         })(r.Component),
-        ie = n(52),
-        oe = n(569),
-        ce = n(567),
-        se = n(568),
-        Ae = n(573),
-        le = n(173),
-        ue = n.n(le),
-        de = n(574),
-        me = n(128),
-        pe = n(576),
-        fe = n(579);
-      var be = n(48),
-        ge = n(30),
-        Ee = n(1),
-        he = n(29),
-        ye = n.n(he),
-        we = n(83),
-        ve = (n(51), n(2));
-      function ke(e) {
-        return xe.apply(this, arguments);
+        se = n(52),
+        le = n(569),
+        Ae = n(567),
+        ue = n(568),
+        de = n(573),
+        me = n(173),
+        pe = n.n(me),
+        fe = n(574),
+        be = n(128),
+        ge = n(576),
+        Ee = n(579);
+      var he = n(48),
+        we = n(30),
+        ye = n(1),
+        ve = n(29),
+        ke = n.n(ve),
+        xe = n(83),
+        Be = (n(51), n(2));
+      function je(e) {
+        return Ce.apply(this, arguments);
       }
-      function xe() {
-        return (xe = Object(A.a)(
+      function Ce() {
+        return (Ce = Object(l.a)(
           s.a.mark(function e(t) {
             var n, r, a, i, o, c;
             return s.a.wrap(function (e) {
@@ -1206,7 +1311,7 @@
                   case 8:
                     return (
                       (e.t3 = e.sent),
-                      (e.t4 = ge.TokenInstructions.TOKEN_PROGRAM_ID),
+                      (e.t4 = we.TokenInstructions.TOKEN_PROGRAM_ID),
                       (e.t5 = {
                         fromPubkey: e.t1,
                         newAccountPubkey: e.t2,
@@ -1217,7 +1322,7 @@
                       (c = e.t0.createAccount.call(e.t0, e.t5)),
                       o.add(c),
                       o.add(
-                        ge.TokenInstructions.initializeAccount({
+                        we.TokenInstructions.initializeAccount({
                           account: i.publicKey,
                           mint: a,
                           owner: r.publicKey,
@@ -1237,13 +1342,13 @@
           }),
         )).apply(this, arguments);
       }
-      function Be(e) {
-        return je.apply(this, arguments);
+      function Ie(e) {
+        return Te.apply(this, arguments);
       }
-      function je() {
-        return (je = Object(A.a)(
+      function Te() {
+        return (Te = Object(l.a)(
           s.a.mark(function e(t) {
-            var n, r, a, i, o, c, l, u, d, m, p, f, b;
+            var n, r, a, i, o, c, A, u, d, m, p, f, b;
             return s.a.wrap(function (e) {
               for (;;)
                 switch ((e.prev = e.next)) {
@@ -1272,8 +1377,8 @@
                             return t.equals(e);
                           }) || c.push(e);
                         }),
-                      (l = (function () {
-                        var e = Object(A.a)(
+                      (A = (function () {
+                        var e = Object(l.a)(
                           s.a.mark(function e(t) {
                             var a;
                             return s.a.wrap(function (e) {
@@ -1282,7 +1387,7 @@
                                   case 0:
                                     return (
                                       (e.next = 2),
-                                      ge.OpenOrders.findForOwner(
+                                      we.OpenOrders.findForOwner(
                                         n,
                                         r.publicKey,
                                         t,
@@ -1315,7 +1420,7 @@
                       (e.next = 8),
                       Promise.all(
                         c.map(function (e) {
-                          return l(e);
+                          return A(e);
                         }),
                       )
                     );
@@ -1343,24 +1448,24 @@
                               null === c || void 0 === c
                                 ? void 0
                                 : c.baseMintAddress,
-                            A =
+                            l =
                               null === c || void 0 === c
                                 ? void 0
                                 : c.quoteMintAddress,
-                            l =
+                            A =
                               null ===
-                                (t = xt(a, s, s && o && o[s.toBase58()])) ||
+                                (t = Ct(a, s, s && o && o[s.toBase58()])) ||
                               void 0 === t
                                 ? void 0
                                 : t.pubkey,
                             u =
                               null ===
-                                (r = xt(a, A, A && o && o[A.toBase58()])) ||
+                                (r = Ct(a, l, l && o && o[l.toBase58()])) ||
                               void 0 === r
                                 ? void 0
                                 : r.pubkey;
-                          return l && u
-                            ? c && c.makeSettleFundsTransaction(n, e, l, u)
+                          return A && u
+                            ? c && c.makeSettleFundsTransaction(n, e, A, u)
                             : null;
                         }),
                       )
@@ -1391,9 +1496,9 @@
                             return t.publicKey.equals(e.publicKey);
                           }) || f.push(e);
                         }),
-                      (b = Me(p)),
+                      (b = Ve(p)),
                       (e.next = 21),
-                      Oe({
+                      De({
                         transaction: b,
                         signers: f,
                         wallet: r,
@@ -1410,11 +1515,11 @@
           }),
         )).apply(this, arguments);
       }
-      function Ce(e) {
-        return Ie.apply(this, arguments);
+      function Se(e) {
+        return Qe.apply(this, arguments);
       }
-      function Ie() {
-        return (Ie = Object(A.a)(
+      function Qe() {
+        return (Qe = Object(l.a)(
           s.a.mark(function e(t) {
             return s.a.wrap(function (e) {
               for (;;)
@@ -1422,9 +1527,9 @@
                   case 0:
                     return e.abrupt(
                       'return',
-                      Te(
-                        Object(be.a)(
-                          Object(be.a)({}, t),
+                      Ne(
+                        Object(he.a)(
+                          Object(he.a)({}, t),
                           {},
                           { orders: [t.order] },
                         ),
@@ -1438,11 +1543,11 @@
           }),
         )).apply(this, arguments);
       }
-      function Te(e) {
-        return Se.apply(this, arguments);
+      function Ne(e) {
+        return Fe.apply(this, arguments);
       }
-      function Se() {
-        return (Se = Object(A.a)(
+      function Fe() {
+        return (Fe = Object(l.a)(
           s.a.mark(function e(t) {
             var n, r, a, i, o;
             return s.a.wrap(function (e) {
@@ -1460,7 +1565,7 @@
                       }),
                       o.add(n.makeMatchOrdersTransaction(5)),
                       (e.next = 6),
-                      Oe({
+                      De({
                         transaction: o,
                         wallet: r,
                         connection: a,
@@ -1477,11 +1582,11 @@
           }),
         )).apply(this, arguments);
       }
-      function Qe(e) {
-        return Ne.apply(this, arguments);
+      function Oe(e) {
+        return Ke.apply(this, arguments);
       }
-      function Ne() {
-        return (Ne = Object(A.a)(
+      function Ke() {
+        return (Ke = Object(l.a)(
           s.a.mark(function e(t) {
             var n,
               r,
@@ -1489,16 +1594,16 @@
               i,
               o,
               c,
-              A,
               l,
+              A,
               m,
               p,
               f,
               b,
               g,
               h,
-              y,
               w,
+              y,
               v,
               k,
               x,
@@ -1513,8 +1618,8 @@
               F,
               O,
               K,
-              D,
               P,
+              D,
               R,
               U,
               L;
@@ -1527,30 +1632,30 @@
                       (i = t.price),
                       (o = t.size),
                       (c = t.orderType),
-                      (A = t.market),
-                      (l = t.connection),
+                      (l = t.market),
+                      (A = t.connection),
                       (m = t.wallet),
                       (p = t.baseCurrencyAccount),
                       (f = t.quoteCurrencyAccount),
                       (b = t.feeDiscountPubkey),
                       (g = void 0 === b ? void 0 : b),
                       (h =
-                        (null === A ||
-                        void 0 === A ||
-                        null === (n = A.minOrderSize) ||
+                        (null === l ||
+                        void 0 === l ||
+                        null === (n = l.minOrderSize) ||
                         void 0 === n
                           ? void 0
-                          : n.toFixed(E(A.minOrderSize))) ||
-                        (null === A || void 0 === A ? void 0 : A.minOrderSize)),
-                      (y =
-                        (null === A ||
-                        void 0 === A ||
-                        null === (r = A.tickSize) ||
+                          : n.toFixed(E(l.minOrderSize))) ||
+                        (null === l || void 0 === l ? void 0 : l.minOrderSize)),
+                      (w =
+                        (null === l ||
+                        void 0 === l ||
+                        null === (r = l.tickSize) ||
                         void 0 === r
                           ? void 0
-                          : r.toFixed(E(A.tickSize))) ||
-                        (null === A || void 0 === A ? void 0 : A.tickSize)),
-                      (w = function (e, t) {
+                          : r.toFixed(E(l.tickSize))) ||
+                        (null === l || void 0 === l ? void 0 : l.tickSize)),
+                      (y = function (e, t) {
                         return (
                           Math.abs((e / t) % 1) < 1e-5 ||
                           Math.abs(((e / t) % 1) - 1) < 1e-5
@@ -1562,7 +1667,7 @@
                       break;
                     }
                     return (
-                      V({ message: 'Invalid price', type: 'error' }),
+                      J({ message: 'Invalid price', type: 'error' }),
                       e.abrupt('return')
                     );
                   case 7:
@@ -1571,7 +1676,7 @@
                       break;
                     }
                     return (
-                      V({ message: 'Invalid size', type: 'error' }),
+                      J({ message: 'Invalid size', type: 'error' }),
                       e.abrupt('return')
                     );
                   case 10:
@@ -1580,58 +1685,58 @@
                       break;
                     }
                     return (
-                      V({ message: 'Connect wallet', type: 'error' }),
+                      J({ message: 'Connect wallet', type: 'error' }),
                       e.abrupt('return')
                     );
                   case 13:
-                    if (A) {
+                    if (l) {
                       e.next = 16;
                       break;
                     }
                     return (
-                      V({ message: 'Invalid  market', type: 'error' }),
+                      J({ message: 'Invalid  market', type: 'error' }),
                       e.abrupt('return')
                     );
                   case 16:
-                    if (w(o, A.minOrderSize)) {
+                    if (y(o, l.minOrderSize)) {
                       e.next = 19;
                       break;
                     }
                     return (
-                      V({
+                      J({
                         message: 'Size must be an increment of '.concat(h),
                         type: 'error',
                       }),
                       e.abrupt('return')
                     );
                   case 19:
-                    if (!(o < A.minOrderSize)) {
+                    if (!(o < l.minOrderSize)) {
                       e.next = 22;
                       break;
                     }
                     return (
-                      V({ message: 'Size too small', type: 'error' }),
+                      J({ message: 'Size too small', type: 'error' }),
                       e.abrupt('return')
                     );
                   case 22:
-                    if (w(i, A.tickSize)) {
+                    if (y(i, l.tickSize)) {
                       e.next = 25;
                       break;
                     }
                     return (
-                      V({
-                        message: 'Price must be an increment of '.concat(y),
+                      J({
+                        message: 'Price must be an increment of '.concat(w),
                         type: 'error',
                       }),
                       e.abrupt('return')
                     );
                   case 25:
-                    if (!(i < A.tickSize)) {
+                    if (!(i < l.tickSize)) {
                       e.next = 28;
                       break;
                     }
                     return (
-                      V({ message: 'Price under tick size', type: 'error' }),
+                      J({ message: 'Price under tick size', type: 'error' }),
                       e.abrupt('return')
                     );
                   case 28:
@@ -1646,10 +1751,10 @@
                     }
                     return (
                       (e.next = 34),
-                      ke({
-                        connection: l,
+                      je({
+                        connection: A,
                         wallet: m,
-                        mintPublicKey: A.baseMintAddress,
+                        mintPublicKey: l.baseMintAddress,
                       })
                     );
                   case 34:
@@ -1667,10 +1772,10 @@
                     }
                     return (
                       (e.next = 44),
-                      ke({
-                        connection: l,
+                      je({
+                        connection: A,
                         wallet: m,
-                        mintPublicKey: A.quoteMintAddress,
+                        mintPublicKey: l.quoteMintAddress,
                       })
                     );
                   case 44:
@@ -1687,7 +1792,7 @@
                       break;
                     }
                     return (
-                      V({
+                      J({
                         message: 'Need an SPL token account for cost currency',
                         type: 'error',
                       }),
@@ -1705,29 +1810,29 @@
                         feeDiscountPubkey: g || null,
                       }),
                       console.log(O),
-                      (K = A.makeMatchOrdersTransaction(5)),
+                      (K = l.makeMatchOrdersTransaction(5)),
                       k.add(K),
-                      (D = Fe()),
+                      (P = Pe()),
                       (e.next = 62),
-                      A.makePlaceOrderTransaction(l, O, 12e4, 12e4)
+                      l.makePlaceOrderTransaction(A, O, 12e4, 12e4)
                     );
                   case 62:
                     return (
-                      (P = e.sent),
-                      (R = P.transaction),
-                      (U = P.signers),
-                      (L = Fe()),
+                      (D = e.sent),
+                      (R = D.transaction),
+                      (U = D.signers),
+                      (L = Pe()),
                       console.log(
-                        'Creating order transaction took '.concat(L - D),
+                        'Creating order transaction took '.concat(L - P),
                       ),
                       k.add(R),
-                      k.add(A.makeMatchOrdersTransaction(5)),
+                      k.add(l.makeMatchOrdersTransaction(5)),
                       x.push.apply(x, Object(u.a)(U)),
                       (e.next = 72),
-                      Oe({
+                      De({
                         transaction: k,
                         wallet: m,
-                        connection: l,
+                        connection: A,
                         signers: x,
                         sendingMessage: 'Sending order...',
                       })
@@ -1742,16 +1847,16 @@
           }),
         )).apply(this, arguments);
       }
-      var Fe = function () {
+      var Pe = function () {
         return new Date().getTime() / 1e3;
       };
-      function Oe(e) {
-        return Ke.apply(this, arguments);
+      function De(e) {
+        return Re.apply(this, arguments);
       }
-      function Ke() {
-        return (Ke = Object(A.a)(
+      function Re() {
+        return (Re = Object(l.a)(
           s.a.mark(function e(t) {
-            var n, r, a, i, o, c, A, l, u, d, m, p, f, b;
+            var n, r, a, i, o, c, l, A, u, d, m, p, f, b;
             return s.a.wrap(function (e) {
               for (;;)
                 switch ((e.prev = e.next)) {
@@ -1763,15 +1868,15 @@
                       (i = void 0 === a ? [] : a),
                       (o = t.connection),
                       (c = t.sendingMessage),
-                      (A = void 0 === c ? 'Sending transaction...' : c),
-                      (l = t.sentMessage),
-                      (u = void 0 === l ? 'Transaction sent' : l),
+                      (l = void 0 === c ? 'Sending transaction...' : c),
+                      (A = t.sentMessage),
+                      (u = void 0 === A ? 'Transaction sent' : A),
                       (d = t.successMessage),
                       (m = void 0 === d ? 'Transaction confirmed' : d),
                       (p = t.timeout),
                       (f = void 0 === p ? 15e3 : p),
                       (e.next = 3),
-                      De({
+                      Ue({
                         transaction: n,
                         wallet: r,
                         signers: i,
@@ -1782,10 +1887,10 @@
                     return (
                       (b = e.sent),
                       (e.next = 6),
-                      Re({
+                      qe({
                         signedTransaction: b,
                         connection: o,
-                        sendingMessage: A,
+                        sendingMessage: l,
                         sentMessage: u,
                         successMessage: m,
                         timeout: f,
@@ -1801,11 +1906,11 @@
           }),
         )).apply(this, arguments);
       }
-      function De(e) {
-        return Pe.apply(this, arguments);
+      function Ue(e) {
+        return Le.apply(this, arguments);
       }
-      function Pe() {
-        return (Pe = Object(A.a)(
+      function Le() {
+        return (Le = Object(l.a)(
           s.a.mark(function e(t) {
             var n, r, a, i, o;
             return s.a.wrap(function (e) {
@@ -1848,13 +1953,13 @@
           }),
         )).apply(this, arguments);
       }
-      function Re(e) {
-        return Ue.apply(this, arguments);
+      function qe(e) {
+        return Me.apply(this, arguments);
       }
-      function Ue() {
-        return (Ue = Object(A.a)(
+      function Me() {
+        return (Me = Object(l.a)(
           s.a.mark(function e(t) {
-            var n, r, a, i, o, c, l, u, d, m, p, f, g, E, h, y, w;
+            var n, r, a, i, o, c, A, u, d, m, p, f, g, E, h, w, y;
             return s.a.wrap(
               function (e) {
                 for (;;)
@@ -1867,29 +1972,29 @@
                         (i = void 0 === a ? 'Sending transaction...' : a),
                         (o = t.sentMessage),
                         (c = void 0 === o ? 'Transaction sent' : o),
-                        (l = t.successMessage),
-                        (u = void 0 === l ? 'Transaction confirmed' : l),
+                        (A = t.successMessage),
+                        (u = void 0 === A ? 'Transaction confirmed' : A),
                         (d = t.timeout),
                         (m = void 0 === d ? 15e3 : d),
                         (p = n.serialize()),
-                        (f = Fe()),
-                        V({ message: i }),
+                        (f = Pe()),
+                        J({ message: i }),
                         (e.next = 6),
                         r.sendRawTransaction(p, { skipPreflight: !0 })
                       );
                     case 6:
                       return (
                         (g = e.sent),
-                        V({ message: c, type: 'success', txid: g }),
+                        J({ message: c, type: 'success', txid: g }),
                         console.log('Started awaiting confirmation for', g),
                         (E = !1),
-                        Object(A.a)(
+                        Object(l.a)(
                           s.a.mark(function e() {
                             return s.a.wrap(function (e) {
                               for (;;)
                                 switch ((e.prev = e.next)) {
                                   case 0:
-                                    if (E || !(Fe() - f < m)) {
+                                    if (E || !(Pe() - f < m)) {
                                       e.next = 6;
                                       break;
                                     }
@@ -1912,7 +2017,7 @@
                         )(),
                         (e.prev = 11),
                         (e.next = 14),
-                        Le(g, m, r)
+                        We(g, m, r)
                       );
                     case 14:
                       e.next = 41;
@@ -1932,7 +2037,7 @@
                         (h = null),
                         (e.prev = 21),
                         (e.next = 24),
-                        Ve(r, n, 'single')
+                        ze(r, n, 'single')
                       );
                     case 24:
                       (h = e.sent.value), (e.next = 29);
@@ -1948,22 +2053,22 @@
                         e.next = 39;
                         break;
                       }
-                      y = h.logs.length - 1;
+                      w = h.logs.length - 1;
                     case 32:
-                      if (!(y >= 0)) {
+                      if (!(w >= 0)) {
                         e.next = 39;
                         break;
                       }
-                      if (!(w = h.logs[y]).startsWith('Program log: ')) {
+                      if (!(y = h.logs[w]).startsWith('Program log: ')) {
                         e.next = 36;
                         break;
                       }
                       throw new Error(
                         'Transaction failed: ' +
-                          w.slice('Program log: '.length),
+                          y.slice('Program log: '.length),
                       );
                     case 36:
-                      --y, (e.next = 32);
+                      --w, (e.next = 32);
                       break;
                     case 39:
                       throw new Error(JSON.stringify(h.err));
@@ -1973,8 +2078,8 @@
                       return (e.prev = 41), (E = !0), e.finish(41);
                     case 44:
                       return (
-                        V({ message: u, type: 'success', txid: g }),
-                        console.log('Latency', g, Fe() - f),
+                        J({ message: u, type: 'success', txid: g }),
+                        console.log('Latency', g, Pe() - f),
                         e.abrupt('return', g)
                       );
                     case 47:
@@ -1992,11 +2097,11 @@
           }),
         )).apply(this, arguments);
       }
-      function Le(e, t, n) {
-        return qe.apply(this, arguments);
+      function We(e, t, n) {
+        return He.apply(this, arguments);
       }
-      function qe() {
-        return (qe = Object(A.a)(
+      function He() {
+        return (He = Object(l.a)(
           s.a.mark(function e(t, n, r) {
             var a, i;
             return s.a.wrap(function (e) {
@@ -2007,7 +2112,7 @@
                       (a = !1),
                       (e.next = 3),
                       new Promise(function (e, i) {
-                        Object(A.a)(
+                        Object(l.a)(
                           s.a.mark(function o() {
                             return s.a.wrap(function (o) {
                               for (;;)
@@ -2040,7 +2145,7 @@
                                       break;
                                     }
                                     return (
-                                      Object(A.a)(
+                                      Object(l.a)(
                                         s.a.mark(function n() {
                                           var o, c;
                                           return s.a.wrap(
@@ -2133,7 +2238,7 @@
           }),
         )).apply(this, arguments);
       }
-      function Me(e) {
+      function Ve(e) {
         var t = new d.Transaction();
         return (
           e
@@ -2146,34 +2251,34 @@
           t
         );
       }
-      var We,
-        He = Object(ve.a)({
+      var Ze,
+        Je = Object(Be.a)({
           executable: 'boolean',
           owner: 'string',
           lamports: 'number',
           data: 'any',
           rentEpoch: 'number?',
         });
-      (We = ve.a.array([ve.a.union(['null', He])])),
+      (Ze = Be.a.array([Be.a.union(['null', Je])])),
         (function (e) {
-          var t = ve.a.literal('2.0');
-          ve.a.union([
-            Object(ve.a)({ jsonrpc: t, id: 'string', error: 'any' }),
-            Object(ve.a)({
+          var t = Be.a.literal('2.0');
+          Be.a.union([
+            Object(Be.a)({ jsonrpc: t, id: 'string', error: 'any' }),
+            Object(Be.a)({
               jsonrpc: t,
               id: 'string',
               error: 'null?',
               result: e,
             }),
           ]);
-        })({ context: Object(ve.a)({ slot: 'number' }), value: We });
-      function Ve(e, t, n) {
-        return Ze.apply(this, arguments);
+        })({ context: Object(Be.a)({ slot: 'number' }), value: Ze });
+      function ze(e, t, n) {
+        return Ye.apply(this, arguments);
       }
-      function Ze() {
-        return (Ze = Object(A.a)(
+      function Ye() {
+        return (Ye = Object(l.a)(
           s.a.mark(function e(t, n, r) {
-            var a, i, o, c, A;
+            var a, i, o, c, l;
             return s.a.wrap(function (e) {
               for (;;)
                 switch ((e.prev = e.next)) {
@@ -2193,15 +2298,15 @@
                       t._rpcRequest('simulateTransaction', c)
                     );
                   case 10:
-                    if (!(A = e.sent).error) {
+                    if (!(l = e.sent).error) {
                       e.next = 13;
                       break;
                     }
                     throw new Error(
-                      'failed to simulate transaction: ' + A.error.message,
+                      'failed to simulate transaction: ' + l.error.message,
                     );
                   case 13:
-                    return e.abrupt('return', A.result);
+                    return e.abrupt('return', l.result);
                   case 14:
                   case 'end':
                     return e.stop();
@@ -2210,21 +2315,21 @@
           }),
         )).apply(this, arguments);
       }
-      var Je = Ee.struct([
-        Ee.blob(32, 'mint'),
-        Ee.blob(32, 'owner'),
-        Ee.nu64('amount'),
-        Ee.blob(93),
+      var Ge = ye.struct([
+        ye.blob(32, 'mint'),
+        ye.blob(32, 'owner'),
+        ye.nu64('amount'),
+        ye.blob(93),
       ]);
-      Ee.struct([
-        Ee.blob(36),
-        Ee.blob(8, 'supply'),
-        Ee.u8('decimals'),
-        Ee.u8('initialized'),
-        Ee.blob(36),
+      ye.struct([
+        ye.blob(36),
+        ye.blob(8, 'supply'),
+        ye.u8('decimals'),
+        ye.u8('initialized'),
+        ye.blob(36),
       ]);
-      function ze(e) {
-        var t = Je.decode(e),
+      function Xe(e) {
+        var t = Ge.decode(e),
           n = t.mint,
           r = t.owner,
           a = t.amount;
@@ -2234,18 +2339,18 @@
           amount: a,
         };
       }
-      function Ye(e) {
+      function _e(e) {
         return [
-          { memcmp: { offset: Je.offsetOf('owner'), bytes: e.toBase58() } },
-          { dataSize: Je.span },
+          { memcmp: { offset: Ge.offsetOf('owner'), bytes: e.toBase58() } },
+          { dataSize: Ge.span },
         ];
       }
-      var Ge = new d.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
-      function Xe(e, t) {
-        return _e.apply(this, arguments);
+      var $e = new d.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
+      function et(e, t) {
+        return tt.apply(this, arguments);
       }
-      function _e() {
-        return (_e = Object(A.a)(
+      function tt() {
+        return (tt = Object(l.a)(
           s.a.mark(function e(t, n) {
             var r, a;
             return s.a.wrap(function (e) {
@@ -2253,10 +2358,10 @@
                 switch ((e.prev = e.next)) {
                   case 0:
                     return (
-                      (r = Ye(n)),
+                      (r = _e(n)),
                       (e.next = 3),
                       t._rpcRequest('getProgramAccounts', [
-                        Ge.toBase58(),
+                        $e.toBase58(),
                         { commitment: t.commitment, filters: r },
                       ])
                     );
@@ -2285,7 +2390,7 @@
                           return {
                             publicKey: new d.PublicKey(t),
                             accountInfo: {
-                              data: ye.a.decode(r),
+                              data: ke.a.decode(r),
                               executable: a,
                               owner: new d.PublicKey(i),
                               lamports: o,
@@ -2297,7 +2402,7 @@
                           return r.every(function (e) {
                             if (e.dataSize) return t.data.length === e.dataSize;
                             if (e.memcmp) {
-                              var n = ye.a.decode(e.memcmp.bytes);
+                              var n = ke.a.decode(e.memcmp.bytes);
                               return t.data
                                 .slice(
                                   e.memcmp.offset,
@@ -2317,11 +2422,11 @@
           }),
         )).apply(this, arguments);
       }
-      function $e(e, t) {
-        return et.apply(this, arguments);
+      function nt(e, t) {
+        return rt.apply(this, arguments);
       }
-      function et() {
-        return (et = Object(A.a)(
+      function rt() {
+        return (rt = Object(l.a)(
           s.a.mark(function e(t, n) {
             var r, a, i, o, c;
             return s.a.wrap(function (e) {
@@ -2329,12 +2434,12 @@
                 switch ((e.prev = e.next)) {
                   case 0:
                     return (
-                      (e.next = 2), Promise.all([Xe(t, n), t.getAccountInfo(n)])
+                      (e.next = 2), Promise.all([et(t, n), t.getAccountInfo(n)])
                     );
                   case 2:
                     return (
                       (r = e.sent),
-                      (a = Object(l.a)(r, 2)),
+                      (a = Object(A.a)(r, 2)),
                       (i = a[0]),
                       (o = a[1]),
                       (c = i.map(function (e) {
@@ -2343,7 +2448,7 @@
                         return {
                           pubkey: t,
                           account: n,
-                          effectiveMint: ze(n.data).mint,
+                          effectiveMint: Xe(n.data).mint,
                         };
                       })),
                       e.abrupt(
@@ -2351,7 +2456,7 @@
                         c.concat({
                           pubkey: n,
                           account: o,
-                          effectiveMint: we.WRAPPED_SOL_MINT,
+                          effectiveMint: xe.WRAPPED_SOL_MINT,
                         }),
                       )
                     );
@@ -2363,16 +2468,16 @@
           }),
         )).apply(this, arguments);
       }
-      var tt = (function () {
+      var at = (function () {
         function e() {
-          Object(k.a)(this, e);
+          Object(x.a)(this, e);
         }
         return (
-          Object(v.a)(e, null, [
+          Object(k.a)(e, null, [
             {
               key: 'get',
               value: (function () {
-                var e = Object(A.a)(
+                var e = Object(l.a)(
                   s.a.mark(function e(t) {
                     var n, r;
                     return s.a.wrap(
@@ -2426,7 +2531,7 @@
             {
               key: 'getRecentTrades',
               value: (function () {
-                var t = Object(A.a)(
+                var t = Object(l.a)(
                   s.a.mark(function t(n) {
                     return s.a.wrap(function (t) {
                       for (;;)
@@ -2452,13 +2557,13 @@
           e
         );
       })();
-      tt.URL = 'https://serum-api.bonfida.com/';
-      var nt;
+      at.URL = 'https://serum-api.bonfida.com/';
+      var it;
       !(function (e) {
         (e.VIDEO = 'VIDEO'), (e.IMAGE = 'IMAGE'), (e.REDEEMABLE = 'REDEEMABLE');
-      })(nt || (nt = {}));
-      var rt = function e(t, n, r, a, i, o, c, s, A, l, u, d, m) {
-          Object(k.a)(this, e),
+      })(it || (it = {}));
+      var ot = function e(t, n, r, a, i, o, c, s, l, A, u, d, m) {
+          Object(x.a)(this, e),
             (this.img = void 0),
             (this.imgSmall = void 0),
             (this.name = void 0),
@@ -2480,14 +2585,14 @@
             (this.marketAddress = o),
             (this.redeembable = c),
             (this.keywords = s),
-            (this.type = A),
-            (this.redeemAddress = l),
+            (this.type = l),
+            (this.redeemAddress = A),
             (this.redeemDescription = u),
             (this.auctionDeadLine = d),
             (this.description = m);
         },
-        at = [
-          new rt(
+        ct = [
+          new ot(
             n(432),
             n(433),
             'FIDA - NFT.',
@@ -2496,9 +2601,9 @@
             new d.PublicKey('Hoo738bVaLdJmjXL6TbdyHmWME7ZijhdkpTR7AwZPT9m'),
             !1,
             ['fida', 'bonfida'],
-            nt.VIDEO,
+            it.VIDEO,
           ),
-          new rt(
+          new ot(
             n(434),
             n(435),
             'FTX x Frontier Round 1',
@@ -2507,9 +2612,9 @@
             new d.PublicKey('C4YD46QQ7K59MY6cDd8qJwcfPTggiWa2fCsWXUUfq6nk'),
             !1,
             ['front', 'frontier', 'ftx', 'round'],
-            nt.VIDEO,
+            it.VIDEO,
           ),
-          new rt(
+          new ot(
             n(436),
             n(437),
             'Unlimited Energy',
@@ -2518,9 +2623,9 @@
             new d.PublicKey('BnWVMg9dvBLbQDR9j96QP8q85SFPWEsyouZUEMLevkE3'),
             !1,
             ['unlimited', 'energy', 'bonfida', 'front'],
-            nt.VIDEO,
+            it.VIDEO,
           ),
-          new rt(
+          new ot(
             n(438),
             n(439),
             'Need for Speed',
@@ -2529,9 +2634,9 @@
             new d.PublicKey('6u8M7NH853WRpxnLs9qKKZn3ShR9QK4Y6kE6X9A1s7wK'),
             !1,
             ['need', 'speed', 'front'],
-            nt.VIDEO,
+            it.VIDEO,
           ),
-          new rt(
+          new ot(
             n(240),
             n(241),
             'LSD',
@@ -2540,9 +2645,9 @@
             new d.PublicKey('BdU5UYU8AU9iTVJXF6Sxc63M6XY4XWqZpdq2PigoqA92'),
             !1,
             ['lsd', 'gif'],
-            nt.VIDEO,
+            it.VIDEO,
           ),
-          new rt(
+          new ot(
             n(440),
             n(441),
             'CMS - Rare',
@@ -2551,9 +2656,9 @@
             new d.PublicKey('GgWVyfbM1tfJ72vGfCinmqxhdQQkyy8t67YzWzc9izsA'),
             !1,
             ['cms', 'holding'],
-            nt.IMAGE,
+            it.IMAGE,
           ),
-          new rt(
+          new ot(
             n(442),
             n(443),
             'DeceFi',
@@ -2562,9 +2667,9 @@
             new d.PublicKey('BKZSAFLqxBHKXJk3cw5pGdFCsKzyrouSG19KmiUQKXBh'),
             !1,
             ['decefi', 'DCFI'],
-            nt.VIDEO,
+            it.VIDEO,
           ),
-          new rt(
+          new ot(
             n(242),
             n(243),
             'Seldom',
@@ -2573,9 +2678,9 @@
             new d.PublicKey('AQWam8CiWsbqQWGToD9vwYRStZTYAuCuUKnV3iorDasA'),
             !1,
             ['seldom', 'wallet'],
-            nt.IMAGE,
+            it.IMAGE,
           ),
-          new rt(
+          new ot(
             n(444),
             n(445),
             'Satoshi Closeup',
@@ -2584,9 +2689,9 @@
             new d.PublicKey('7CGbje815jANonTXSBsdP7nkRLwy3ShLLvZFZRjtU7g2'),
             !1,
             ['satoshi', 'closeup', 'genesis', 'block'],
-            nt.IMAGE,
+            it.IMAGE,
           ),
-          new rt(
+          new ot(
             n(446),
             n(447),
             'Satoshi GB',
@@ -2595,9 +2700,9 @@
             new d.PublicKey('EHKqPgFnWHzUvgqzhroSeEDp4mD2em2RasxMmTPHDP6x'),
             !1,
             ['satoshi', 'gb', 'genesis', 'block'],
-            nt.IMAGE,
+            it.IMAGE,
           ),
-          new rt(
+          new ot(
             n(448),
             n(449),
             'Satoshi GB',
@@ -2606,9 +2711,9 @@
             new d.PublicKey('5W39A7d5iqHzh7oUHyu37HBN2nx7Ptg4yrSvgz1A8sq9'),
             !1,
             ['satoshi', 'gb', 'genesis', 'block', 'gif'],
-            nt.VIDEO,
+            it.VIDEO,
           ),
-          new rt(
+          new ot(
             n(450),
             n(451),
             'CZ vs SBF',
@@ -2617,9 +2722,9 @@
             new d.PublicKey('2WbNP2KesAC4LekDhS8QTEjCTV5E3negSeJyMU4WBFaf'),
             !1,
             ['cz', 'sbf', 'binance', 'ftx'],
-            nt.VIDEO,
+            it.VIDEO,
           ),
-          new rt(
+          new ot(
             n(452),
             n(453),
             'Sound Wave',
@@ -2628,9 +2733,9 @@
             new d.PublicKey('EHaWsSQCTBa92QuSM4XDDz5uj4EzZ5mjvgcEtJb2GFZp'),
             !1,
             ['solana', 'sound', 'wave'],
-            nt.VIDEO,
+            it.VIDEO,
           ),
-          new rt(
+          new ot(
             n(454),
             n(455),
             'Serum Galaxy',
@@ -2639,9 +2744,9 @@
             new d.PublicKey('CbLaQjfJsBH9mA8L1yFSNxbq8VYWyDJyVRf6Xq7GVaVU'),
             !1,
             ['serum', 'galazy', 'srm'],
-            nt.VIDEO,
+            it.VIDEO,
           ),
-          new rt(
+          new ot(
             n(456),
             n(457),
             'Rainbow',
@@ -2650,11 +2755,11 @@
             new d.PublicKey('4XPA13bFZ1AHxMzyNX9cp2VUYPWasq76qR4cVC9tkvFw'),
             !1,
             ['rainbox', 'solana', 'srm'],
-            nt.VIDEO,
+            it.VIDEO,
           ),
         ],
-        it = [
-          new rt(
+        st = [
+          new ot(
             n(458),
             n(459),
             'SRM Socks',
@@ -2663,11 +2768,11 @@
             new d.PublicKey('H4WRoAMyGAxtTX5dLsvFYkxCgLXWjMUdWpNqST8E3jzx'),
             !0,
             ['srm', 'serum', 'sock', 'kong'],
-            nt.VIDEO,
+            it.VIDEO,
             new d.PublicKey('9QTrBTjooTK4NQ5QkYQGUNkyo8grpMrrmjMXAh3bJVtd'),
             'This NFT can be redeemed for a physical pair of Serum Socks mailed to your door',
           ),
-          new rt(
+          new ot(
             n(244),
             n(245),
             'SRM tee-shirt',
@@ -2676,11 +2781,11 @@
             new d.PublicKey('rxqQa92aD8ZZGuyc2mjCARG4f832dBmQo9xiasX5mzq'),
             !0,
             ['srm', 't', 'shirt', 'tee-shirt', 'redeem'],
-            nt.IMAGE,
+            it.IMAGE,
             new d.PublicKey('4bGXwBj7222chiksjAF4XcsqebamRNQUBqxdRQeYHYMr'),
             'This NFT can be redeemed for a physical SRM tee-shirt mailed to your door. All sizes are availble (M/F).',
           ),
-          new rt(
+          new ot(
             n(246),
             n(247),
             'Ledger Nano X',
@@ -2689,12 +2794,12 @@
             new d.PublicKey('327ubUZkUUAEdeWvyQYh1Ycs9mt6yDnt7jDAW47U3krw'),
             !0,
             ['ledger', 'nano', 'x', 'black', 'friday'],
-            nt.IMAGE,
+            it.IMAGE,
             new d.PublicKey('EvXsVnNu9mxo63tPiGNbLy3mwb6Zy4qT59RR62Y2UJW1'),
             'This NFT can be redeemed for a Ledger Nano X branded Serum mailed to your door. The market will be unlisted on 30/11/2020 at 9pm UTC +8. After this date you will only be able to redeem.',
             '2020-11-30T21:00:00.000+08:00',
           ),
-          new rt(
+          new ot(
             n(248),
             n(249),
             'Bitcoin Tram',
@@ -2703,15 +2808,15 @@
             new d.PublicKey('CWkuMPt24aZFA4sHTUs43zwp3N8Lh9UfKNAScQqQ8uUg'),
             !0,
             ['bitcoin', 'tram', 'hong', 'kong'],
-            nt.IMAGE,
+            it.IMAGE,
             new d.PublicKey('FCHmpXY6AQifAwe6SjAEGfF6APTPEcCjyNFAHn83ijdb'),
             'This NFT can be redeemed for a physical Bitcoin Tram model mailed to your door',
             '2020-11-06T21:00:00.000+08:00',
           ),
         ],
-        ot = [].concat(it, at),
-        ct =
-          (new rt(
+        lt = [].concat(st, ct),
+        At =
+          (new ot(
             n(240),
             n(241),
             'LSD',
@@ -2720,12 +2825,12 @@
             new d.PublicKey('BdU5UYU8AU9iTVJXF6Sxc63M6XY4XWqZpdq2PigoqA92'),
             !1,
             ['lsd', 'gif'],
-            nt.VIDEO,
+            it.VIDEO,
           ),
           function () {
-            return ot;
+            return lt;
           }),
-        st = function (e) {
+        ut = function (e) {
           switch (e.toBase58()) {
             case '94w8qHS4XFadqJhWZzyfAS2bbj55ReFnVYB8BwewMNmf':
               return { top: 80 };
@@ -2733,14 +2838,14 @@
               return null;
           }
         },
-        At = ge.MARKETS,
-        lt = ge.TOKEN_MINTS;
-      function ut() {
-        var e = P(),
-          t = bt().customMarkets;
-        return Q(
+        dt = we.MARKETS,
+        mt = we.TOKEN_MINTS;
+      function pt() {
+        var e = U(),
+          t = ht().customMarkets;
+        return N(
           (function () {
-            var n = Object(A.a)(
+            var n = Object(l.a)(
               s.a.mark(function n() {
                 var r;
                 return s.a.wrap(function (n) {
@@ -2750,9 +2855,9 @@
                         return (
                           (n.next = 2),
                           Promise.all(
-                            Tt(t).map(
+                            Nt(t).map(
                               (function () {
-                                var t = Object(A.a)(
+                                var t = Object(l.a)(
                                   s.a.mark(function t(n) {
                                     var r;
                                     return s.a.wrap(
@@ -2763,7 +2868,7 @@
                                               return (
                                                 (t.prev = 0),
                                                 (t.next = 3),
-                                                ge.Market.load(
+                                                we.Market.load(
                                                   e,
                                                   n.address,
                                                   {},
@@ -2783,7 +2888,7 @@
                                               return (
                                                 (t.prev = 7),
                                                 (t.t0 = t.catch(0)),
-                                                V({
+                                                J({
                                                   message:
                                                     'Error loading all market',
                                                   description: t.t0.message,
@@ -2830,12 +2935,12 @@
               return n.apply(this, arguments);
             };
           })(),
-          Object(N.a)('getAllMarkets', t.length, e),
-          { refreshInterval: mt },
+          Object(F.a)('getAllMarkets', t.length, e),
+          { refreshInterval: bt },
         );
       }
-      ct().forEach(function (e) {
-        At.push({
+      At().forEach(function (e) {
+        dt.push({
           name: e.name,
           address: e.marketAddress,
           programId: new d.PublicKey(
@@ -2843,25 +2948,25 @@
           ),
           deprecated: !1,
         }),
-          lt.push({ name: e.name, address: e.mintAddress });
+          mt.push({ name: e.name, address: e.mintAddress });
       });
-      var dt = a.a.createContext(null),
-        mt = 5e6,
-        pt = At.find(function (e) {
+      var ft = a.a.createContext(null),
+        bt = 5e6,
+        gt = dt.find(function (e) {
           var t = e.name,
             n = e.deprecated;
           return 'SRM/USDT' === t && !n;
         });
-      function ft(e, t) {
+      function Et(e, t) {
         var n, r;
         if (!e) return {};
-        var a = Tt(t).find(function (t) {
+        var a = Nt(t).find(function (t) {
             return t.address.equals(e.address);
           }),
           i =
             ((null === e || void 0 === e ? void 0 : e.baseMintAddress) &&
               (null ===
-                (n = lt.find(function (t) {
+                (n = mt.find(function (t) {
                   return t.address.equals(e.baseMintAddress);
                 })) || void 0 === n
                 ? void 0
@@ -2875,7 +2980,7 @@
           o =
             ((null === e || void 0 === e ? void 0 : e.quoteMintAddress) &&
               (null ===
-                (r = lt.find(function (t) {
+                (r = mt.find(function (t) {
                   return t.address.equals(e.quoteMintAddress);
                 })) || void 0 === r
                 ? void 0
@@ -2886,8 +2991,8 @@
                 '*',
               )) ||
             'UNKNOWN';
-        return Object(be.a)(
-          Object(be.a)({}, a),
+        return Object(he.a)(
+          Object(he.a)({}, a),
           {},
           {
             marketName: null === a || void 0 === a ? void 0 : a.name,
@@ -2897,34 +3002,34 @@
           },
         );
       }
-      function bt() {
-        var e = w('customMarkets', []),
-          t = Object(l.a)(e, 2);
+      function ht() {
+        var e = y('customMarkets', []),
+          t = Object(A.a)(e, 2);
         return { customMarkets: t[0], setCustomMarkets: t[1] };
       }
-      function gt(e) {
+      function wt(e) {
         var t = e.marketAddress,
           n = e.setMarketAddress,
           i = e.children,
-          o = bt(),
+          o = ht(),
           c = o.customMarkets,
           s = o.setCustomMarkets,
-          A = t && new d.PublicKey(t),
-          u = P(),
-          m = Tt(c),
+          l = t && new d.PublicKey(t),
+          u = U(),
+          m = Nt(c),
           p =
-            A &&
+            l &&
             m.find(function (e) {
-              return e.address.equals(A);
+              return e.address.equals(l);
             });
         Object(r.useEffect)(function () {
           p &&
             p.deprecated &&
             (console.log('Switching markets from deprecated', p),
-            pt && n(pt.address.toBase58()));
+            gt && n(gt.address.toBase58()));
         }, []);
         var f = Object(r.useState)(),
-          b = Object(l.a)(f, 2),
+          b = Object(A.a)(f, 2),
           g = b[0],
           E = b[1];
         return (
@@ -2940,16 +3045,16 @@
                     ))) ||
                 (E(null),
                 p && p.address
-                  ? ge.Market.load(u, p.address, {}, p.programId)
+                  ? we.Market.load(u, p.address, {}, p.programId)
                       .then(E)
                       .catch(function (e) {
-                        return V({
+                        return J({
                           message: 'Error loading market',
                           description: e.message,
                           type: 'error',
                         });
                       })
-                  : V({
+                  : J({
                       message: 'Error loading market',
                       description: 'Please select a market from the dropdown',
                       type: 'error',
@@ -2958,10 +3063,10 @@
             [u, p],
           ),
           a.a.createElement(
-            dt.Provider,
+            ft.Provider,
             {
-              value: Object(be.a)(
-                Object(be.a)({ market: g }, ft(g, c)),
+              value: Object(he.a)(
+                Object(he.a)({ market: g }, Et(g, c)),
                 {},
                 { setMarketAddress: n, customMarkets: c, setCustomMarkets: s },
               ),
@@ -2970,38 +3075,38 @@
           )
         );
       }
-      function Et() {
-        var e = w('selectedTokenAccounts', {}),
-          t = Object(l.a)(e, 2);
+      function yt() {
+        var e = y('selectedTokenAccounts', {}),
+          t = Object(A.a)(e, 2);
         return [t[0], t[1]];
       }
-      function ht() {
-        var e = Object(r.useContext)(dt);
+      function vt() {
+        var e = Object(r.useContext)(ft);
         if (!e) throw new Error('Missing market context');
         return e;
       }
-      function yt() {
-        var e = ht().market,
-          t = U(e && e._decoded.bids),
-          n = U(e && e._decoded.asks);
+      function kt() {
+        var e = vt().market,
+          t = q(e && e._decoded.bids),
+          n = q(e && e._decoded.asks);
         return {
-          bidOrderbook: e && t ? ge.Orderbook.decode(e, t) : null,
-          askOrderbook: e && n ? ge.Orderbook.decode(e, n) : null,
+          bidOrderbook: e && t ? we.Orderbook.decode(e, t) : null,
+          askOrderbook: e && n ? we.Orderbook.decode(e, n) : null,
         };
       }
-      function wt() {
+      function xt() {
         var e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0],
-          t = ht(),
+          t = vt(),
           n = t.market,
-          r = Y(),
+          r = X(),
           a = r.connected,
           i = r.wallet,
-          o = P();
+          o = U();
         function c() {
-          return l.apply(this, arguments);
+          return A.apply(this, arguments);
         }
-        function l() {
-          return (l = Object(A.a)(
+        function A() {
+          return (A = Object(l.a)(
             s.a.mark(function e() {
               return s.a.wrap(function (e) {
                 for (;;)
@@ -3033,24 +3138,24 @@
             }),
           )).apply(this, arguments);
         }
-        return Q(c, Object(N.a)('getOpenOrdersAccounts', i, n, a), {
+        return N(c, Object(F.a)('getOpenOrdersAccounts', i, n, a), {
           refreshInterval: e ? 1e3 : 5e3,
         });
       }
-      function vt() {
+      function Bt() {
         var e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0],
-          t = wt(e),
-          n = Object(l.a)(t, 1),
+          t = xt(e),
+          n = Object(A.a)(t, 1),
           r = n[0];
         return r ? r[0] : null;
       }
-      function kt() {
-        var e = Y(),
+      function jt() {
+        var e = X(),
           t = e.connected,
           n = e.wallet,
-          r = P();
+          r = U();
         function a() {
-          return (a = Object(A.a)(
+          return (a = Object(l.a)(
             s.a.mark(function e() {
               return s.a.wrap(function (e) {
                 for (;;)
@@ -3062,7 +3167,7 @@
                       }
                       return e.abrupt('return', null);
                     case 2:
-                      return (e.next = 4), $e(r, n.publicKey);
+                      return (e.next = 4), nt(r, n.publicKey);
                     case 4:
                       return e.abrupt('return', e.sent);
                     case 5:
@@ -3073,15 +3178,15 @@
             }),
           )).apply(this, arguments);
         }
-        return Q(
+        return N(
           function () {
             return a.apply(this, arguments);
           },
-          Object(N.a)('getTokenAccounts', n, t),
+          Object(F.a)('getTokenAccounts', n, t),
           { refreshInterval: 5e3 },
         );
       }
-      function xt(e, t, n) {
+      function Ct(e, t, n) {
         if (!e || !t) return null;
         var r = e.filter(function (e) {
           var r = e.effectiveMint,
@@ -3093,27 +3198,27 @@
         });
         return r && r[0];
       }
-      function Bt() {
-        var e = kt(),
-          t = Object(l.a)(e, 1)[0],
-          n = ht().market,
-          r = Et(),
-          a = Object(l.a)(r, 1)[0],
+      function It() {
+        var e = jt(),
+          t = Object(A.a)(e, 1)[0],
+          n = vt().market,
+          r = yt(),
+          a = Object(A.a)(r, 1)[0],
           i = null === n || void 0 === n ? void 0 : n.quoteMintAddress;
-        return xt(t, i, i && a[i.toBase58()]);
+        return Ct(t, i, i && a[i.toBase58()]);
       }
-      function jt() {
-        var e = kt(),
-          t = Object(l.a)(e, 1)[0],
-          n = ht().market,
-          r = Et(),
-          a = Object(l.a)(r, 1)[0],
+      function Tt() {
+        var e = jt(),
+          t = Object(A.a)(e, 1)[0],
+          n = vt().market,
+          r = yt(),
+          a = Object(A.a)(r, 1)[0],
           i = null === n || void 0 === n ? void 0 : n.baseMintAddress;
-        return xt(t, i, i && a[i.toBase58()]);
+        return Ct(t, i, i && a[i.toBase58()]);
       }
-      function Ct() {
-        var e = w('feeDiscountKey', void 0),
-          t = Object(l.a)(e, 2),
+      function St() {
+        var e = y('feeDiscountKey', void 0),
+          t = Object(A.a)(e, 2),
           n = t[0],
           r = t[1];
         return {
@@ -3121,17 +3226,17 @@
           setStoredFeeDiscountKey: r,
         };
       }
-      function It() {
+      function Qt() {
         var e = (function () {
             var e,
-              t = jt(),
-              n = ht().market,
-              r = R(null === t || void 0 === t ? void 0 : t.pubkey),
-              a = Object(l.a)(r, 2),
+              t = Tt(),
+              n = vt().market,
+              r = L(null === t || void 0 === t ? void 0 : t.pubkey),
+              a = Object(A.a)(r, 2),
               i = a[0],
               o = a[1];
             return n && t && o && i
-              ? n.baseMintAddress.equals(ge.TokenInstructions.WRAPPED_SOL_MINT)
+              ? n.baseMintAddress.equals(we.TokenInstructions.WRAPPED_SOL_MINT)
                 ? null !==
                     (e =
                       (null === i || void 0 === i ? void 0 : i.lamports) /
@@ -3143,14 +3248,14 @@
           })(),
           t = (function () {
             var e,
-              t = Bt(),
-              n = ht().market,
-              r = R(null === t || void 0 === t ? void 0 : t.pubkey),
-              a = Object(l.a)(r, 2),
+              t = It(),
+              n = vt().market,
+              r = L(null === t || void 0 === t ? void 0 : t.pubkey),
+              a = Object(A.a)(r, 2),
               i = a[0],
               o = a[1];
             return n && t && o && i
-              ? n.quoteMintAddress.equals(ge.TokenInstructions.WRAPPED_SOL_MINT)
+              ? n.quoteMintAddress.equals(we.TokenInstructions.WRAPPED_SOL_MINT)
                 ? null !==
                     (e =
                       (null === i || void 0 === i ? void 0 : i.lamports) /
@@ -3162,8 +3267,8 @@
                   )
               : null;
           })(),
-          n = vt(!0),
-          r = ht(),
+          n = Bt(!0),
+          r = vt(),
           a = r.baseCurrency,
           i = r.quoteCurrency,
           o = r.market,
@@ -3204,10 +3309,10 @@
             ]
           : [];
       }
-      function Tt(e) {
+      function Nt(e) {
         var t = e.map(function (e) {
-          return Object(be.a)(
-            Object(be.a)({}, e),
+          return Object(he.a)(
+            Object(he.a)({}, e),
             {},
             {
               address: new d.PublicKey(e.address),
@@ -3216,25 +3321,25 @@
             },
           );
         });
-        return [].concat(Object(u.a)(t), Object(u.a)(At));
+        return [].concat(Object(u.a)(t), Object(u.a)(dt));
       }
-      var St = a.a.createContext(null);
-      function Qt(e) {
+      var Ft = a.a.createContext(null);
+      function Ot(e) {
         var t = e.children,
-          n = w('autoSettleEnabled', !0),
-          i = Object(l.a)(n, 2),
+          n = y('autoSettleEnabled', !0),
+          i = Object(A.a)(n, 2),
           o = i[0],
           c = i[1],
-          u = kt(),
-          d = Object(l.a)(u, 1)[0],
-          m = Y(),
+          u = jt(),
+          d = Object(A.a)(u, 1)[0],
+          m = X(),
           p = m.connected,
           f = m.wallet,
-          b = ut(),
-          g = Object(l.a)(b, 1)[0],
-          E = P(),
-          h = Et(),
-          y = Object(l.a)(h, 1)[0];
+          b = pt(),
+          g = Object(A.a)(b, 1)[0],
+          E = U(),
+          h = yt(),
+          w = Object(A.a)(h, 1)[0];
         return (
           (function (e, t) {
             var n = Object(r.useRef)();
@@ -3259,7 +3364,7 @@
               );
           })(function () {
             var e = (function () {
-              var e = Object(A.a)(
+              var e = Object(l.a)(
                 s.a.mark(function e() {
                   var t;
                   return s.a.wrap(
@@ -3274,12 +3379,12 @@
                               (e.prev = 1),
                               console.log('Auto settling'),
                               (e.next = 5),
-                              Be({
+                              Ie({
                                 connection: E,
                                 wallet: f,
                                 tokenAccounts: d || [],
                                 markets: t,
-                                selectedTokenAccounts: y,
+                                selectedTokenAccounts: w,
                               })
                             );
                           case 5:
@@ -3312,16 +3417,16 @@
               e();
           }, 1e4),
           a.a.createElement(
-            St.Provider,
+            Ft.Provider,
             { value: { autoSettleEnabled: o, setAutoSettleEnabled: c } },
             t,
           )
         );
       }
-      function Nt(e) {
+      function Kt(e) {
         var t = e.autoApprove,
           n = (function () {
-            var e = Object(r.useContext)(St);
+            var e = Object(r.useContext)(Ft);
             if (!e) throw new Error('Missing preferences context');
             return {
               autoSettleEnabled: e.autoSettleEnabled,
@@ -3333,7 +3438,7 @@
         return a.a.createElement(
           'div',
           { style: { fontWeight: 400, fontSize: 16, color: 'white' } },
-          a.a.createElement(fe.a, {
+          a.a.createElement(Ee.a, {
             style: { marginRight: 2 },
             disabled: !t,
             checked: t && i,
@@ -3343,11 +3448,11 @@
           'Auto settle',
         );
       }
-      var Ft = n(581),
-        Ot = n(582),
-        Kt = n(583),
-        Dt = de.a.Item,
-        Pt = function () {
+      var Pt = n(581),
+        Dt = n(582),
+        Rt = n(583),
+        Ut = fe.a.Item,
+        Lt = function () {
           return a.a.createElement('div', {
             style: {
               width: 6,
@@ -3357,12 +3462,12 @@
             },
           });
         };
-      function Rt() {
-        var e = Y(),
+      function qt() {
+        var e = X(),
           t = e.connected,
           n = e.wallet,
           r = null === n || void 0 === n ? void 0 : n.publicKey,
-          i = Object(ie.f)(),
+          i = Object(se.f)(),
           o = {
             menu: {
               width: '100%',
@@ -3374,31 +3479,31 @@
             col: { paddingRight: 20 },
             item: { paddingTop: 15 },
           },
-          c = P(),
-          u = Et(),
-          d = Object(l.a)(u, 1)[0],
-          m = ut(),
-          p = Object(l.a)(m, 2),
+          c = U(),
+          u = yt(),
+          d = Object(A.a)(u, 1)[0],
+          m = pt(),
+          p = Object(A.a)(m, 2),
           f = p[0],
           b = p[1],
-          g = kt(),
-          E = Object(l.a)(g, 2),
+          g = jt(),
+          E = Object(A.a)(g, 2),
           h = E[0],
-          y = E[1],
-          w = (function () {
-            var e = Object(A.a)(
+          w = E[1],
+          y = (function () {
+            var e = Object(l.a)(
               s.a.mark(function e() {
                 return s.a.wrap(
                   function (e) {
                     for (;;)
                       switch ((e.prev = e.next)) {
                         case 0:
-                          if (((e.prev = 0), h && y)) {
+                          if (((e.prev = 0), h && w)) {
                             e.next = 4;
                             break;
                           }
                           return (
-                            V({
+                            J({
                               message: 'Error settling funds',
                               description: 'TokenAccounts not connected',
                               type: 'error',
@@ -3411,7 +3516,7 @@
                             break;
                           }
                           return (
-                            V({
+                            J({
                               message: 'Error settling funds',
                               description: 'Markets not connected',
                               type: 'error',
@@ -3421,7 +3526,7 @@
                         case 7:
                           return (
                             (e.next = 9),
-                            Be({
+                            Ie({
                               connection: c,
                               tokenAccounts: h,
                               selectedTokenAccounts: d,
@@ -3437,7 +3542,7 @@
                         case 11:
                           (e.prev = 11),
                             (e.t0 = e.catch(0)),
-                            V({
+                            J({
                               message: 'Error settling funds',
                               description: e.t0.message,
                               type: 'error',
@@ -3445,7 +3550,7 @@
                         case 14:
                           return (
                             (e.prev = 14),
-                            V({
+                            J({
                               message: 'Funds settled',
                               description: 'All funds settled',
                               type: 'success',
@@ -3468,21 +3573,21 @@
             };
           })(),
           v = a.a.createElement(
-            de.a,
+            fe.a,
             { style: o.menu },
             a.a.createElement(
-              Dt,
+              Ut,
               null,
-              a.a.createElement(Nt, {
+              a.a.createElement(Kt, {
                 autoApprove:
                   null === n || void 0 === n ? void 0 : n.autoApprove,
               }),
             ),
             a.a.createElement(
-              Dt,
+              Ut,
               { style: o.item },
               a.a.createElement(
-                ce.a,
+                Ae.a,
                 {
                   align: 'middle',
                   justify: 'start',
@@ -3491,44 +3596,44 @@
                   },
                 },
                 a.a.createElement(
-                  se.a,
+                  ue.a,
                   { style: o.col },
-                  a.a.createElement(Ft.a, { style: o.icon }),
+                  a.a.createElement(Pt.a, { style: o.icon }),
                 ),
-                a.a.createElement(se.a, null, 'Collection'),
+                a.a.createElement(ue.a, null, 'Collection'),
               ),
             ),
             a.a.createElement(
-              Dt,
+              Ut,
               {
                 onClick: function () {
-                  return w();
+                  return y();
                 },
                 style: o.item,
               },
               a.a.createElement(
-                ce.a,
+                Ae.a,
                 { align: 'middle', justify: 'start' },
                 a.a.createElement(
-                  se.a,
+                  ue.a,
                   { style: o.col },
-                  a.a.createElement(Ot.a, { style: o.icon }),
+                  a.a.createElement(Dt.a, { style: o.icon }),
                 ),
-                a.a.createElement(se.a, null, 'Settle'),
+                a.a.createElement(ue.a, null, 'Settle'),
               ),
             ),
             a.a.createElement(
-              Dt,
+              Ut,
               { onClick: n.disconnect, style: o.item },
               a.a.createElement(
-                ce.a,
+                Ae.a,
                 { align: 'middle', justify: 'start' },
                 a.a.createElement(
-                  se.a,
+                  ue.a,
                   { style: o.col },
-                  a.a.createElement(Kt.a, { style: o.icon }),
+                  a.a.createElement(Rt.a, { style: o.icon }),
                 ),
-                a.a.createElement(se.a, null, 'Disconnect'),
+                a.a.createElement(ue.a, null, 'Disconnect'),
               ),
             ),
           );
@@ -3536,7 +3641,7 @@
           a.a.Fragment,
           null,
           a.a.createElement(
-            me.a,
+            be.a,
             {
               type: 'text',
               size: 'large',
@@ -3550,22 +3655,22 @@
             },
             t
               ? a.a.createElement(
-                  pe.a,
+                  ge.a,
                   {
                     overlay: v,
                     placement: 'bottomCenter',
                     overlayStyle: { width: 284, background: '#0A0D1F' },
                   },
                   a.a.createElement(
-                    ce.a,
+                    Ae.a,
                     { align: 'middle', justify: 'space-around' },
                     a.a.createElement(
-                      se.a,
+                      ue.a,
                       { style: { paddingRight: 10 } },
-                      a.a.createElement(Pt, null),
+                      a.a.createElement(Lt, null),
                     ),
                     a.a.createElement(
-                      se.a,
+                      ue.a,
                       null,
                       (function (e) {
                         var t =
@@ -3582,11 +3687,11 @@
           ),
         );
       }
-      var Ut = n(575),
-        Lt = Ut.a.Search,
-        qt = function () {
-          var e = Object(ie.f)();
-          return a.a.createElement(Lt, {
+      var Mt = n(575),
+        Wt = Mt.a.Search,
+        Ht = function () {
+          var e = Object(se.f)();
+          return a.a.createElement(Wt, {
             placeholder: 'Search items',
             onSearch: function (t) {
               t.trim() &&
@@ -3600,55 +3705,55 @@
             style: { maxWidth: 500 },
           });
         };
-      function Mt() {
-        var e = Object(G.a)([
+      function Vt() {
+        var e = Object($.a)([
           '\n  display: flex;\n  align-items: center;\n  color: white;\n  font-weight: 600;\n  cursor: pointer;\n  font-size: 16px;\n  img {\n    height: 30px;\n    margin-right: 8px;\n  }\n',
         ]);
         return (
-          (Mt = function () {
+          (Vt = function () {
             return e;
           }),
           e
         );
       }
-      var Wt = X.b.div(Mt());
-      function Ht() {
-        var e = Y(),
+      var Zt = ee.b.div(Vt());
+      function Jt() {
+        var e = X(),
           t = (e.connected, e.wallet, e.providerUrl),
           n = e.setProvider,
-          r = Object(ie.f)();
+          r = Object(se.f)();
         return a.a.createElement(
           a.a.Fragment,
           null,
           a.a.createElement(
-            ce.a,
+            Ae.a,
             {
               align: 'middle',
               justify: 'space-around',
               style: { background: '#121837' },
             },
             a.a.createElement(
-              Wt,
+              Zt,
               {
                 onClick: function () {
                   return r.push('/');
                 },
               },
-              a.a.createElement('img', { src: ue.a, alt: '' }),
+              a.a.createElement('img', { src: pe.a, alt: '' }),
               'Solible',
             ),
-            a.a.createElement(qt, null),
+            a.a.createElement(Ht, null),
             a.a.createElement(
-              se.a,
+              ue.a,
               null,
               a.a.createElement(
-                ce.a,
+                Ae.a,
                 {
                   justify: 'space-around',
                   style: { fontWeight: 600, fontSize: 16 },
                 },
                 a.a.createElement(
-                  se.a,
+                  ue.a,
                   {
                     style: { cursor: 'pointer' },
                     onClick: function () {
@@ -3658,7 +3763,7 @@
                   'EXPLORE',
                 ),
                 a.a.createElement(
-                  se.a,
+                  ue.a,
                   {
                     style: {
                       paddingRight: 70,
@@ -3672,18 +3777,18 @@
                   },
                   'FAQ',
                 ),
-                a.a.createElement(se.a, null, a.a.createElement(Rt, null)),
+                a.a.createElement(ue.a, null, a.a.createElement(qt, null)),
                 a.a.createElement(
-                  se.a,
+                  ue.a,
                   { style: { marginLeft: 20 } },
                   a.a.createElement(
-                    Ae.a,
+                    de.a,
                     { onSelect: n, value: t },
-                    Z.map(function (e) {
+                    z.map(function (e) {
                       var t = e.name,
                         n = e.url;
                       return a.a.createElement(
-                        Ae.a.Option,
+                        de.a.Option,
                         { value: n, key: n },
                         t,
                       );
@@ -3695,29 +3800,29 @@
           ),
         );
       }
-      var Vt = n(265),
-        Zt = 'https://twitter.com/bonfida',
-        Jt = 'https://help.bonfida.com/',
-        zt = 'https://bonfida.com',
-        Yt = 'https://discord.gg/B4xzATxQHC',
-        Gt = 'https://t.me/bonfidatg',
-        Xt = n(283),
-        _t = n.n(Xt),
-        $t = n(284),
-        en = n.n($t),
-        tn = n(285),
-        nn = n.n(tn),
-        rn = oe.a.Footer,
-        an = Vt.a.useBreakpoint,
-        on = [
-          { description: 'Twitter', link: Zt },
-          { description: 'Support', link: Jt },
-          { description: 'Bonfida', link: zt },
+      var zt = n(265),
+        Yt = 'https://twitter.com/bonfida',
+        Gt = 'https://help.bonfida.com/',
+        Xt = 'https://bonfida.com',
+        _t = 'https://discord.gg/B4xzATxQHC',
+        $t = 'https://t.me/bonfidatg',
+        en = n(283),
+        tn = n.n(en),
+        nn = n(284),
+        rn = n.n(nn),
+        an = n(285),
+        on = n.n(an),
+        cn = le.a.Footer,
+        sn = zt.a.useBreakpoint,
+        ln = [
+          { description: 'Twitter', link: Yt },
+          { description: 'Support', link: Gt },
+          { description: 'Bonfida', link: Xt },
         ],
-        cn = function () {
-          var e = !an().lg;
+        An = function () {
+          var e = !sn().lg;
           return a.a.createElement(
-            rn,
+            cn,
             {
               style: {
                 height: '60px',
@@ -3727,20 +3832,20 @@
               },
             },
             a.a.createElement(
-              ce.a,
+              Ae.a,
               { align: 'middle', justify: 'space-around' },
               a.a.createElement(
-                se.a,
+                ue.a,
                 null,
-                a.a.createElement('img', { src: ue.a, alt: '' }),
+                a.a.createElement('img', { src: pe.a, alt: '' }),
               ),
               !e &&
                 a.a.createElement(
-                  se.a,
+                  ue.a,
                   null,
-                  on.map(function (e, t) {
+                  ln.map(function (e, t) {
                     return a.a.createElement(
-                      H,
+                      Z,
                       {
                         key: 'footer-elem-'
                           .concat(t, '-')
@@ -3759,18 +3864,18 @@
                   }),
                 ),
               a.a.createElement(
-                se.a,
+                ue.a,
                 null,
                 a.a.createElement('img', {
-                  src: _t.a,
+                  src: tn.a,
                   style: { height: 25, cursor: 'pointer' },
                   onClick: function () {
-                    return (window.location.href = Yt);
+                    return (window.location.href = _t);
                   },
                   alt: '',
                 }),
                 a.a.createElement('img', {
-                  src: en.a,
+                  src: rn.a,
                   style: {
                     height: 20,
                     marginRight: 25,
@@ -3778,15 +3883,15 @@
                     cursor: 'pointer',
                   },
                   onClick: function () {
-                    return (window.location.href = Gt);
+                    return (window.location.href = $t);
                   },
                   alt: '',
                 }),
                 a.a.createElement('img', {
-                  src: nn.a,
+                  src: on.a,
                   style: { height: 20, cursor: 'pointer' },
                   onClick: function () {
-                    return (window.location.href = Zt);
+                    return (window.location.href = Yt);
                   },
                   alt: '',
                 }),
@@ -3794,15 +3899,15 @@
             ),
           );
         },
-        sn = oe.a.Header,
-        An = oe.a.Content;
-      function ln(e) {
+        un = le.a.Header,
+        dn = le.a.Content;
+      function mn(e) {
         var t = e.children;
         return a.a.createElement(
           a.a.Fragment,
           null,
           a.a.createElement(
-            oe.a,
+            le.a,
             {
               style: {
                 display: 'flex',
@@ -3811,26 +3916,26 @@
               },
             },
             a.a.createElement(
-              sn,
+              un,
               { style: { padding: 0, minHeight: 64, height: 'unset' } },
-              a.a.createElement(Ht, null),
+              a.a.createElement(Jt, null),
             ),
-            a.a.createElement(An, { style: { flex: 1 } }, t),
-            a.a.createElement(cn, null),
+            a.a.createElement(dn, { style: { flex: 1 } }, t),
+            a.a.createElement(An, null),
           ),
         );
       }
-      var un = new d.PublicKey('EUqojwWA2rd19FZrzeBncJsm38Jm1hEhE3zsmX3bRc2o'),
-        dn = function (e) {
+      var pn = new d.PublicKey('EUqojwWA2rd19FZrzeBncJsm38Jm1hEhE3zsmX3bRc2o'),
+        fn = function (e) {
           var t = Object(r.useState)(void 0),
-            n = Object(l.a)(t, 2),
+            n = Object(A.a)(t, 2),
             a = n[0],
             i = n[1],
-            o = P();
+            o = U();
           return (
             Object(r.useEffect)(function () {
               (function () {
-                var t = Object(A.a)(
+                var t = Object(l.a)(
                   s.a.mark(function t() {
                     var n, r, a;
                     return s.a.wrap(function (t) {
@@ -3843,13 +3948,13 @@
                             }
                             return t.abrupt('return');
                           case 2:
-                            return (t.next = 4), ge.Market.load(o, e, {}, un);
+                            return (t.next = 4), we.Market.load(o, e, {}, pn);
                           case 4:
                             (r = t.sent),
                               (a = r.quoteMintAddress),
                               i(
                                 null ===
-                                  (n = ge.TOKEN_MINTS.find(function (e) {
+                                  (n = we.TOKEN_MINTS.find(function (e) {
                                     return (
                                       e.address.toBase58() === a.toBase58()
                                     );
@@ -3872,22 +3977,22 @@
             a
           );
         },
-        mn = function (e) {
-          return ct().find(function (t) {
+        bn = function (e) {
+          return At().find(function (t) {
             return t.mintAddress.toBase58() === e.toBase58();
           });
         },
-        pn = function (e) {
+        gn = function (e) {
           var t = Object(r.useState)(null),
-            n = Object(l.a)(t, 2),
+            n = Object(A.a)(t, 2),
             a = n[0],
             i = n[1],
-            o = P();
+            o = U();
           return (
             Object(r.useEffect)(
               function () {
                 (function () {
-                  var t = Object(A.a)(
+                  var t = Object(l.a)(
                     s.a.mark(function t() {
                       var n, r, a;
                       return s.a.wrap(function (t) {
@@ -3900,7 +4005,7 @@
                               }
                               return t.abrupt('return');
                             case 2:
-                              return (t.next = 4), ge.Market.load(o, e, {}, un);
+                              return (t.next = 4), we.Market.load(o, e, {}, pn);
                             case 4:
                               return (n = t.sent), (t.next = 7), n.loadAsks(o);
                             case 7:
@@ -3924,16 +4029,16 @@
             a
           );
         },
-        fn = function (e) {
+        En = function (e) {
           var t = Object(r.useState)(null),
-            n = Object(l.a)(t, 2),
+            n = Object(A.a)(t, 2),
             a = n[0],
             i = n[1],
-            o = P();
+            o = U();
           return (
             Object(r.useEffect)(function () {
               (function () {
-                var t = Object(A.a)(
+                var t = Object(l.a)(
                   s.a.mark(function t() {
                     var n;
                     return s.a.wrap(
@@ -3974,29 +4079,29 @@
             a
           );
         },
-        bn = n(206),
-        gn = n.n(bn),
-        En = function (e) {
+        hn = n(206),
+        wn = n.n(hn),
+        yn = function (e) {
           return a.a.createElement(
             'div',
             { className: 'redeemable-tag', style: e.style },
             'Redeemable',
           );
         },
-        hn = function () {
+        vn = function () {
           return a.a.createElement(
             'div',
             { className: 'owned-tag' },
             'Owned by you',
           );
         },
-        yn = function (e) {
+        kn = function (e) {
           var t = e.mintAddress,
-            n = mn(t),
-            r = pn(null === n || void 0 === n ? void 0 : n.marketAddress),
-            i = dn(null === n || void 0 === n ? void 0 : n.marketAddress),
-            o = fn(t),
-            c = Object(ie.f)();
+            n = bn(t),
+            r = gn(null === n || void 0 === n ? void 0 : n.marketAddress),
+            i = fn(null === n || void 0 === n ? void 0 : n.marketAddress),
+            o = En(t),
+            c = Object(se.f)();
           return n
             ? a.a.createElement(
                 'div',
@@ -4011,10 +4116,10 @@
                   },
                 },
                 n.redeembable &&
-                  a.a.createElement(En, { style: st(n.mintAddress) }),
+                  a.a.createElement(yn, { style: ut(n.mintAddress) }),
                 'IMAGE' === n.type
                   ? a.a.createElement(
-                      gn.a,
+                      wn.a,
                       { height: 300 },
                       a.a.createElement('img', { src: n.imgSmall, alt: '' }),
                     )
@@ -4022,7 +4127,7 @@
                       a.a.Fragment,
                       null,
                       a.a.createElement(
-                        gn.a,
+                        wn.a,
                         { height: 300 },
                         a.a.createElement(
                           'video',
@@ -4032,7 +4137,7 @@
                             loop: !0,
                             autoPlay: !0,
                             playsInline: !0,
-                            style: st(n.mintAddress),
+                            style: ut(n.mintAddress),
                           },
                           a.a.createElement('source', {
                             src: n.imgSmall,
@@ -4045,10 +4150,10 @@
                   'div',
                   { className: 'bottom' },
                   a.a.createElement(
-                    ce.a,
+                    Ae.a,
                     { justify: 'space-between' },
                     a.a.createElement(
-                      se.a,
+                      ue.a,
                       { style: { paddingLeft: 15 } },
                       a.a.createElement(
                         'span',
@@ -4076,7 +4181,7 @@
                         ),
                     ),
                     a.a.createElement(
-                      se.a,
+                      ue.a,
                       { style: { textAlign: 'right', paddingRight: 15 } },
                       a.a.createElement('b', null, o),
                       a.a.createElement('br', null),
@@ -4087,11 +4192,11 @@
               )
             : null;
         },
-        wn = function (e) {
+        xn = function (e) {
           var t = e.redeemable,
-            n = Object(ie.f)();
+            n = Object(se.f)();
           return a.a.createElement(
-            me.a,
+            be.a,
             {
               className: 'button-view-more',
               onClick: function () {
@@ -4103,14 +4208,14 @@
             'View more items',
           );
         },
-        vn = function (e) {
+        Bn = function (e) {
           var t = e.title,
             n = e.NftsArray;
           return a.a.createElement(
             'div',
             { className: 'nft-panel' },
             a.a.createElement(
-              ce.a,
+              Ae.a,
               { align: 'middle', justify: 'center' },
               a.a.createElement(
                 'h3',
@@ -4125,30 +4230,30 @@
               ),
             ),
             a.a.createElement(
-              ce.a,
+              Ae.a,
               { align: 'middle', justify: 'center' },
               n.map(function (e, t) {
                 return a.a.createElement(
-                  se.a,
+                  ue.a,
                   {
                     style: { padding: 20 },
                     key: 'nft-card-homepage-'.concat(e.mintAddress.toBase58()),
                   },
-                  a.a.createElement(yn, { mintAddress: e.mintAddress }),
+                  a.a.createElement(kn, { mintAddress: e.mintAddress }),
                 );
               }),
             ),
             a.a.createElement(
-              ce.a,
+              Ae.a,
               { justify: 'center' },
-              a.a.createElement(wn, { redeemable: 'redeemable' === t }),
+              a.a.createElement(xn, { redeemable: 'redeemable' === t }),
             ),
           );
         },
-        kn = n(179),
-        xn = n.n(kn),
-        Bn = function () {
-          var e = Object(ie.f)();
+        jn = n(179),
+        Cn = n.n(jn),
+        In = function () {
+          var e = Object(se.f)();
           return a.a.createElement(
             a.a.Fragment,
             null,
@@ -4163,10 +4268,10 @@
               'Spend crypto on real life products',
             ),
             a.a.createElement(
-              ce.a,
+              Ae.a,
               { align: 'middle', justify: 'center', style: { paddingTop: 20 } },
               a.a.createElement(
-                me.a,
+                be.a,
                 {
                   className: 'btn-explore-marketplace',
                   onClick: function () {
@@ -4178,51 +4283,51 @@
             ),
           );
         },
-        jn = function () {
-          var e = it,
-            t = at;
+        Tn = function () {
+          var e = st,
+            t = ct;
           return a.a.createElement(
             'div',
             {
               style: {
-                backgroundImage: 'url('.concat(xn.a, ')'),
+                backgroundImage: 'url('.concat(Cn.a, ')'),
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
               },
             },
-            a.a.createElement(Bn, null),
+            a.a.createElement(In, null),
             a.a.createElement(
-              ce.a,
+              Ae.a,
               {
                 justify: 'center',
                 style: { paddingTop: 100, marginBottom: 50 },
               },
-              a.a.createElement(vn, {
+              a.a.createElement(Bn, {
                 title: 'Redeemable',
                 NftsArray: e.slice(0, 3),
               }),
             ),
             a.a.createElement(
-              ce.a,
+              Ae.a,
               { justify: 'center', style: { marginBottom: 50 } },
-              a.a.createElement(vn, {
+              a.a.createElement(Bn, {
                 title: 'Digital NFTS',
                 NftsArray: t.slice(0, 3),
               }),
             ),
           );
         },
-        Cn = function () {
+        Sn = function () {
           var e,
-            t = ct(),
+            t = At(),
             n = Object(u.a)(Array(Math.ceil(t.length / 4))).map(function (
               e,
               n,
             ) {
               return t.slice(4 * n, 4 * n + 4);
             }),
-            r = Object(ie.g)(),
+            r = Object(se.g)(),
             i =
               null === (e = new URLSearchParams(r.search).get('keywords')) ||
               void 0 === e
@@ -4232,14 +4337,14 @@
             a.a.Fragment,
             null,
             a.a.createElement(
-              ce.a,
+              Ae.a,
               {
                 align: 'middle',
                 justify: 'space-around',
                 style: { paddingTop: 50 },
               },
               a.a.createElement(
-                se.a,
+                ue.a,
                 null,
                 i
                   ? a.a.createElement(
@@ -4254,11 +4359,11 @@
                       'Explore NFTs',
                     ),
               ),
-              a.a.createElement(se.a, null, 'Sort options'),
+              a.a.createElement(ue.a, null, 'Sort options'),
             ),
             n.map(function (e, t) {
               return a.a.createElement(
-                ce.a,
+                Ae.a,
                 {
                   align: 'middle',
                   justify: 'center',
@@ -4274,20 +4379,20 @@
                     !i
                   )
                     return a.a.createElement(
-                      se.a,
+                      ue.a,
                       { style: { padding: 20 } },
-                      a.a.createElement(yn, { mintAddress: e.mintAddress }),
+                      a.a.createElement(kn, { mintAddress: e.mintAddress }),
                     );
                 }),
               );
             }),
           );
         },
-        In = n(580),
-        Tn = function (e) {
+        Qn = n(580),
+        Nn = function (e) {
           var t = e.address;
           return a.a.createElement(
-            H,
+            Z,
             {
               external: !0,
               to: 'https://explorer.solana.com/address/' + t.toBase58(),
@@ -4298,48 +4403,48 @@
             t.toBase58().slice(t.toBase58().length - 6, t.toBase58().length),
           );
         },
-        Sn = Vt.a.useBreakpoint,
-        Qn = function () {
+        Fn = zt.a.useBreakpoint,
+        On = function () {
           return a.a.createElement('div', { className: 'line' });
         },
-        Nn = function (e) {
+        Kn = function (e) {
           var t = e.nft,
-            n = Object(ie.f)(),
+            n = Object(se.f)(),
             i = Object(r.useState)(null),
-            o = Object(l.a)(i, 2),
+            o = Object(A.a)(i, 2),
             c = o[0],
             u = o[1],
             d = Object(r.useState)(null),
-            m = Object(l.a)(d, 2),
+            m = Object(A.a)(d, 2),
             p = m[0],
             f = m[1],
-            b = Y().wallet,
+            b = X().wallet,
             g = Object(r.useState)(!1),
-            E = Object(l.a)(g, 2),
+            E = Object(A.a)(g, 2),
             h = E[0],
-            y = E[1],
-            w = Object(r.useState)(!1),
-            v = Object(l.a)(w, 2),
+            w = E[1],
+            y = Object(r.useState)(!1),
+            v = Object(A.a)(y, 2),
             k = v[0],
             x = v[1],
-            B = It(),
+            B = Qt(),
             j = (function () {
-              var e = Object(r.useContext)(K);
+              var e = Object(r.useContext)(D);
               if (!e) throw new Error('Missing connection context');
               return e.sendConnection;
             })(),
-            C = jt(),
-            I = Bt();
+            C = Tt(),
+            I = It();
           !(function () {
-            var e = ht().market,
-              t = Y(),
+            var e = vt().market,
+              t = X(),
               n = t.connected,
               r = t.wallet,
-              a = P(),
-              i = Ct().setStoredFeeDiscountKey;
-            Q(
+              a = U(),
+              i = St().setStoredFeeDiscountKey;
+            N(
               (function () {
-                var t = Object(A.a)(
+                var t = Object(l.a)(
                   s.a.mark(function t() {
                     var o;
                     return s.a.wrap(function (t) {
@@ -4378,34 +4483,34 @@
                   return t.apply(this, arguments);
                 };
               })(),
-              Object(N.a)('getFeeDiscountKeys', r, e, n),
+              Object(F.a)('getFeeDiscountKeys', r, e, n),
               { refreshInterval: 5e3 },
             );
           })();
-          var T = Ct().storedFeeDiscountKey,
+          var T = St().storedFeeDiscountKey,
             S = (function () {
-              var e = ht(),
+              var e = vt(),
                 t = e.market,
                 n = e.marketName,
-                r = vt(),
-                a = yt(),
+                r = Bt(),
+                a = kt(),
                 i = a.bidOrderbook,
                 o = a.askOrderbook;
               return t && r && i && o
                 ? t.filterForOpenOrders(i, o, [r]).map(function (e) {
-                    return Object(be.a)(
-                      Object(be.a)({}, e),
+                    return Object(he.a)(
+                      Object(he.a)({}, e),
                       {},
                       { marketName: n, market: t },
                     );
                   })
                 : null;
             })(),
-            F = Object(r.useState)(null),
-            O = Object(l.a)(F, 2),
-            D = O[0],
-            R = O[1],
-            U = P(),
+            Q = Object(r.useState)(null),
+            O = Object(A.a)(Q, 2),
+            K = O[0],
+            P = O[1],
+            R = U(),
             L = null === S || void 0 === S ? void 0 : S.length;
           Object(r.useEffect)(
             function () {
@@ -4413,7 +4518,7 @@
                 void 0 === S ||
                 S.map(function (e) {
                   e.market.address.toBase58() === t.marketAddress.toBase58() &&
-                    R(e);
+                    P(e);
                 });
             },
             [L],
@@ -4425,21 +4530,21 @@
                   e.wallet &&
                     e.coin === t.name &&
                     e.wallet > 0 &&
-                    (console.log('balance', e), y(!0));
+                    (console.log('balance', e), w(!0));
                 });
             }, []);
-          var q = ht().market,
+          var q = vt().market,
             M = (function (e) {
               var t = Object(r.useState)(null),
-                n = Object(l.a)(t, 2),
+                n = Object(A.a)(t, 2),
                 a = n[0],
                 i = n[1],
-                o = P();
+                o = U();
               return (
                 Object(r.useEffect)(
                   function () {
                     (function () {
-                      var t = Object(A.a)(
+                      var t = Object(l.a)(
                         s.a.mark(function t() {
                           var n, r, a;
                           return s.a.wrap(function (t) {
@@ -4453,7 +4558,7 @@
                                   return t.abrupt('return');
                                 case 2:
                                   return (
-                                    (t.next = 4), ge.Market.load(o, e, {}, un)
+                                    (t.next = 4), we.Market.load(o, e, {}, pn)
                                   );
                                 case 4:
                                   return (
@@ -4480,11 +4585,11 @@
                 a
               );
             })(null === q || void 0 === q ? void 0 : q.address),
-            W = pn(null === q || void 0 === q ? void 0 : q.address),
-            H = dn(null === q || void 0 === q ? void 0 : q.address),
-            Z = fn(t.mintAddress),
-            J = (function () {
-              var e = Object(A.a)(
+            W = gn(null === q || void 0 === q ? void 0 : q.address),
+            H = fn(null === q || void 0 === q ? void 0 : q.address),
+            V = En(t.mintAddress),
+            Z = (function () {
+              var e = Object(l.a)(
                 s.a.mark(function e() {
                   return s.a.wrap(
                     function (e) {
@@ -4497,7 +4602,7 @@
                             }
                             return (
                               console.warn('Missing price'),
-                              V({ message: 'Missing price', type: 'error' }),
+                              J({ message: 'Missing price', type: 'error' }),
                               e.abrupt('return')
                             );
                           case 4:
@@ -4505,7 +4610,7 @@
                               x(!0),
                               (e.prev = 5),
                               (e.next = 8),
-                              Qe({
+                              Oe({
                                 side: 'buy',
                                 price: parseFloat(c),
                                 size: 1,
@@ -4531,7 +4636,7 @@
                             (e.prev = 10),
                               (e.t0 = e.catch(5)),
                               console.warn(e.t0),
-                              V({
+                              J({
                                 message: 'Error placing order',
                                 description: e.t0.message,
                                 type: 'error',
@@ -4554,7 +4659,7 @@
               };
             })(),
             z = (function () {
-              var e = Object(A.a)(
+              var e = Object(l.a)(
                 s.a.mark(function e() {
                   return s.a.wrap(
                     function (e) {
@@ -4567,7 +4672,7 @@
                             }
                             return (
                               console.warn('No offer to take'),
-                              V({ message: 'No offer to take', type: 'error' }),
+                              J({ message: 'No offer to take', type: 'error' }),
                               e.abrupt('return')
                             );
                           case 5:
@@ -4575,7 +4680,7 @@
                               x(!0),
                               (e.prev = 6),
                               (e.next = 9),
-                              Qe({
+                              Oe({
                                 side: 'buy',
                                 price: W,
                                 size: 1,
@@ -4601,7 +4706,7 @@
                             (e.prev = 11),
                               (e.t0 = e.catch(6)),
                               console.warn(e.t0),
-                              V({
+                              J({
                                 message: 'Error placing order',
                                 description: e.t0.message,
                                 type: 'error',
@@ -4623,8 +4728,8 @@
                 return e.apply(this, arguments);
               };
             })(),
-            G = (function () {
-              var e = Object(A.a)(
+            Y = (function () {
+              var e = Object(l.a)(
                 s.a.mark(function e() {
                   return s.a.wrap(
                     function (e) {
@@ -4637,7 +4742,7 @@
                             }
                             return (
                               console.warn('Missing Price'),
-                              V({ message: 'Missing Price', type: 'error' }),
+                              J({ message: 'Missing Price', type: 'error' }),
                               e.abrupt('return')
                             );
                           case 5:
@@ -4645,7 +4750,7 @@
                               x(!0),
                               (e.prev = 6),
                               (e.next = 9),
-                              Qe({
+                              Oe({
                                 side: 'sell',
                                 price: parseFloat(p),
                                 size: 1,
@@ -4671,7 +4776,7 @@
                             (e.prev = 11),
                               (e.t0 = e.catch(6)),
                               console.warn(e.t0),
-                              V({
+                              J({
                                 message: 'Error placing order',
                                 description: e.t0.message,
                                 type: 'error',
@@ -4693,8 +4798,8 @@
                 return e.apply(this, arguments);
               };
             })(),
-            X = (function () {
-              var e = Object(A.a)(
+            G = (function () {
+              var e = Object(l.a)(
                 s.a.mark(function e() {
                   return s.a.wrap(
                     function (e) {
@@ -4707,7 +4812,7 @@
                             }
                             return (
                               console.warn('No bid'),
-                              V({ message: 'No Bid', type: 'error' }),
+                              J({ message: 'No Bid', type: 'error' }),
                               e.abrupt('return')
                             );
                           case 5:
@@ -4715,7 +4820,7 @@
                               x(!0),
                               (e.prev = 6),
                               (e.next = 9),
-                              Qe({
+                              Oe({
                                 side: 'sell',
                                 price: M,
                                 size: 1,
@@ -4741,7 +4846,7 @@
                             (e.prev = 11),
                               (e.t0 = e.catch(6)),
                               console.warn(e.t0),
-                              V({
+                              J({
                                 message: 'Error placing order',
                                 description: e.t0.message,
                                 type: 'error',
@@ -4764,14 +4869,14 @@
               };
             })(),
             _ = (function () {
-              var e = Object(A.a)(
+              var e = Object(l.a)(
                 s.a.mark(function e() {
                   return s.a.wrap(
                     function (e) {
                       for (;;)
                         switch ((e.prev = e.next)) {
                           case 0:
-                            if ((x(!0), (e.prev = 1), D)) {
+                            if ((x(!0), (e.prev = 1), K)) {
                               e.next = 4;
                               break;
                             }
@@ -4779,10 +4884,10 @@
                           case 4:
                             return (
                               (e.next = 6),
-                              Ce({
-                                order: D,
-                                market: D.market,
-                                connection: U,
+                              Se({
+                                order: K,
+                                market: K.market,
+                                connection: R,
                                 wallet: b,
                               })
                             );
@@ -4793,7 +4898,7 @@
                             return (
                               (e.prev = 8),
                               (e.t0 = e.catch(1)),
-                              V({
+                              J({
                                 message: 'Error cancelling openOrder',
                                 description: e.t0.message,
                                 type: 'error',
@@ -4818,7 +4923,7 @@
               };
             })();
           return a.a.createElement(
-            In.b,
+            Qn.b,
             { direction: 'vertical', style: { width: '100%' } },
             h &&
               t.redeembable &&
@@ -4826,14 +4931,14 @@
                 a.a.Fragment,
                 null,
                 a.a.createElement(
-                  ce.a,
+                  Ae.a,
                   {
                     justify: 'end',
                     align: 'middle',
                     style: { paddingBottom: 20 },
                   },
                   a.a.createElement(
-                    me.a,
+                    be.a,
                     {
                       className: 'buy-button',
                       disabled: k,
@@ -4846,24 +4951,24 @@
                 ),
               ),
             !h &&
-              !('sell' === (null === D || void 0 === D ? void 0 : D.side)) &&
+              !('sell' === (null === K || void 0 === K ? void 0 : K.side)) &&
               a.a.createElement(
                 a.a.Fragment,
                 null,
                 a.a.createElement(
-                  ce.a,
+                  Ae.a,
                   {
                     justify: 'space-between',
                     align: 'middle',
                     style: { paddingTop: 20 },
                   },
                   a.a.createElement(
-                    se.a,
+                    ue.a,
                     { className: 'trade-form-label' },
                     'Price:',
                   ),
                   a.a.createElement(
-                    se.a,
+                    ue.a,
                     { className: 'trade-form-description' },
                     W,
                     ' ',
@@ -4871,34 +4976,34 @@
                   ),
                 ),
                 a.a.createElement(
-                  ce.a,
+                  Ae.a,
                   {
                     justify: 'end',
                     align: 'middle',
                     style: { paddingBottom: 20 },
                   },
                   a.a.createElement(
-                    me.a,
+                    be.a,
                     { className: 'buy-button', disabled: k, onClick: z },
                     'Buy now',
                   ),
                 ),
                 a.a.createElement(
-                  ce.a,
+                  Ae.a,
                   {
                     align: 'middle',
                     justify: 'space-between',
                     style: { paddingTop: 20 },
                   },
                   a.a.createElement(
-                    se.a,
+                    ue.a,
                     { className: 'trade-form-label' },
                     'Place Bid',
                   ),
                   a.a.createElement(
-                    se.a,
+                    ue.a,
                     { className: 'trade-form-description' },
-                    a.a.createElement(Ut.a, {
+                    a.a.createElement(Mt.a, {
                       placeholder: 'Bid price',
                       suffix: H,
                       style: {
@@ -4911,8 +5016,8 @@
                       },
                     }),
                     a.a.createElement(
-                      me.a,
-                      { className: 'button-place-bid', onClick: J },
+                      be.a,
+                      { className: 'button-place-bid', onClick: Z },
                       'Place bid',
                     ),
                   ),
@@ -4923,21 +5028,21 @@
                 a.a.Fragment,
                 null,
                 a.a.createElement(
-                  ce.a,
+                  Ae.a,
                   {
                     align: 'middle',
                     justify: 'space-between',
                     style: { paddingTop: 20 },
                   },
                   a.a.createElement(
-                    se.a,
+                    ue.a,
                     { className: 'trade-form-label' },
                     'Sell price',
                   ),
                   a.a.createElement(
-                    se.a,
+                    ue.a,
                     { className: 'trade-form-description' },
-                    a.a.createElement(Ut.a, {
+                    a.a.createElement(Mt.a, {
                       placeholder: 'Sell price',
                       suffix: H,
                       style: {
@@ -4950,36 +5055,36 @@
                       },
                     }),
                     a.a.createElement(
-                      me.a,
-                      { className: 'button-place-bid', onClick: G },
+                      be.a,
+                      { className: 'button-place-bid', onClick: Y },
                       'Set price',
                     ),
                   ),
                 ),
                 a.a.createElement(
-                  ce.a,
+                  Ae.a,
                   {
                     align: 'middle',
                     justify: 'space-between',
                     style: { paddingTop: 20 },
                   },
                   a.a.createElement(
-                    se.a,
+                    ue.a,
                     { className: 'trade-form-label' },
                     'Bids',
                   ),
                   a.a.createElement(
-                    se.a,
+                    ue.a,
                     { className: 'trade-form-description' },
                     'Highest Bid: ',
                     M,
                     ' ',
                     H,
                     a.a.createElement(
-                      me.a,
+                      be.a,
                       {
                         className: 'button-place-bid',
-                        onClick: X,
+                        onClick: G,
                         style: { marginLeft: 20 },
                       },
                       'Accept Bid',
@@ -4989,38 +5094,38 @@
               ),
             !h &&
               M &&
-              !('sell' === (null === D || void 0 === D ? void 0 : D.side)) &&
+              !('sell' === (null === K || void 0 === K ? void 0 : K.side)) &&
               a.a.createElement(
-                ce.a,
+                Ae.a,
                 {
                   justify: 'start',
                   align: 'middle',
                   style: { paddingBottom: 10 },
                 },
-                a.a.createElement(se.a, { flex: 'auto' }),
-                a.a.createElement(se.a, null, 'Highest Bid: ', M, ' ', H),
+                a.a.createElement(ue.a, { flex: 'auto' }),
+                a.a.createElement(ue.a, null, 'Highest Bid: ', M, ' ', H),
               ),
-            'buy' === (null === D || void 0 === D ? void 0 : D.side) &&
+            'buy' === (null === K || void 0 === K ? void 0 : K.side) &&
               a.a.createElement(
                 a.a.Fragment,
                 null,
                 a.a.createElement(
-                  ce.a,
+                  Ae.a,
                   {
                     align: 'middle',
                     justify: 'space-between',
                     style: { paddingTop: 20 },
                   },
                   a.a.createElement(
-                    se.a,
+                    ue.a,
                     { className: 'trade-form-label' },
                     'Your bid',
                   ),
                   a.a.createElement(
-                    se.a,
+                    ue.a,
                     { className: 'trade-form-description' },
-                    a.a.createElement(Ut.a, {
-                      placeholder: D.price,
+                    a.a.createElement(Mt.a, {
+                      placeholder: K.price,
                       disabled: !0,
                       suffix: H,
                       style: {
@@ -5033,7 +5138,7 @@
                       },
                     }),
                     a.a.createElement(
-                      me.a,
+                      be.a,
                       {
                         className: 'button-place-bid',
                         onClick: function () {
@@ -5045,27 +5150,27 @@
                   ),
                 ),
               ),
-            'sell' === (null === D || void 0 === D ? void 0 : D.side) &&
+            'sell' === (null === K || void 0 === K ? void 0 : K.side) &&
               a.a.createElement(
                 a.a.Fragment,
                 null,
                 a.a.createElement(
-                  ce.a,
+                  Ae.a,
                   {
                     align: 'middle',
                     justify: 'space-between',
                     style: { paddingTop: 20 },
                   },
                   a.a.createElement(
-                    se.a,
+                    ue.a,
                     { className: 'trade-form-label' },
                     'Your offer',
                   ),
                   a.a.createElement(
-                    se.a,
+                    ue.a,
                     { className: 'trade-form-description' },
-                    a.a.createElement(Ut.a, {
-                      placeholder: D.price,
+                    a.a.createElement(Mt.a, {
+                      placeholder: K.price,
                       disabled: !0,
                       suffix: H,
                       style: {
@@ -5078,7 +5183,7 @@
                       },
                     }),
                     a.a.createElement(
-                      me.a,
+                      be.a,
                       {
                         className: 'button-place-bid',
                         onClick: function () {
@@ -5091,83 +5196,83 @@
                 ),
               ),
             a.a.createElement(
-              ce.a,
+              Ae.a,
               {
                 justify: 'space-between',
                 align: 'middle',
                 style: { paddingTop: 20, paddingBottom: 20 },
               },
               a.a.createElement(
-                se.a,
+                ue.a,
                 { className: 'trade-form-label' },
                 'Supply',
               ),
               a.a.createElement(
-                se.a,
+                ue.a,
                 { className: 'trade-form-description' },
                 '1 of ',
-                Z,
+                V,
               ),
             ),
             t.description &&
               a.a.createElement(
-                ce.a,
+                Ae.a,
                 {
                   justify: 'space-between',
                   align: 'middle',
                   style: { paddingTop: 20, paddingBottom: 20 },
                 },
                 a.a.createElement(
-                  se.a,
+                  ue.a,
                   { className: 'trade-form-label' },
                   'Description',
                 ),
                 a.a.createElement(
-                  se.a,
+                  ue.a,
                   { className: 'trade-form-description' },
                   t.description,
                 ),
               ),
             a.a.createElement(
-              ce.a,
+              Ae.a,
               {
                 justify: 'space-between',
                 align: 'middle',
                 style: { paddingTop: 20, paddingBottom: 20 },
               },
               a.a.createElement(
-                se.a,
+                ue.a,
                 { className: 'trade-form-label' },
                 'Mint address',
               ),
               a.a.createElement(
-                se.a,
+                ue.a,
                 { className: 'trade-form-description' },
-                a.a.createElement(Tn, { address: t.mintAddress }),
+                a.a.createElement(Nn, { address: t.mintAddress }),
               ),
             ),
           );
         },
-        Fn = function () {
-          var e = !Sn().lg,
-            t = ht().market,
+        Pn = function () {
+          var e = !Fn().lg,
+            t = vt().market,
             n = (function (e) {
               if (e)
-                return ct().find(function (t) {
+                return At().find(function (t) {
                   return t.marketAddress.toBase58() === e.toBase58();
                 });
             })(null === t || void 0 === t ? void 0 : t.address),
             i = Object(r.useState)(!1),
-            o = Object(l.a)(i, 2),
+            o = Object(A.a)(i, 2),
             c = o[0],
             s = o[1],
-            A = It();
+            l = Qt();
           return (
             Object(r.useEffect)(
               function () {
-                null === A ||
-                  void 0 === A ||
-                  A.forEach(function (e) {
+                null === l ||
+                  void 0 === l ||
+                  l.forEach(function (e) {
                     e.wallet &&
                       e.coin ===
                         (null === n || void 0 === n ? void 0 : n.name) &&
@@ -5175,7 +5280,7 @@
                       s(!0);
                   });
               },
-              [A, n],
+              [l, n],
             ),
             n
               ? a.a.createElement(
@@ -5185,55 +5290,55 @@
                     style: { height: e ? '60%' : '658px' },
                   },
                   a.a.createElement(
-                    ce.a,
+                    Ae.a,
                     { align: 'middle', justify: 'start' },
                     a.a.createElement(
-                      se.a,
+                      ue.a,
                       null,
                       a.a.createElement('h1', { className: 'title' }, n.name),
                     ),
                     a.a.createElement(
-                      se.a,
+                      ue.a,
                       { style: { paddingLeft: 20, paddingRight: 10 } },
-                      n.redeembable && a.a.createElement(En, null),
+                      n.redeembable && a.a.createElement(yn, null),
                     ),
                     c &&
                       a.a.createElement(
-                        se.a,
+                        ue.a,
                         null,
-                        a.a.createElement(hn, null),
+                        a.a.createElement(vn, null),
                       ),
                   ),
-                  a.a.createElement(Qn, null),
+                  a.a.createElement(On, null),
                   a.a.createElement(
-                    ce.a,
+                    Ae.a,
                     {
                       align: 'middle',
                       justify: 'space-around',
                       style: { height: '80%' },
                     },
-                    a.a.createElement(se.a, { flex: 'auto' }),
+                    a.a.createElement(ue.a, { flex: 'auto' }),
                     a.a.createElement(
-                      se.a,
+                      ue.a,
                       null,
                       a.a.createElement('img', { src: n.img, alt: '' }),
                     ),
-                    a.a.createElement(se.a, { flex: 'auto' }),
+                    a.a.createElement(ue.a, { flex: 'auto' }),
                     a.a.createElement(
-                      se.a,
+                      ue.a,
                       { flex: 'auto' },
-                      a.a.createElement(Nn, { nft: n }),
+                      a.a.createElement(Kn, { nft: n }),
                     ),
-                    a.a.createElement(se.a, { flex: 'auto' }),
+                    a.a.createElement(ue.a, { flex: 'auto' }),
                   ),
                 )
               : null
           );
         },
-        On = Vt.a.useBreakpoint,
-        Kn = function () {
-          var e = !On().lg,
-            t = ct()
+        Dn = zt.a.useBreakpoint,
+        Rn = function () {
+          var e = !Dn().lg,
+            t = At()
               .map(function (e) {
                 return { sort: Math.random(), value: e };
               })
@@ -5252,7 +5357,7 @@
                 a.a.Fragment,
                 null,
                 a.a.createElement(
-                  ce.a,
+                  Ae.a,
                   {
                     align: 'middle',
                     justify: 'center',
@@ -5265,44 +5370,44 @@
                   ),
                 ),
                 a.a.createElement(
-                  ce.a,
+                  Ae.a,
                   { align: 'middle', justify: 'space-around' },
-                  a.a.createElement(se.a, { flex: 'auto' }),
+                  a.a.createElement(ue.a, { flex: 'auto' }),
                   t.map(function (e) {
                     return a.a.createElement(
-                      se.a,
+                      ue.a,
                       {
                         style: { padding: 20 },
                         key: 'more-nfts-'.concat(e.mintAddress.toBase58()),
                       },
-                      a.a.createElement(yn, { mintAddress: e.mintAddress }),
+                      a.a.createElement(kn, { mintAddress: e.mintAddress }),
                     );
                   }),
-                  a.a.createElement(se.a, { flex: 'auto' }),
+                  a.a.createElement(ue.a, { flex: 'auto' }),
                 ),
               ),
             a.a.createElement(
-              ce.a,
+              Ae.a,
               {
                 align: 'middle',
                 justify: 'center',
                 style: { marginBottom: 50, marginTop: e ? '30px' : 'unset' },
               },
-              a.a.createElement(wn, { redeemable: !1 }),
+              a.a.createElement(xn, { redeemable: !1 }),
             ),
           );
         },
-        Dn = function () {
-          var e = Object(ie.h)().marketAddress;
+        Un = function () {
+          var e = Object(se.h)().marketAddress;
           Object(r.useEffect)(
             function () {
               e && localStorage.setItem('marketAddress', JSON.stringify(e));
             },
             [e],
           );
-          var t = Object(ie.f)();
+          var t = Object(se.f)();
           return a.a.createElement(
-            gt,
+            wt,
             {
               marketAddress: e,
               setMarketAddress: function (e) {
@@ -5313,9 +5418,9 @@
                       t && (e = JSON.parse(t)),
                         (e =
                           e ||
-                          (null === pt || void 0 === pt
+                          (null === gt || void 0 === gt
                             ? void 0
-                            : pt.address.toBase58()) ||
+                            : gt.address.toBase58()) ||
                           '');
                     }
                     return '/market/'.concat(e);
@@ -5324,27 +5429,27 @@
               },
             },
             a.a.createElement(
-              ce.a,
+              Ae.a,
               { justify: 'center', style: { paddingTop: 50 } },
-              a.a.createElement(Fn, null),
+              a.a.createElement(Pn, null),
             ),
-            a.a.createElement(Kn, null),
+            a.a.createElement(Rn, null),
           );
         },
-        Pn = n(577),
-        Rn = n(571),
-        Un = n(578),
-        Ln = n(584),
-        qn = n(585),
-        Mn = n(586),
-        Wn = n(587),
-        Hn = n(588),
-        Vn = n(589),
-        Zn = 'https://wallet-api.bonfida.com/redeem',
-        Jn = (function () {
-          var e = Object(A.a)(
+        Ln = n(577),
+        qn = n(571),
+        Mn = n(578),
+        Wn = n(584),
+        Hn = n(585),
+        Vn = n(586),
+        Zn = n(587),
+        Jn = n(588),
+        zn = n(589),
+        Yn = 'https://wallet-api.bonfida.com/redeem',
+        Gn = (function () {
+          var e = Object(l.a)(
             s.a.mark(function e(t) {
-              var n, r, a, i, o, c, A, l;
+              var n, r, a, i, o, c, l, A;
               return s.a.wrap(function (e) {
                 for (;;)
                   switch ((e.prev = e.next)) {
@@ -5356,14 +5461,14 @@
                         (i = t.destination),
                         (o = t.amount),
                         (c = t.wallet),
-                        (A = []),
-                        (l = new d.Transaction()).add(
-                          m.b.createTransferInstruction(m.a, a, i, r, A, o),
+                        (l = []),
+                        (A = new d.Transaction()).add(
+                          m.b.createTransferInstruction(m.a, a, i, r, l, o),
                         ),
                         (e.next = 6),
-                        Oe({
-                          transaction: l,
-                          signers: A,
+                        De({
+                          transaction: A,
+                          signers: l,
                           wallet: c,
                           connection: n,
                           sendingMessage: 'Sending NFT to burn authority...',
@@ -5382,11 +5487,11 @@
             return e.apply(this, arguments);
           };
         })();
-      function zn(e, t, n) {
-        return Yn.apply(this, arguments);
+      function Xn(e, t, n) {
+        return _n.apply(this, arguments);
       }
-      function Yn() {
-        return (Yn = Object(A.a)(
+      function _n() {
+        return (_n = Object(l.a)(
           s.a.mark(function e(t, n, r) {
             var a, i;
             return s.a.wrap(
@@ -5432,8 +5537,8 @@
           }),
         )).apply(this, arguments);
       }
-      var Gn = (function () {
-        var e = Object(A.a)(
+      var $n = (function () {
+        var e = Object(l.a)(
           s.a.mark(function e(t) {
             var n;
             return s.a.wrap(function (e) {
@@ -5442,7 +5547,7 @@
                   case 0:
                     return (
                       (e.next = 2),
-                      zn(Zn, t, { 'Content-Type': 'application/json' })
+                      Xn(Yn, t, { 'Content-Type': 'application/json' })
                     );
                   case 2:
                     return (n = e.sent), e.abrupt('return', n);
@@ -5457,37 +5562,37 @@
           return e.apply(this, arguments);
         };
       })();
-      function Xn() {
-        var e = Object(G.a)([
+      function er() {
+        var e = Object($.a)([
           '\n  .ant-input-number-input {\n    color: white;\n  }\n',
         ]);
         return (
-          (Xn = function () {
+          (er = function () {
             return e;
           }),
           e
         );
       }
-      function _n() {
-        var e = Object(G.a)(['\n  .ant-input {\n    color: white;\n  }\n']);
+      function tr() {
+        var e = Object($.a)(['\n  .ant-input {\n    color: white;\n  }\n']);
         return (
-          (_n = function () {
+          (tr = function () {
             return e;
           }),
           e
         );
       }
-      var $n = Object(X.b)(Ut.a)(_n()),
-        er = Object(X.b)(Pn.a)(Xn()),
-        tr = function () {
-          var e = a.a.createElement(Ln.a, {
+      var nr = Object(ee.b)(Mt.a)(tr()),
+        rr = Object(ee.b)(Ln.a)(er()),
+        ar = function () {
+          var e = a.a.createElement(Wn.a, {
             style: { fontSize: 24 },
             spin: !0,
           });
-          return a.a.createElement(ee.a, { indicator: e });
+          return a.a.createElement(re.a, { indicator: e });
         },
-        nr = { labelCol: { span: 8 }, wrapperCol: { span: 16 } },
-        rr = {
+        ir = { labelCol: { span: 8 }, wrapperCol: { span: 16 } },
+        or = {
           required: '${label} is required!',
           types: {
             email: '${label} is not a valid email!',
@@ -5495,7 +5600,7 @@
           },
           number: { range: '${label} must be between ${min} and ${max}' },
         },
-        ar = function () {
+        cr = function () {
           return a.a.createElement(
             'div',
             { style: { textAlign: 'center', paddingLeft: 60, paddingTop: 20 } },
@@ -5508,17 +5613,17 @@
             ),
           );
         },
-        ir = function (e) {
+        sr = function (e) {
           var t = e.nftMint,
             n = e.destination,
             i = Object(r.useState)(!1),
-            o = Object(l.a)(i, 2),
+            o = Object(A.a)(i, 2),
             c = o[0],
             u = o[1],
-            d = P(),
-            m = Y().wallet,
-            p = kt(),
-            f = Object(l.a)(p, 1)[0],
+            d = U(),
+            m = X().wallet,
+            p = jt(),
+            f = Object(A.a)(p, 1)[0],
             b =
               null === f || void 0 === f
                 ? void 0
@@ -5526,10 +5631,10 @@
                     return e.effectiveMint.toBase58() === t.toBase58();
                   }),
             g = Object(r.useState)(!1),
-            E = Object(l.a)(g, 2),
+            E = Object(A.a)(g, 2),
             h = E[0],
-            y = E[1],
-            w = Object(r.useRef)(null),
+            w = E[1],
+            y = Object(r.useRef)(null),
             v = Object(r.useRef)(null),
             k = Object(r.useRef)(null),
             x = Object(r.useRef)(0),
@@ -5538,7 +5643,7 @@
             C = Object(r.useRef)(null),
             I = Object(r.useRef)(null),
             T = Object(r.useRef)(null),
-            S = mn(t);
+            S = bn(t);
           if (!S) return null;
           if (!b || 0 === (null === b || void 0 === b ? void 0 : b.length))
             return console.log('Error getting source'), null;
@@ -5548,7 +5653,7 @@
               placeHolder: { color: 'white' },
             },
             N = (function () {
-              var e = Object(A.a)(
+              var e = Object(l.a)(
                 s.a.mark(function e(t) {
                   var r, a, i, o;
                   return s.a.wrap(
@@ -5568,7 +5673,7 @@
                           case 5:
                             return (
                               (e.next = 7),
-                              Jn({
+                              Gn({
                                 connection: d,
                                 owner: m.publicKey,
                                 sourceSpl:
@@ -5584,7 +5689,7 @@
                             return (
                               (i = e.sent),
                               (o = {
-                                email: w.current,
+                                email: y.current,
                                 name: v.current,
                                 phone: k.current,
                                 amount: x.current,
@@ -5596,22 +5701,22 @@
                                 txId: i,
                               }),
                               (e.next = 11),
-                              Gn(o)
+                              $n(o)
                             );
                           case 11:
-                            V({
+                            J({
                               message: 'Redeem request successful',
                               type: 'success',
                               txid: i,
                             }),
-                              y(!0),
+                              w(!0),
                               (e.next = 19);
                             break;
                           case 15:
                             (e.prev = 15),
                               (e.t0 = e.catch(1)),
                               console.log('Error redeeming: '.concat(e.t0)),
-                              V({ message: 'Error redeeming', type: 'error' });
+                              J({ message: 'Error redeeming', type: 'error' });
                           case 19:
                             return (e.prev = 19), u(!1), e.finish(19);
                           case 22:
@@ -5633,7 +5738,7 @@
             a.a.Fragment,
             null,
             a.a.createElement(
-              ce.a,
+              Ae.a,
               { className: 'redeem-form', justify: 'center' },
               a.a.createElement(
                 'h1',
@@ -5642,18 +5747,18 @@
                 null === S || void 0 === S ? void 0 : S.name,
               ),
               a.a.createElement(
-                se.a,
+                ue.a,
                 { style: { color: 'white', padding: 50 } },
                 a.a.createElement(
-                  Rn.a,
-                  Object.assign({}, nr, {
+                  qn.a,
+                  Object.assign({}, ir, {
                     name: 'redeem',
                     onFinish: N,
-                    validateMessages: rr,
+                    validateMessages: or,
                     style: { paddingTop: 10, paddingRight: 40, color: 'white' },
                   }),
                   a.a.createElement(
-                    Rn.a.Item,
+                    qn.a.Item,
                     {
                       name: ['user', 'email'],
                       label: a.a.createElement(
@@ -5664,15 +5769,15 @@
                       rules: [{ type: 'email', required: !0 }],
                       style: Q.icon,
                     },
-                    a.a.createElement($n, {
-                      prefix: a.a.createElement(qn.a, { style: Q.icon }),
+                    a.a.createElement(nr, {
+                      prefix: a.a.createElement(Hn.a, { style: Q.icon }),
                       onChange: function (e) {
-                        return (w.current = e.target.value);
+                        return (y.current = e.target.value);
                       },
                     }),
                   ),
                   a.a.createElement(
-                    Rn.a.Item,
+                    qn.a.Item,
                     {
                       name: ['user', 'name'],
                       label: a.a.createElement(
@@ -5684,15 +5789,15 @@
                         { required: !0, message: 'Please enter your name' },
                       ],
                     },
-                    a.a.createElement($n, {
-                      prefix: a.a.createElement(Mn.a, { style: Q.icon }),
+                    a.a.createElement(nr, {
+                      prefix: a.a.createElement(Vn.a, { style: Q.icon }),
                       onChange: function (e) {
                         return (v.current = e.target.value);
                       },
                     }),
                   ),
                   a.a.createElement(
-                    Rn.a.Item,
+                    qn.a.Item,
                     {
                       name: ['user', 'phone'],
                       label: a.a.createElement(
@@ -5707,15 +5812,15 @@
                         },
                       ],
                     },
-                    a.a.createElement($n, {
-                      prefix: a.a.createElement(Wn.a, { style: Q.icon }),
+                    a.a.createElement(nr, {
+                      prefix: a.a.createElement(Zn.a, { style: Q.icon }),
                       onChange: function (e) {
                         return (k.current = e.target.value);
                       },
                     }),
                   ),
                   a.a.createElement(
-                    Rn.a.Item,
+                    qn.a.Item,
                     {
                       name: ['user', 'amount'],
                       label: a.a.createElement(
@@ -5734,14 +5839,14 @@
                         },
                       ],
                     },
-                    a.a.createElement(er, {
+                    a.a.createElement(rr, {
                       onChange: function (e) {
                         e && (x.current = parseFloat(e.toString()));
                       },
                     }),
                   ),
                   a.a.createElement(
-                    Rn.a.Item,
+                    qn.a.Item,
                     {
                       name: ['user', 'country'],
                       label: a.a.createElement(
@@ -5753,15 +5858,15 @@
                         { required: !0, message: 'Please enter your country' },
                       ],
                     },
-                    a.a.createElement($n, {
-                      prefix: a.a.createElement(Hn.a, { style: Q.icon }),
+                    a.a.createElement(nr, {
+                      prefix: a.a.createElement(Jn.a, { style: Q.icon }),
                       onChange: function (e) {
                         return (B.current = e.target.value);
                       },
                     }),
                   ),
                   a.a.createElement(
-                    Rn.a.Item,
+                    qn.a.Item,
                     {
                       name: ['user', 'City'],
                       label: a.a.createElement(
@@ -5773,15 +5878,15 @@
                         { required: !0, message: 'Please enter your city' },
                       ],
                     },
-                    a.a.createElement($n, {
-                      prefix: a.a.createElement(Hn.a, { style: Q.icon }),
+                    a.a.createElement(nr, {
+                      prefix: a.a.createElement(Jn.a, { style: Q.icon }),
                       onChange: function (e) {
                         return (j.current = e.target.value);
                       },
                     }),
                   ),
                   a.a.createElement(
-                    Rn.a.Item,
+                    qn.a.Item,
                     {
                       name: ['user', 'address'],
                       label: a.a.createElement(
@@ -5793,15 +5898,15 @@
                         { required: !0, message: 'Please enter your address' },
                       ],
                     },
-                    a.a.createElement($n, {
-                      prefix: a.a.createElement(Hn.a, { style: Q.icon }),
+                    a.a.createElement(nr, {
+                      prefix: a.a.createElement(Jn.a, { style: Q.icon }),
                       onChange: function (e) {
                         return (C.current = e.target.value);
                       },
                     }),
                   ),
                   a.a.createElement(
-                    Rn.a.Item,
+                    qn.a.Item,
                     {
                       name: ['user', 'postcode'],
                       label: a.a.createElement(
@@ -5813,15 +5918,15 @@
                         { required: !0, message: 'Please enter your postcode' },
                       ],
                     },
-                    a.a.createElement($n, {
-                      prefix: a.a.createElement(Hn.a, { style: Q.icon }),
+                    a.a.createElement(nr, {
+                      prefix: a.a.createElement(Jn.a, { style: Q.icon }),
                       onChange: function (e) {
                         return (I.current = e.target.value);
                       },
                     }),
                   ),
                   a.a.createElement(
-                    Rn.a.Item,
+                    qn.a.Item,
                     {
                       name: ['user', 'additional-information'],
                       label: a.a.createElement(
@@ -5831,44 +5936,44 @@
                       ),
                       rules: [{ required: !1 }],
                     },
-                    a.a.createElement($n, {
+                    a.a.createElement(nr, {
                       onChange: function (e) {
                         return (T.current = e.target.value);
                       },
-                      prefix: a.a.createElement(Vn.a, { style: Q.icon }),
+                      prefix: a.a.createElement(zn.a, { style: Q.icon }),
                     }),
                   ),
                   a.a.createElement(
-                    Rn.a.Item,
+                    qn.a.Item,
                     {
-                      wrapperCol: Object(be.a)(
-                        Object(be.a)({}, nr.wrapperCol),
+                      wrapperCol: Object(he.a)(
+                        Object(he.a)({}, ir.wrapperCol),
                         {},
                         { offset: 8 },
                       ),
                     },
                     a.a.createElement(
-                      ce.a,
+                      Ae.a,
                       {
                         align: 'middle',
                         justify: 'center',
                         style: { paddingTop: 10 },
                       },
                       a.a.createElement(
-                        me.a,
+                        be.a,
                         {
                           className: 'buy-button',
                           type: 'primary',
                           htmlType: 'submit',
                           disabled: c,
                         },
-                        c ? a.a.createElement(tr, null) : 'Submit',
+                        c ? a.a.createElement(ar, null) : 'Submit',
                       ),
                     ),
                   ),
                 ),
                 h &&
-                  a.a.createElement(Un.a, {
+                  a.a.createElement(Mn.a, {
                     style: {
                       background: 'transparent',
                       border: '1px solid',
@@ -5882,25 +5987,25 @@
                     type: 'success',
                     showIcon: !0,
                   }),
-                a.a.createElement(ar, null),
+                a.a.createElement(cr, null),
               ),
             ),
-            a.a.createElement(ce.a, null),
+            a.a.createElement(Ae.a, null),
           );
         },
-        or = function () {
-          var e = Object(ie.h)().mintAddress,
-            t = Object(ie.f)(),
-            n = mn(new d.PublicKey(e));
+        lr = function () {
+          var e = Object(se.h)().mintAddress,
+            t = Object(se.f)(),
+            n = bn(new d.PublicKey(e));
           return (
             (n &&
               (null === n || void 0 === n ? void 0 : n.redeembable) &&
               (null === n || void 0 === n ? void 0 : n.redeemAddress)) ||
               t.push('/'),
             a.a.createElement(
-              ce.a,
+              Ae.a,
               { justify: 'center', style: { paddingTop: 50 } },
-              a.a.createElement(ir, {
+              a.a.createElement(sr, {
                 nftMint: new d.PublicKey(e),
                 destination:
                   null === n || void 0 === n ? void 0 : n.redeemAddress,
@@ -5908,289 +6013,340 @@
             )
           );
         },
-        cr = a.a.createElement(Ln.a, { style: { fontSize: 80 }, spin: !0 }),
-        sr = function () {
-          var e,
-            t = ct(),
-            n = Object(r.useState)([]),
-            i = Object(l.a)(n, 2),
-            o = i[0],
-            c = i[1],
-            d = Y(),
-            p = d.wallet,
-            f = d.connected,
-            b = P(),
-            g = (function (e, t) {
-              var n = Object(r.useState)([]),
-                a = Object(l.a)(n, 2),
-                i = a[0],
-                o = a[1],
-                c = Object(r.useState)(!1),
-                d = Object(l.a)(c, 2),
-                p = d[0],
-                f = d[1];
-              return (
-                Object(r.useEffect)(
-                  function () {
-                    var n = { programId: m.a };
-                    (function () {
-                      var r = Object(A.a)(
-                        s.a.mark(function r() {
-                          var a, i, c;
-                          return s.a.wrap(function (r) {
-                            for (;;)
-                              switch ((r.prev = r.next)) {
-                                case 0:
-                                  if (e && t) {
-                                    r.next = 4;
+        Ar =
+          (Wn.a,
+          function () {
+            var e,
+              t = At(),
+              n = Object(r.useState)([]),
+              i = Object(A.a)(n, 2),
+              o = i[0],
+              c = i[1],
+              d = X(),
+              p = d.wallet,
+              f = d.connected,
+              b = U(),
+              g = (function (e, t) {
+                var n = Object(r.useState)([]),
+                  a = Object(A.a)(n, 2),
+                  i = a[0],
+                  o = a[1],
+                  c = Object(r.useState)(!1),
+                  d = Object(A.a)(c, 2),
+                  p = d[0],
+                  f = d[1];
+                return (
+                  Object(r.useEffect)(
+                    function () {
+                      var n = { programId: m.a };
+                      (function () {
+                        var r = Object(l.a)(
+                          s.a.mark(function r() {
+                            var a, i, c;
+                            return s.a.wrap(function (r) {
+                              for (;;)
+                                switch ((r.prev = r.next)) {
+                                  case 0:
+                                    if (e && t) {
+                                      r.next = 4;
+                                      break;
+                                    }
+                                    return r.abrupt('return');
+                                  case 4:
+                                    return (
+                                      (r.next = 6),
+                                      t.getTokenAccountsByOwner(e, n)
+                                    );
+                                  case 6:
+                                    (a = r.sent),
+                                      (i = s.a.mark(function e(n) {
+                                        var r, i;
+                                        return s.a.wrap(function (e) {
+                                          for (;;)
+                                            switch ((e.prev = e.next)) {
+                                              case 0:
+                                                return (
+                                                  (e.next = 2),
+                                                  t.getTokenAccountBalance(
+                                                    a.value[n].pubkey,
+                                                  )
+                                                );
+                                              case 2:
+                                                return (
+                                                  (r = e.sent),
+                                                  (e.next = 5),
+                                                  t.getParsedAccountInfo(
+                                                    a.value[n].pubkey,
+                                                  )
+                                                );
+                                              case 5:
+                                                (i = e.sent),
+                                                  r.value.uiAmount > 1 &&
+                                                    o(function (e) {
+                                                      var t;
+                                                      return [].concat(
+                                                        Object(u.a)(e),
+                                                        [
+                                                          null ===
+                                                            (t = i.value) ||
+                                                          void 0 === t
+                                                            ? void 0
+                                                            : t.data.parsed.info
+                                                                .mint,
+                                                        ],
+                                                      );
+                                                    });
+                                              case 7:
+                                              case 'end':
+                                                return e.stop();
+                                            }
+                                        }, e);
+                                      })),
+                                      (c = 0);
+                                  case 9:
+                                    if (!(c < a.value.length)) {
+                                      r.next = 14;
+                                      break;
+                                    }
+                                    return r.delegateYield(i(c), 't0', 11);
+                                  case 11:
+                                    c++, (r.next = 9);
                                     break;
-                                  }
-                                  return r.abrupt('return');
-                                case 4:
-                                  return (
-                                    (r.next = 6),
-                                    t.getTokenAccountsByOwner(e, n)
-                                  );
-                                case 6:
-                                  (a = r.sent),
-                                    (i = s.a.mark(function e(n) {
-                                      var r, i;
-                                      return s.a.wrap(function (e) {
-                                        for (;;)
-                                          switch ((e.prev = e.next)) {
-                                            case 0:
-                                              return (
-                                                (e.next = 2),
-                                                t.getTokenAccountBalance(
-                                                  a.value[n].pubkey,
-                                                )
-                                              );
-                                            case 2:
-                                              return (
-                                                (r = e.sent),
-                                                (e.next = 5),
-                                                t.getParsedAccountInfo(
-                                                  a.value[n].pubkey,
-                                                )
-                                              );
-                                            case 5:
-                                              (i = e.sent),
-                                                r.value.uiAmount > 1 &&
-                                                  o(function (e) {
-                                                    var t;
-                                                    return [].concat(
-                                                      Object(u.a)(e),
-                                                      [
-                                                        null ===
-                                                          (t = i.value) ||
-                                                        void 0 === t
-                                                          ? void 0
-                                                          : t.data.parsed.info
-                                                              .mint,
-                                                      ],
-                                                    );
-                                                  });
-                                            case 7:
-                                            case 'end':
-                                              return e.stop();
-                                          }
-                                      }, e);
-                                    })),
-                                    (c = 0);
-                                case 9:
-                                  if (!(c < a.value.length)) {
-                                    r.next = 14;
-                                    break;
-                                  }
-                                  return r.delegateYield(i(c), 't0', 11);
-                                case 11:
-                                  c++, (r.next = 9);
-                                  break;
-                                case 14:
-                                  f(!0);
-                                case 15:
-                                case 'end':
-                                  return r.stop();
-                              }
-                          }, r);
+                                  case 14:
+                                    f(!0);
+                                  case 15:
+                                  case 'end':
+                                    return r.stop();
+                                }
+                            }, r);
+                          }),
+                        );
+                        return function () {
+                          return r.apply(this, arguments);
+                        };
+                      })()();
+                    },
+                    [e],
+                  ),
+                  { balances: i, loaded: p }
+                );
+              })(null === p || void 0 === p ? void 0 : p.publicKey, b),
+              E =
+                (g.balances,
+                g.loaded,
+                Object(u.a)(
+                  Array(
+                    Math.ceil(
+                      (null === o || void 0 === o ? void 0 : o.length) / 4,
+                    ),
+                  ),
+                ).map(function (e, t) {
+                  return null === o || void 0 === o
+                    ? void 0
+                    : o.slice(4 * t, 4 * t + 4);
+                })),
+              h = Object(se.g)();
+            null === (e = new URLSearchParams(h.search).get('keywords')) ||
+              void 0 === e ||
+              e.split('-');
+            return (
+              Object(r.useEffect)(
+                function () {
+                  var e = [];
+                  (function () {
+                    var e = Object(l.a)(
+                      s.a.mark(function e() {
+                        var t, n;
+                        return s.a.wrap(function (e) {
+                          for (;;)
+                            switch ((e.prev = e.next)) {
+                              case 0:
+                                return (
+                                  (e.next = 2),
+                                  _(
+                                    null === p || void 0 === p
+                                      ? void 0
+                                      : p.publicKey,
+                                  )
+                                );
+                              case 2:
+                                return (
+                                  (n = e.sent),
+                                  (n =
+                                    null === (t = n) || void 0 === t
+                                      ? void 0
+                                      : t.map(function (e) {
+                                          var t, n, r, a;
+                                          return null === e ||
+                                            void 0 === e ||
+                                            null === (t = e.account) ||
+                                            void 0 === t ||
+                                            null === (n = t.data) ||
+                                            void 0 === n ||
+                                            null === (r = n.parsed) ||
+                                            void 0 === r ||
+                                            null === (a = r.info) ||
+                                            void 0 === a
+                                            ? void 0
+                                            : a.mint;
+                                        })),
+                                  e.abrupt('return', n)
+                                );
+                              case 5:
+                              case 'end':
+                                return e.stop();
+                            }
+                        }, e);
+                      }),
+                    );
+                    return function () {
+                      return e.apply(this, arguments);
+                    };
+                  })()().then(function (n) {
+                    t.forEach(function (t) {
+                      (null === n || void 0 === n
+                        ? void 0
+                        : n.includes(t.mintAddress.toBase58())) && e.push(t);
+                    });
+                  }),
+                    console.log(e),
+                    c(e);
+                },
+                [f],
+              ),
+              f
+                ? a.a.createElement(
+                    a.a.Fragment,
+                    null,
+                    a.a.createElement(
+                      Ae.a,
+                      {
+                        align: 'middle',
+                        justify: 'space-around',
+                        style: { paddingTop: 50 },
+                      },
+                      a.a.createElement(
+                        ue.a,
+                        null,
+                        a.a.createElement(
+                          'h1',
+                          { className: 'explore-page-title' },
+                          'Your collection',
+                        ),
+                      ),
+                    ),
+                    E.map(function (e, t) {
+                      return a.a.createElement(
+                        Ae.a,
+                        {
+                          align: 'middle',
+                          justify: 'center',
+                          style: { paddingBottom: 20 },
+                          key: 'collection-'.concat(t),
+                        },
+                        e.map(function (e, t) {
+                          if (o.length > 0)
+                            return a.a.createElement(
+                              ue.a,
+                              {
+                                style: { padding: 20 },
+                                key: 'col-collection-'.concat(t),
+                              },
+                              a.a.createElement(kn, {
+                                mintAddress: e.mintAddress,
+                              }),
+                            );
                         }),
                       );
-                      return function () {
-                        return r.apply(this, arguments);
-                      };
-                    })()();
-                  },
-                  [e],
-                ),
-                { balances: i, loaded: p }
-              );
-            })(null === p || void 0 === p ? void 0 : p.publicKey, b),
-            E = g.balances,
-            h = g.loaded,
-            y = Object(u.a)(
-              Array(
-                Math.ceil((null === o || void 0 === o ? void 0 : o.length) / 4),
-              ),
-            ).map(function (e, t) {
-              return null === o || void 0 === o
-                ? void 0
-                : o.slice(4 * t, 4 * t + 4);
-            }),
-            w = Object(ie.g)();
-          null === (e = new URLSearchParams(w.search).get('keywords')) ||
-            void 0 === e ||
-            e.split('-');
-          return (
-            Object(r.useEffect)(
-              function () {
-                var e = t.filter(function (e) {
-                  return null === E || void 0 === E
-                    ? void 0
-                    : E.includes(e.mintAddress.toBase58());
-                });
-                c(e);
-              },
-              [E, f],
-            ),
-            f
-              ? a.a.createElement(
-                  a.a.Fragment,
-                  null,
-                  a.a.createElement(
-                    ce.a,
+                    }),
+                  )
+                : a.a.createElement(
+                    Ae.a,
                     {
                       align: 'middle',
-                      justify: 'space-around',
+                      justify: 'center',
                       style: { paddingTop: 50 },
                     },
                     a.a.createElement(
-                      se.a,
-                      null,
-                      a.a.createElement(
-                        'h1',
-                        { className: 'explore-page-title' },
-                        'Your collection',
-                      ),
+                      'h1',
+                      { className: 'explore-page-title' },
+                      'Please connect your wallet',
                     ),
-                    a.a.createElement(se.a, null, 'Sort options'),
-                  ),
-                  y.map(function (e, t) {
-                    return h
-                      ? a.a.createElement(
-                          ce.a,
-                          {
-                            align: 'middle',
-                            justify: 'center',
-                            style: { paddingBottom: 20 },
-                          },
-                          e.map(function (e) {
-                            if (o.length > 0)
-                              return a.a.createElement(
-                                se.a,
-                                { style: { padding: 20 } },
-                                a.a.createElement(yn, {
-                                  mintAddress: e.mintAddress,
-                                }),
-                              );
-                          }),
-                        )
-                      : a.a.createElement(
-                          ce.a,
-                          { justify: 'center', style: { paddingTop: 100 } },
-                          a.a.createElement(ee.a, {
-                            indicator: cr,
-                            size: 'large',
-                          }),
-                        );
-                  }),
-                )
-              : a.a.createElement(
-                  ce.a,
-                  {
-                    align: 'middle',
-                    justify: 'center',
-                    style: { paddingTop: 50 },
-                  },
-                  a.a.createElement(
-                    'h1',
-                    { className: 'explore-page-title' },
-                    'Please connect your wallet',
-                  ),
-                )
-          );
-        };
-      function Ar() {
+                  )
+            );
+          });
+      function ur() {
         return a.a.createElement(
           a.a.Fragment,
           null,
           a.a.createElement(
-            W.a,
+            V.a,
             { basename: '/' },
             a.a.createElement(
-              ln,
+              mn,
               null,
               a.a.createElement(
-                ie.c,
+                se.c,
                 null,
                 a.a.createElement(
-                  ie.a,
+                  se.a,
                   { exact: !0, path: '/' },
-                  a.a.createElement(jn, null),
+                  a.a.createElement(Tn, null),
                 ),
                 a.a.createElement(
-                  ie.a,
+                  se.a,
                   { exact: !0, path: '/explore' },
-                  a.a.createElement(Cn, null),
+                  a.a.createElement(Sn, null),
                 ),
                 a.a.createElement(
-                  ie.a,
+                  se.a,
                   { exact: !0, path: '/market/:marketAddress' },
-                  a.a.createElement(Dn, null),
+                  a.a.createElement(Un, null),
                 ),
                 a.a.createElement(
-                  ie.a,
+                  se.a,
                   { exact: !0, path: '/redeem/:mintAddress' },
-                  a.a.createElement(or, null),
+                  a.a.createElement(lr, null),
                 ),
                 a.a.createElement(
-                  ie.a,
+                  se.a,
                   { exact: !0, path: '/collection' },
-                  a.a.createElement(sr, null),
+                  a.a.createElement(Ar, null),
                 ),
               ),
             ),
           ),
         );
       }
-      function lr() {
+      function dr() {
         return a.a.createElement(
           r.Suspense,
           {
             fallback: function () {
-              return a.a.createElement(ee.a, { size: 'large' });
+              return a.a.createElement(re.a, { size: 'large' });
             },
           },
-          a.a.createElement($, null),
+          a.a.createElement(ne, null),
           a.a.createElement(
-            ae,
+            ce,
             null,
             a.a.createElement(
-              D,
+              R,
               null,
               a.a.createElement(
-                z,
+                G,
                 null,
                 a.a.createElement(
-                  Qt,
+                  Ot,
                   null,
                   a.a.createElement(
                     r.Suspense,
                     {
                       fallback: function () {
-                        return a.a.createElement(ee.a, { size: 'large' });
+                        return a.a.createElement(re.a, { size: 'large' });
                       },
                     },
-                    a.a.createElement(Ar, null),
+                    a.a.createElement(ur, null),
                   ),
                 ),
               ),
@@ -6206,7 +6362,7 @@
           ),
       );
       o.a.render(
-        a.a.createElement(a.a.StrictMode, null, a.a.createElement(lr, null)),
+        a.a.createElement(a.a.StrictMode, null, a.a.createElement(dr, null)),
         document.getElementById('root'),
       ),
         'serviceWorker' in navigator &&
@@ -6221,4 +6377,4 @@
   },
   [[297, 1, 2]],
 ]);
-//# sourceMappingURL=main.bcbd1265.chunk.js.map
+//# sourceMappingURL=main.d71f486b.chunk.js.map
