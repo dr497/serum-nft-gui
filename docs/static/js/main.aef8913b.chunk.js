@@ -514,7 +514,7 @@
                         return (
                           (e.prev = 0),
                           (e.next = 3),
-                          fetch(T, {
+                          fetch(Q, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
@@ -834,8 +834,8 @@
           p = m ? I.get(t) : void 0;
         return [p, m];
       }
-      var Q = n(60),
-        T = 'https://solana-api.projectserum.com',
+      var T = n(60),
+        Q = 'https://solana-api.projectserum.com',
         M = [
           {
             name: 'mainnet-beta',
@@ -939,7 +939,7 @@
       }
       function K(e) {
         var t = R(),
-          n = Object(Q.a)(
+          n = Object(T.a)(
             t,
             null === e || void 0 === e ? void 0 : e.toBase58(),
           ),
@@ -1586,10 +1586,10 @@
         )).apply(this, arguments);
       }
       function Pe(e) {
-        return Qe.apply(this, arguments);
+        return Te.apply(this, arguments);
       }
-      function Qe() {
-        return (Qe = Object(A.a)(
+      function Te() {
+        return (Te = Object(A.a)(
           s.a.mark(function e(t) {
             var n, r, a, i, o;
             return s.a.wrap(function (e) {
@@ -1624,7 +1624,7 @@
           }),
         )).apply(this, arguments);
       }
-      function Te(e) {
+      function Qe(e) {
         return Me.apply(this, arguments);
       }
       function Me() {
@@ -1657,8 +1657,8 @@
               O,
               S,
               P,
-              Q,
               T,
+              Q,
               M,
               L,
               F,
@@ -1829,7 +1829,7 @@
                       B.push(S),
                       (f = P);
                   case 51:
-                    if ((Q = 'sell' === a ? p : f)) {
+                    if ((T = 'sell' === a ? p : f)) {
                       e.next = 55;
                       break;
                     }
@@ -1842,21 +1842,21 @@
                     );
                   case 55:
                     return (
-                      (T = {
+                      (Q = {
                         owner: v,
-                        payer: Q,
+                        payer: T,
                         side: a,
                         price: i,
                         size: o,
                         orderType: c,
                         feeDiscountPubkey: g || null,
                       }),
-                      console.log(T),
+                      console.log(Q),
                       (M = A.makeMatchOrdersTransaction(5)),
                       k.add(M),
                       (L = Le()),
                       (e.next = 62),
-                      A.makePlaceOrderTransaction(l, T, 12e4, 12e4)
+                      A.makePlaceOrderTransaction(l, Q, 12e4, 12e4)
                     );
                   case 62:
                     return (
@@ -2882,7 +2882,7 @@
             ['doge', 'painting'],
             it.IMAGE,
             new d.PublicKey('7aMoYNa3M6r1F4QrkPmUPpjRtEXbDaNpaWkFXW1wvNuj'),
-            'This NFT can be redeemed for the real painting',
+            'This NFT can be redeemed for the real painting mailed to your door',
             '2021-02-14T21:00:00.000+08:00',
           ),
           new ot(
@@ -3035,7 +3035,7 @@
               return n.apply(this, arguments);
             };
           })(),
-          Object(Q.a)('getAllMarkets', t.length, e),
+          Object(T.a)('getAllMarkets', t.length, e),
           { refreshInterval: bt },
         );
       }
@@ -3238,7 +3238,7 @@
             }),
           )).apply(this, arguments);
         }
-        return P(c, Object(Q.a)('getOpenOrdersAccounts', i, n, a), {
+        return P(c, Object(T.a)('getOpenOrdersAccounts', i, n, a), {
           refreshInterval: e ? 1e3 : 5e3,
         });
       }
@@ -3282,7 +3282,7 @@
           function () {
             return a.apply(this, arguments);
           },
-          Object(Q.a)('getTokenAccounts', n, t),
+          Object(T.a)('getTokenAccounts', n, t),
           { refreshInterval: 5e3 },
         );
       }
@@ -3423,8 +3423,8 @@
         });
         return [].concat(Object(u.a)(t), Object(u.a)(dt));
       }
-      var Qt = a.a.createContext(null);
-      function Tt(e) {
+      var Tt = a.a.createContext(null);
+      function Qt(e) {
         var t = e.children,
           n = w('autoSettleEnabled', !0),
           i = Object(l.a)(n, 2),
@@ -3517,7 +3517,7 @@
               e();
           }, 1e4),
           a.a.createElement(
-            Qt.Provider,
+            Tt.Provider,
             { value: { autoSettleEnabled: o, setAutoSettleEnabled: c } },
             t,
           )
@@ -3526,7 +3526,7 @@
       function Mt(e) {
         var t = e.autoApprove,
           n = (function () {
-            var e = Object(r.useContext)(Qt);
+            var e = Object(r.useContext)(Tt);
             if (!e) throw new Error('Missing preferences context');
             return {
               autoSettleEnabled: e.autoSettleEnabled,
@@ -4490,7 +4490,7 @@
         },
         Sn = n(601),
         Pn = n(610),
-        Qn = function (e) {
+        Tn = function (e) {
           var t = e.address;
           return a.a.createElement(
             J,
@@ -4504,7 +4504,7 @@
             t.toBase58().slice(t.toBase58().length - 6, t.toBase58().length),
           );
         },
-        Tn = zt.a.useBreakpoint,
+        Qn = zt.a.useBreakpoint,
         Mn = Sn.a.Countdown,
         Ln = function () {
           return a.a.createElement('div', { className: 'line' });
@@ -4587,12 +4587,12 @@
                   return t.apply(this, arguments);
                 };
               })(),
-              Object(Q.a)('getFeeDiscountKeys', r, e, n),
+              Object(T.a)('getFeeDiscountKeys', r, e, n),
               { refreshInterval: 5e3 },
             );
           })();
           var S = Ot().storedFeeDiscountKey,
-            T = (function () {
+            Q = (function () {
               var e = vt(),
                 t = e.market,
                 n = e.marketName,
@@ -4615,12 +4615,12 @@
             q = L[0],
             K = L[1],
             N = R(),
-            U = null === T || void 0 === T ? void 0 : T.length;
+            U = null === Q || void 0 === Q ? void 0 : Q.length;
           Object(r.useEffect)(
             function () {
-              null === T ||
-                void 0 === T ||
-                T.map(function (e) {
+              null === Q ||
+                void 0 === Q ||
+                Q.map(function (e) {
                   e.market.address.toBase58() === t.marketAddress.toBase58() &&
                     K(e);
                 });
@@ -4792,7 +4792,7 @@
                               j(!0),
                               (e.prev = 5),
                               (e.next = 8),
-                              Te({
+                              Qe({
                                 side: 'buy',
                                 price: parseFloat(c),
                                 size: 1,
@@ -4862,7 +4862,7 @@
                               j(!0),
                               (e.prev = 6),
                               (e.next = 9),
-                              Te({
+                              Qe({
                                 side: 'buy',
                                 price: H,
                                 size: 1,
@@ -4932,7 +4932,7 @@
                               j(!0),
                               (e.prev = 6),
                               (e.next = 9),
-                              Te({
+                              Qe({
                                 side: 'sell',
                                 price: parseFloat(p),
                                 size: 1,
@@ -5002,7 +5002,7 @@
                               j(!0),
                               (e.prev = 6),
                               (e.next = 9),
-                              Te({
+                              Qe({
                                 side: 'sell',
                                 price: V,
                                 size: 1,
@@ -5430,9 +5430,29 @@
               a.a.createElement(
                 ue.a,
                 { className: 'trade-form-description' },
-                a.a.createElement(Qn, { address: t.mintAddress }),
+                a.a.createElement(Tn, { address: t.mintAddress }),
               ),
             ),
+            t.description &&
+              a.a.createElement(
+                le.a,
+                {
+                  justify: 'space-between',
+                  align: 'middle',
+                  style: { paddingTop: 20, paddingBottom: 20 },
+                },
+                t.description,
+              ),
+            t.redeemDescription &&
+              a.a.createElement(
+                le.a,
+                {
+                  justify: 'space-between',
+                  align: 'middle',
+                  style: { paddingTop: 20, paddingBottom: 20 },
+                },
+                t.redeemDescription,
+              ),
             t.redeembable &&
               t.auctionDeadLine &&
               new Date().getTime() < Date.parse(t.auctionDeadLine) &&
@@ -5443,7 +5463,7 @@
           );
         },
         qn = function () {
-          var e = !Tn().lg,
+          var e = !Qn().lg,
             t = vt().market,
             n = (function (e) {
               if (e)
@@ -6526,7 +6546,7 @@
                 G,
                 null,
                 a.a.createElement(
-                  Tt,
+                  Qt,
                   null,
                   a.a.createElement(
                     r.Suspense,
@@ -6566,4 +6586,4 @@
   },
   [[309, 1, 2]],
 ]);
-//# sourceMappingURL=main.47b1b3de.chunk.js.map
+//# sourceMappingURL=main.aef8913b.chunk.js.map
