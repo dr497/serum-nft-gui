@@ -6408,43 +6408,74 @@
                   (function () {
                     var e = Object(s.a)(
                       c.a.mark(function e() {
-                        var t, n;
+                        var t, n, r;
                         return c.a.wrap(function (e) {
                           for (;;)
                             switch ((e.prev = e.next)) {
                               case 0:
+                                if (p) {
+                                  e.next = 2;
+                                  break;
+                                }
+                                return e.abrupt('return');
+                              case 2:
                                 return (
-                                  (e.next = 2),
+                                  (e.next = 4),
                                   _(
                                     null === f || void 0 === f
                                       ? void 0
                                       : f.publicKey,
                                   )
                                 );
-                              case 2:
+                              case 4:
                                 return (
-                                  (n = e.sent),
-                                  (n =
-                                    null === (t = n) || void 0 === t
+                                  (r = e.sent),
+                                  (r =
+                                    null === (t = r) || void 0 === t
                                       ? void 0
                                       : t.map(function (e) {
-                                          var t, n, r, a;
-                                          return null === e ||
-                                            void 0 === e ||
-                                            null === (t = e.account) ||
-                                            void 0 === t ||
-                                            null === (n = t.data) ||
-                                            void 0 === n ||
-                                            null === (r = n.parsed) ||
-                                            void 0 === r ||
-                                            null === (a = r.info) ||
-                                            void 0 === a
-                                            ? void 0
-                                            : a.mint;
+                                          var t, n, r, a, i, o, A, c, s;
+                                          return {
+                                            amount:
+                                              null === e ||
+                                              void 0 === e ||
+                                              null === (t = e.account) ||
+                                              void 0 === t ||
+                                              null === (n = t.data) ||
+                                              void 0 === n ||
+                                              null === (r = n.parsed) ||
+                                              void 0 === r ||
+                                              null === (a = r.info) ||
+                                              void 0 === a ||
+                                              null === (i = a.tokenAmount) ||
+                                              void 0 === i
+                                                ? void 0
+                                                : i.uiAmount,
+                                            mint:
+                                              null === e ||
+                                              void 0 === e ||
+                                              null === (o = e.account) ||
+                                              void 0 === o ||
+                                              null === (A = o.data) ||
+                                              void 0 === A ||
+                                              null === (c = A.parsed) ||
+                                              void 0 === c ||
+                                              null === (s = c.info) ||
+                                              void 0 === s
+                                                ? void 0
+                                                : s.mint,
+                                          };
                                         })),
-                                  e.abrupt('return', n)
+                                  e.abrupt(
+                                    'return',
+                                    null === (n = r) || void 0 === n
+                                      ? void 0
+                                      : n.filter(function (e) {
+                                          return e.amount > 0;
+                                        }),
+                                  )
                                 );
-                              case 5:
+                              case 7:
                               case 'end':
                                 return e.stop();
                             }
@@ -6455,13 +6486,18 @@
                       return e.apply(this, arguments);
                     };
                   })()().then(function (n) {
-                    t.forEach(function (t) {
-                      (null === n || void 0 === n
+                    var r =
+                      null === n || void 0 === n
                         ? void 0
-                        : n.includes(t.mintAddress.toBase58())) && e.push(t);
+                        : n.map(function (e) {
+                            return e.mint;
+                          });
+                    t.forEach(function (t) {
+                      (null === r || void 0 === r
+                        ? void 0
+                        : r.includes(t.mintAddress.toBase58())) && e.push(t);
                     });
                   }),
-                    console.log(e),
                     A(e);
                 },
                 [p],
@@ -6629,4 +6665,4 @@
   },
   [[313, 1, 2]],
 ]);
-//# sourceMappingURL=main.f40a4510.chunk.js.map
+//# sourceMappingURL=main.22e3e43a.chunk.js.map
