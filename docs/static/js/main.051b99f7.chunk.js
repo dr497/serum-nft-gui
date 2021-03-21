@@ -5889,7 +5889,7 @@
                 r.a.createElement(
                   'li',
                   null,
-                  'You need to mint the token you want to mint. It needs to be a token with 0 decimals. You can mint tokens here',
+                  'You need to mint the token you want to list. It needs to be a token with 0 decimals. You can mint tokens here',
                   ' ',
                   r.a.createElement(
                     Y,
@@ -6396,4 +6396,4 @@
   },
   [[335, 1, 2]],
 ]);
-//# sourceMappingURL=main.88eba2d1.chunk.js.map
+//# sourceMappingURL=main.051b99f7.chunk.js.map
