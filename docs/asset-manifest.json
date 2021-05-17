@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.51645f70.chunk.css",
-    "main.js": "/static/js/main.091ecc87.chunk.js",
-    "main.js.map": "/static/js/main.091ecc87.chunk.js.map",
+    "main.css": "/static/css/main.01667222.chunk.css",
+    "main.js": "/static/js/main.cd639f95.chunk.js",
+    "main.js.map": "/static/js/main.cd639f95.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.c7319a82.js",
     "runtime-main.js.map": "/static/js/runtime-main.c7319a82.js.map",
-    "static/css/2.6b9694ee.chunk.css": "/static/css/2.6b9694ee.chunk.css",
-    "static/js/2.7a24eeb8.chunk.js": "/static/js/2.7a24eeb8.chunk.js",
-    "static/js/2.7a24eeb8.chunk.js.map": "/static/js/2.7a24eeb8.chunk.js.map",
+    "static/css/2.22e80df1.chunk.css": "/static/css/2.22e80df1.chunk.css",
+    "static/js/2.e3d7cd49.chunk.js": "/static/js/2.e3d7cd49.chunk.js",
+    "static/js/2.e3d7cd49.chunk.js.map": "/static/js/2.e3d7cd49.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.df96e2106577518351ee33354b00a62a.js": "/precache-manifest.df96e2106577518351ee33354b00a62a.js",
+    "precache-manifest.289f13c092bb06b9d1a8c31283b14863.js": "/precache-manifest.289f13c092bb06b9d1a8c31283b14863.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.6b9694ee.chunk.css.map": "/static/css/2.6b9694ee.chunk.css.map",
-    "static/css/main.51645f70.chunk.css.map": "/static/css/main.51645f70.chunk.css.map",
-    "static/js/2.7a24eeb8.chunk.js.LICENSE.txt": "/static/js/2.7a24eeb8.chunk.js.LICENSE.txt",
+    "static/css/2.22e80df1.chunk.css.map": "/static/css/2.22e80df1.chunk.css.map",
+    "static/css/main.01667222.chunk.css.map": "/static/css/main.01667222.chunk.css.map",
+    "static/js/2.e3d7cd49.chunk.js.LICENSE.txt": "/static/js/2.e3d7cd49.chunk.js.LICENSE.txt",
     "static/media/bonfida_waves.svg": "/static/media/bonfida_waves.c7ff066f.svg",
     "static/media/discord.svg": "/static/media/discord.e59842c9.svg",
     "static/media/solible-logo.svg": "/static/media/solible-logo.eff5ddb2.svg",
@@ -22,9 +22,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.c7319a82.js",
-    "static/css/2.6b9694ee.chunk.css",
-    "static/js/2.7a24eeb8.chunk.js",
-    "static/css/main.51645f70.chunk.css",
-    "static/js/main.091ecc87.chunk.js"
+    "static/css/2.22e80df1.chunk.css",
+    "static/js/2.e3d7cd49.chunk.js",
+    "static/css/main.01667222.chunk.css",
+    "static/js/main.cd639f95.chunk.js"
   ]
 }
